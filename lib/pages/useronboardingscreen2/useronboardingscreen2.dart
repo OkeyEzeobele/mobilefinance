@@ -143,6 +143,7 @@ class _Useronboardingscreen2State extends State<Useronboardingscreen2> {
                 options: CarouselOptions(
                   height: heightOfScreen * 0.8,
                   enlargeCenterPage: false,
+                  // viewportFraction: 0,
                   // aspectRatio: 9/16 ,
                   // autoPlay: true,
                 )),
@@ -152,8 +153,8 @@ class _Useronboardingscreen2State extends State<Useronboardingscreen2> {
                 padding: EdgeInsets.only(
                     left: widthOfScreen * 0.05, top: heightOfScreen * 0.04),
                 child: SizedBox(
-                  height: 70,
-                  width: 70,
+                  height: heightOfScreen * 0.1,
+                  width: widthOfScreen * 0.2,
                   child: OutlinedButton(
                     child: const FaIcon(
                       FontAwesomeIcons.chevronRight,
