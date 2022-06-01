@@ -49,8 +49,7 @@ class _Splashscreenscreen1State extends State<Splashscreenscreen1> {
                       ),
                     ),
                     style: TextButton.styleFrom(
-                      backgroundColor: FvColors
-                          .screen2Backgroundscreen3Backgroundcontainer84Backgroundcontainer85Backgroundcontainer138Backgroundcontainer167Background,
+                      backgroundColor: FvColors.maintheme,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16.31081199645996),
                         side: const BorderSide(

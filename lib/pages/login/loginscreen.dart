@@ -48,8 +48,7 @@ class _Loginscreen4State extends State<Loginscreen4> {
                             // ignore: prefer_const_constructors
                             child: IconButton(
                               icon: const FaIcon(FontAwesomeIcons.arrowLeft),
-                              color: FvColors
-                                  .screen2Backgroundscreen3Backgroundcontainer84Backgroundcontainer85Backgroundcontainer138Backgroundcontainer167Background,
+                              color: FvColors.maintheme,
                               onPressed: () {
                                 Navigator.pushReplacement(
                                     context,
@@ -103,8 +102,7 @@ class _Loginscreen4State extends State<Loginscreen4> {
                           height: heightOfScreen * 0.1,
                           width: widthOfScreen * 0.75,
                           child: TextFormField(
-                            cursorColor: FvColors
-                                .screen2Backgroundscreen3Backgroundcontainer84Backgroundcontainer85Backgroundcontainer138Backgroundcontainer167Background,
+                            cursorColor: FvColors.maintheme,
                             textAlign: TextAlign.center,
                             decoration: InputDecoration(
                               prefixIcon: Padding(
@@ -113,8 +111,7 @@ class _Loginscreen4State extends State<Loginscreen4> {
                                     top: heightOfScreen * 0.014),
                                 child: const FaIcon(
                                   FontAwesomeIcons.envelope,
-                                  color: FvColors
-                                      .screen2Backgroundscreen3Backgroundcontainer84Backgroundcontainer85Backgroundcontainer138Backgroundcontainer167Background,
+                                  color: FvColors.maintheme,
                                 ),
                               ),
                               filled: true,
@@ -138,7 +135,7 @@ class _Loginscreen4State extends State<Loginscreen4> {
                               // label: const Text(
                               //   "Email Address",
                               //   style: TextStyle(
-                              //     color: FvColors.screen2Backgroundscreen3Backgroundcontainer84Backgroundcontainer85Backgroundcontainer138Backgroundcontainer167Background,
+                              //     color: FvColors.maintheme,
                               //     fontSize: 14,
                               //   ),
                               // ),
@@ -165,8 +162,7 @@ class _Loginscreen4State extends State<Loginscreen4> {
                           width: widthOfScreen * 0.75,
                           child: TextFormField(
                             obscureText: true,
-                            cursorColor: FvColors
-                                .screen2Backgroundscreen3Backgroundcontainer84Backgroundcontainer85Backgroundcontainer138Backgroundcontainer167Background,
+                            cursorColor: FvColors.maintheme,
                             textAlign: TextAlign.center,
                             decoration: InputDecoration(
                               prefixIcon: Padding(
@@ -175,8 +171,7 @@ class _Loginscreen4State extends State<Loginscreen4> {
                                     top: heightOfScreen * 0.014),
                                 child: const FaIcon(
                                   FontAwesomeIcons.key,
-                                  color: FvColors
-                                      .screen2Backgroundscreen3Backgroundcontainer84Backgroundcontainer85Backgroundcontainer138Backgroundcontainer167Background,
+                                  color: FvColors.maintheme,
                                 ),
                               ),
                               filled: true,
@@ -201,7 +196,7 @@ class _Loginscreen4State extends State<Loginscreen4> {
                               //   "Password",
                               //   style: TextStyle(
                               //     color: FvColors
-                              //         .screen2Backgroundscreen3Backgroundcontainer84Backgroundcontainer85Backgroundcontainer138Backgroundcontainer167Background,
+                              //         .maintheme,
                               //     fontSize: 14,
                               //   ),
                               // ),
@@ -243,8 +238,7 @@ class _Loginscreen4State extends State<Loginscreen4> {
                               ),
                             ),
                             style: TextButton.styleFrom(
-                              backgroundColor: FvColors
-                                  .screen2Backgroundscreen3Backgroundcontainer84Backgroundcontainer85Backgroundcontainer138Backgroundcontainer167Background,
+                              backgroundColor: FvColors.maintheme,
                               shape: RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.circular(16.31081199645996),
@@ -259,7 +253,7 @@ class _Loginscreen4State extends State<Loginscreen4> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const Homescreen5()));
+                                          const Homescreen()));
                             },
                           ),
                         ),
@@ -277,8 +271,7 @@ class _Loginscreen4State extends State<Loginscreen4> {
                             textAlign: TextAlign.center,
                             // ignore: prefer_const_constructors
                             style: TextStyle(
-                              color: FvColors
-                                  .screen2Backgroundscreen3Backgroundcontainer84Backgroundcontainer85Backgroundcontainer138Backgroundcontainer167Background,
+                              color: FvColors.maintheme,
                               fontWeight: FontWeight.w400,
                             ),
                           )),
@@ -297,8 +290,7 @@ class _Loginscreen4State extends State<Loginscreen4> {
                               child: IconButton(
                                   icon: const FaIcon(
                                       FontAwesomeIcons.fingerprint),
-                                  color: FvColors
-                                      .screen2Backgroundscreen3Backgroundcontainer84Backgroundcontainer85Backgroundcontainer138Backgroundcontainer167Background,
+                                  color: FvColors.maintheme,
                                   onPressed: () {
                                     Navigator.pushReplacement(
                                         context,
@@ -315,5 +307,3 @@ class _Loginscreen4State extends State<Loginscreen4> {
         ));
   }
 }
-
-
