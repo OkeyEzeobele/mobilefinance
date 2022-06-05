@@ -1,81 +1,66 @@
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:o3_cards/pages/cardList/cardlist.dart';
+import 'package:o3_cards/pages/homescreen/homescreen.dart';
+import 'package:o3_cards/pages/login/loginscreen.dart';
+import 'package:o3_cards/ui/pallete.dart';
 
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  static const String _title = 'Flutter Code Sample';
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: _title,
-      home: MyStatefulWidget(),
-    );
-  }
-}
-
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
+class NavBar extends StatefulWidget {
+  const NavBar({Key? key}) : super(key: key);
 
   @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+  State<NavBar> createState() => _NavBarState();
 }
 
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+class _NavBarState extends State<NavBar> {
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
-      ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
-      ),
+    return ConvexAppBar.badge(
+      const {4: '10+'},
+      // ignore: prefer_const_literals_to_create_immutables
+      items: [
+        const TabItem(
+          icon: Iconsax.send_21,
+          title: 'Send',
+        ),
+        const TabItem(icon: FontAwesomeIcons.solidCreditCard, title: 'Cards'),
+        const TabItem(icon: FontAwesomeIcons.houseUser, title: 'Home'),
+        const TabItem(icon: Icons.bar_chart_rounded, title: 'Stats'),
+        const TabItem(icon: Iconsax.more, title: 'More'),
+      ],
+      color: Colors.grey.shade500,
+      activeColor: FvColors.maintheme,
+      backgroundColor: Colors.white,
+      initialActiveIndex: 2, //optional, default as 0
+      onTap: (int i) {
+        if (i == 0) {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const Loginscreen()));
+        } else if(i == 1){
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const CardList()));
+        } else if ( i == 2){
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const Homescreen()));
+        } else if ( i == 3){
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const Loginscreen()));
+        } else if ( i == 4){
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const Loginscreen()));
+        }
+      },
+      elevation: 5,
     );
   }
 }
+
+
+// onTap: (int i) => debugPrint('click index=$i'),

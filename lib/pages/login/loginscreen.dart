@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:o3_cards/pages/dashboard/dashboard.dart';
 // import 'package:o3_cards/pages/login/auth.dart';
 import 'package:o3_cards/ui/export.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:o3_cards/pages/loginscreen/model.dart';
 // import 'package:o3_cards/services/api_service.dart';
 
-class Loginscreen4 extends StatefulWidget {
-  const Loginscreen4({Key? key}) : super(key: key);
+class Loginscreen extends StatefulWidget {
+  const Loginscreen({Key? key}) : super(key: key);
 
   @override
-  _Loginscreen4State createState() => _Loginscreen4State();
+  _LoginscreenState createState() => _LoginscreenState();
 }
 
-class _Loginscreen4State extends State<Loginscreen4> {
+class _LoginscreenState extends State<Loginscreen> {
   // final AuthAPI _authAPI = AuthAPI();
   // final _key = GlobalKey<FormState>();
   late String email;
@@ -36,29 +37,29 @@ class _Loginscreen4State extends State<Loginscreen4> {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          left: widthOfScreen * 0.05,
-                        ),
-                        child: SizedBox(
-                            height: heightOfScreen * 0.05,
-                            width: widthOfScreen * 0.08,
-                            // ignore: prefer_const_constructors
-                            child: IconButton(
-                              icon: const FaIcon(FontAwesomeIcons.arrowLeft),
-                              color: FvColors.maintheme,
-                              onPressed: () {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const Useronboardingscreen2()));
-                              },
-                            )),
-                      ),
-                    ),
+                    // Align(
+                    //   alignment: Alignment.topLeft,
+                    //   child: Padding(
+                    //     padding: EdgeInsets.only(
+                    //       left: widthOfScreen * 0.05,
+                    //     ),
+                    //     child: SizedBox(
+                    //         height: heightOfScreen * 0.05,
+                    //         width: widthOfScreen * 0.08,
+                    //         // ignore: prefer_const_constructors
+                    //         child: IconButton(
+                    //           icon: const FaIcon(FontAwesomeIcons.arrowLeft),
+                    //           color: FvColors.maintheme,
+                    //           onPressed: () {
+                    //             Navigator.pushReplacement(
+                    //                 context,
+                    //                 MaterialPageRoute(
+                    //                     builder: (context) =>
+                    //                         const Useronboardingscreen2()));
+                    //           },
+                    //         )),
+                    //   ),
+                    // ),
                     Align(
                       alignment: Alignment.topCenter,
                       child: Padding(
@@ -253,7 +254,7 @@ class _Loginscreen4State extends State<Loginscreen4> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const Homescreen()));
+                                          const Dashboard()));
                             },
                           ),
                         ),

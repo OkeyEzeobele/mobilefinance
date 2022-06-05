@@ -3,7 +3,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:o3_cards/pages/homescreen/widgets/activitiesAndTransactions.dart';
 import 'package:o3_cards/pages/login/loginscreen.dart';
 import 'package:o3_cards/ui/pallete.dart';
 
@@ -109,7 +108,7 @@ class _GreetingState extends State<Greeting> {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Activities()));
+                                        builder: (context) => Loginscreen()));
                               },
                               icon: const FaIcon(
                                 FontAwesomeIcons.circlePlus,
@@ -140,7 +139,7 @@ class _GreetingState extends State<Greeting> {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const Loginscreen4()));
+                        builder: (context) => const Loginscreen()));
               },
             ),
           ),

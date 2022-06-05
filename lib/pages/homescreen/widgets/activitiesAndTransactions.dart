@@ -40,7 +40,7 @@ class _ActivitiesState extends State<Activities> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: SizedBox(
-                height: heightOfScreen * 0.1,
+                height: heightOfScreen * 0.11,
                 width: widthOfScreen * 0.89,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -88,8 +88,9 @@ class _ActivitiesState extends State<Activities> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SizedBox.square(
-                          dimension: widthOfScreen * 0.21,
+                        SizedBox(
+                          width: widthOfScreen * 0.21,
+                          height: heightOfScreen * 0.1,
                           child: Image.asset("assets/1vrfyidentity.png"),
                         )
                       ],
