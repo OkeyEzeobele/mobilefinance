@@ -64,8 +64,7 @@ class _CardListState extends State<CardList> {
                         height: heightOfScreen * 0.04,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(181),
-                          color: FvColors
-                              .container58Backgroundcontainer72Backgroundcontainer73Backgroundcontainer141Backgroundcontainer142Backgroundcontainer146Backgroundcontainer147Backgroundcontainer161Backgroundcontainer162Background,
+                          color: FvColors.offwhitepink,
                         ),
                         child: Row(
                           children: [
@@ -126,9 +125,7 @@ class _CardListState extends State<CardList> {
                                             topLeft: Radius.circular(30),
                                             topRight: Radius.circular(30))),
                                     builder: (context) {
-                                      return (
-                                        BottomModal()
-                                      );
+                                      return (BottomModal());
                                     });
                               },
                             ),

@@ -265,7 +265,7 @@ class _ActivitiesState extends State<Activities> {
                     ),
                     onTap: () {
                       setState(() {
-                        _swapActivities = true ;
+                        _swapActivities = true;
                       });
                     },
                   )
@@ -284,7 +284,7 @@ class _ActivitiesState extends State<Activities> {
                     ),
                     onTap: () {
                       setState(() {
-                        _swapActivities = false ;
+                        _swapActivities = false;
                       });
                     },
                   )
@@ -305,8 +305,7 @@ class _ActivitiesState extends State<Activities> {
               FvColors.maintheme,
             ],
             activeFgColor: Colors.white,
-            inactiveBgColor: FvColors
-                .container58Backgroundcontainer72Backgroundcontainer73Backgroundcontainer141Backgroundcontainer142Backgroundcontainer146Backgroundcontainer147Backgroundcontainer161Backgroundcontainer162Background,
+            inactiveBgColor: FvColors.offwhitepink,
             inactiveFgColor: Colors.black,
             labels: const ['', ''],
             onToggle: (index) {

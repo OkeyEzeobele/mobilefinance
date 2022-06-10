@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FvColors {
-  static const Color
-      screen1Backgroundcontainer19Backgroundcontainer20Backgroundcontainer42Backgroundcontainer43Backgroundcontainer44Backgroundscreen4Backgroundcontainer57Backgroundcontainer97Backgroundcontainer110Background =
-      Color.fromARGB(255, 255, 255, 255);
+  static const Color offwhite = Color.fromARGB(255, 255, 255, 255);
   static const Color maintheme = Color.fromARGB(255, 206, 44, 47);
   static const Color button14FontColor = Color.fromARGB(255, 170, 217, 243);
   static const Color button22Background = Color.fromARGB(255, 238, 241, 246);
@@ -17,9 +15,7 @@ class FvColors {
   static const Color textview50FontColor = Color.fromARGB(255, 29, 31, 31);
   static const Color edittext51Background = Color.fromARGB(255, 242, 244, 248);
   static const Color screen5Background = Color.fromARGB(255, 247, 249, 252);
-  static const Color
-      container58Backgroundcontainer72Backgroundcontainer73Backgroundcontainer141Backgroundcontainer142Backgroundcontainer146Backgroundcontainer147Backgroundcontainer161Backgroundcontainer162Background =
-      Color.fromARGB(255, 251, 236, 236);
+  static const Color offwhitepink = Color.fromARGB(255, 251, 236, 236);
   static const Color textview65FontColor = Color.fromARGB(255, 119, 126, 144);
   static const Color textview66FontColor = Color.fromARGB(255, 31, 35, 61);
   static const Color textview70FontColor = Color.fromARGB(255, 87, 91, 92);

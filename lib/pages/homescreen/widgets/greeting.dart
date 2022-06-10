@@ -4,6 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:o3_cards/pages/login/loginscreen.dart';
+import 'package:o3_cards/services/shared_service.dart';
 import 'package:o3_cards/ui/pallete.dart';
 
 class Greeting extends StatefulWidget {
@@ -17,6 +18,15 @@ class _GreetingState extends State<Greeting> {
   @override
   void initState() {
     super.initState();
+  }
+
+  String _firstname = '';
+  _GreetingState() {
+    getTextFromFile().then(
+      (val) => setState(() {
+        _firstname = val;
+      }),
+    );
   }
 
   @override
@@ -44,9 +54,9 @@ class _GreetingState extends State<Greeting> {
                             fontSize: 12,
                             color: FvColors.textview70FontColor,
                             fontWeight: FontWeight.w600),
-                        children: const <TextSpan>[
+                        children: <TextSpan>[
                           TextSpan(
-                            text: 'First Name',
+                            text: _firstname,
                             style: TextStyle(
                                 fontSize: 15,
                                 color: FvColors.textview50FontColor,
@@ -73,8 +83,7 @@ class _GreetingState extends State<Greeting> {
                   height: heightOfScreen * 0.04,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(181),
-                    color: FvColors
-                        .container58Backgroundcontainer72Backgroundcontainer73Backgroundcontainer141Backgroundcontainer142Backgroundcontainer146Backgroundcontainer147Backgroundcontainer161Backgroundcontainer162Background,
+                    color: FvColors.offwhitepink,
                   ),
                   child: Row(
                     children: [
@@ -136,15 +145,18 @@ class _GreetingState extends State<Greeting> {
                 ),
               ),
               onTap: () {
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Loginscreen()));
+                SharedService.logout(context);
               },
             ),
           ),
         ),
       ]),
     ]);
+  }
+
+  Future<String> getTextFromFile() async {
+    var userDetails = await SharedService.loginDetails();
+    var name = userDetails!.payload!.user!.fullName;
+    return name.substring(0,name.indexOf(' '));
   }
 }

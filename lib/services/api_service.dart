@@ -1,21 +1,39 @@
-import 'dart:developer';
+import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:o3_cards/widgets/constants.dart';
-import 'package:o3_cards/pages/loginscreen/model.dart';
+import 'package:o3_cards/models/config.dart';
+import 'package:o3_cards/models/loginRequest.dart';
+import 'package:o3_cards/models/loginResponse.dart';
+import 'package:o3_cards/services/shared_service.dart';
 
-class ApiService {
-  Future<List<Login>?> login() async {
-    try {
-      var url = Uri.parse(ApiConstants.baseUrl + ApiConstants.login);
-      var response = await http.get(url);
-      if (response.statusCode == 200) {
-        List<Login> _model = loginFromJson(response.body) as List<Login>;
-        return _model;
-      }
-    } catch (e) {
-      log(e.toString());
+class APIService {
+  static var client = http.Client();
+
+  static Future<LoginResponse> login(
+    LoginRequest model,
+    ) async {
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+    };
+
+    var url = Uri.http(
+      Config.baseUrl,
+      Config.authLogin
+    );
+
+    var response = await client.post(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode(model.toJson()),
+    );
+
+    if (response.statusCode == 200) {
+
+      await SharedService.setLoginDetails(loginResponseJson(response.body));
     }
-    return null;
+    return loginResponseJson(
+      response.body
+    );
   }
+
 }

@@ -46,8 +46,7 @@ class _Useronboardingscreen2State extends State<Useronboardingscreen2> {
                             "Instant Credit Cards",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: FvColors
-                                    .screen1Backgroundcontainer19Backgroundcontainer20Backgroundcontainer42Backgroundcontainer43Backgroundcontainer44Backgroundscreen4Backgroundcontainer57Backgroundcontainer97Backgroundcontainer110Background,
+                                color: FvColors.offwhite,
                                 fontWeight: FontWeight.w700,
                                 fontSize: widthOfScreen * 0.05),
                           ),
@@ -65,8 +64,7 @@ class _Useronboardingscreen2State extends State<Useronboardingscreen2> {
                             "Seamless credit cards, spend with ease",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: FvColors
-                                    .screen1Backgroundcontainer19Backgroundcontainer20Backgroundcontainer42Backgroundcontainer43Backgroundcontainer44Backgroundscreen4Backgroundcontainer57Backgroundcontainer97Backgroundcontainer110Background,
+                                color: FvColors.offwhite,
                                 fontWeight: FontWeight.w600,
                                 fontSize: widthOfScreen * 0.03),
                           ),
@@ -97,8 +95,7 @@ class _Useronboardingscreen2State extends State<Useronboardingscreen2> {
                             "Simple Payments",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: FvColors
-                                    .screen1Backgroundcontainer19Backgroundcontainer20Backgroundcontainer42Backgroundcontainer43Backgroundcontainer44Backgroundscreen4Backgroundcontainer57Backgroundcontainer97Backgroundcontainer110Background,
+                                color: FvColors.offwhite,
                                 fontWeight: FontWeight.w700,
                                 fontSize: widthOfScreen * 0.05),
                           ),
@@ -117,8 +114,7 @@ class _Useronboardingscreen2State extends State<Useronboardingscreen2> {
                             "and businesses",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: FvColors
-                                    .screen1Backgroundcontainer19Backgroundcontainer20Backgroundcontainer42Backgroundcontainer43Backgroundcontainer44Backgroundscreen4Backgroundcontainer57Backgroundcontainer97Backgroundcontainer110Background,
+                                color: FvColors.offwhite,
                                 fontWeight: FontWeight.w600,
                                 fontSize: widthOfScreen * 0.03),
                           ),
@@ -139,10 +135,10 @@ class _Useronboardingscreen2State extends State<Useronboardingscreen2> {
             options: CarouselOptions(
               height: heightOfScreen * 0.8,
               enlargeCenterPage: false,
-              enableInfiniteScroll: true,
+              enableInfiniteScroll: false,
               // viewportFraction: 0,
               // aspectRatio: 9/16 ,
-              autoPlay: true,
+              // autoPlay: true,
             )),
         Align(
           alignment: Alignment.topCenter,
@@ -159,8 +155,7 @@ class _Useronboardingscreen2State extends State<Useronboardingscreen2> {
                       FvColors.container166Background.withOpacity(0.5),
                   child: FaIcon(
                     FontAwesomeIcons.chevronRight,
-                    color: FvColors
-                        .screen1Backgroundcontainer19Backgroundcontainer20Backgroundcontainer42Backgroundcontainer43Backgroundcontainer44Backgroundscreen4Backgroundcontainer57Backgroundcontainer97Backgroundcontainer110Background,
+                    color: FvColors.offwhite,
                   ),
                 ),
                 onTap: () {
@@ -195,8 +190,7 @@ class _Useronboardingscreen2State extends State<Useronboardingscreen2> {
                                               child: const Text(
                                                 'Create New Account',
                                                 style: TextStyle(
-                                                  color: FvColors
-                                                      .screen1Backgroundcontainer19Backgroundcontainer20Backgroundcontainer42Backgroundcontainer43Backgroundcontainer44Backgroundscreen4Backgroundcontainer57Backgroundcontainer97Backgroundcontainer110Background,
+                                                  color: FvColors.offwhite,
                                                   fontWeight: FontWeight.w900,
                                                 ),
                                               ),

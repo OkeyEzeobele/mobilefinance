@@ -39,10 +39,9 @@ class _SendmoneyState extends State<Sendmoney> {
                   'Amount you want to send',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: FvColors.textview50FontColor,
-                    fontWeight: FontWeight.w700,
-                    fontSize: heightOfScreen * 0.02
-                  ),
+                      color: FvColors.textview50FontColor,
+                      fontWeight: FontWeight.w700,
+                      fontSize: heightOfScreen * 0.02),
                 ),
               ),
             ),
@@ -56,20 +55,19 @@ class _SendmoneyState extends State<Sendmoney> {
           child: SizedBox(
             height: heightOfScreen * 0.1,
             child: Center(
-                child: TextField(
-              controller: _myController,
-              textAlign: TextAlign.center,
-              showCursor: false,
-              style: TextStyle(fontSize: heightOfScreen * 0.08),
-              decoration: InputDecoration(
-                prefixIcon: Text('₦'),
-                prefixStyle: TextStyle(
-                  fontSize: heightOfScreen * 0.08
-                )
+              child: TextField(
+                controller: _myController,
+                textAlign: TextAlign.center,
+                showCursor: false,
+                style: TextStyle(fontSize: heightOfScreen * 0.08),
+                decoration: InputDecoration(
+                  prefixIcon: Text('₦'),
+                  prefixStyle: TextStyle(fontSize: heightOfScreen * 0.08),
+                ),
+                // Disable the default soft keybaord
+                keyboardType: TextInputType.none,
               ),
-              // Disable the default soft keybaord
-              keyboardType: TextInputType.none,
-            )),
+            ),
           ),
         ),
         NumPad(

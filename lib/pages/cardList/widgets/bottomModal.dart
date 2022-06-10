@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, file_names
 import 'package:flutter/material.dart';
 import 'package:o3_cards/pages/dashboard/dashboard.dart';
 import 'package:o3_cards/ui/export.dart';
@@ -40,8 +40,7 @@ class _BottomModalState extends State<BottomModal> {
                         child: const Text(
                           'Fund Card',
                           style: TextStyle(
-                            color: FvColors
-                                .screen1Backgroundcontainer19Backgroundcontainer20Backgroundcontainer42Backgroundcontainer43Backgroundcontainer44Backgroundscreen4Backgroundcontainer57Backgroundcontainer97Backgroundcontainer110Background,
+                            color: FvColors.offwhite,
                             fontWeight: FontWeight.w900,
                           ),
                         ),

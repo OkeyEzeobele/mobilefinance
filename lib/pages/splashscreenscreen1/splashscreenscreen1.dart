@@ -16,8 +16,7 @@ class _Splashscreenscreen1State extends State<Splashscreenscreen1> {
     // double width = MediaQuery.of(context).size.width;
     // double height = MediaQuery.of(context).size.height;
     return Scaffold(
-        backgroundColor: FvColors
-            .screen1Backgroundcontainer19Backgroundcontainer20Backgroundcontainer42Backgroundcontainer43Backgroundcontainer44Backgroundscreen4Backgroundcontainer57Backgroundcontainer97Backgroundcontainer110Background,
+        backgroundColor: FvColors.offwhite,
         body: Container(
           width: widthOfScreen,
           height: heightOfScreen,
@@ -42,8 +41,7 @@ class _Splashscreenscreen1State extends State<Splashscreenscreen1> {
                       child: const Text(
                         'Continue',
                         style: TextStyle(
-                          color: FvColors
-                              .screen1Backgroundcontainer19Backgroundcontainer20Backgroundcontainer42Backgroundcontainer43Backgroundcontainer44Backgroundscreen4Backgroundcontainer57Backgroundcontainer97Backgroundcontainer110Background,
+                          color: FvColors.offwhite,
                           fontWeight: FontWeight.w900,
                         ),
                       ),
