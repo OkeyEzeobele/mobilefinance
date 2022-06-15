@@ -20,6 +20,9 @@ class _HomescreenState extends State<Homescreen> {
       body: Column(
         children: [
           Greeting(),
+          SizedBox.square(
+            dimension: 20,
+          ),
           CreditCards(),
           QuickLinks(),
           SizedBox.square(

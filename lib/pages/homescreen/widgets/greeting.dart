@@ -35,128 +35,133 @@ class _GreetingState extends State<Greeting> {
     var heightOfScreen =
         MediaQuery.of(context).size.height - marginFromSafeArea;
     var widthOfScreen = MediaQuery.of(context).size.width;
-    return Column(children: [
-      Row(children: <Widget>[
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: EdgeInsets.only(
-                left: widthOfScreen * 0.05, top: heightOfScreen * 0.05),
-            child: SizedBox(
-              width: widthOfScreen * 0.25,
-              child: AutoSizeText.rich(
-                TextSpan(
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: 'How are you?\n',
-                        style: TextStyle(
-                            fontSize: 12,
-                            color: FvColors.textview70FontColor,
-                            fontWeight: FontWeight.w600),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: _firstname,
-                            style: TextStyle(
-                                fontSize: 15,
-                                color: FvColors.textview50FontColor,
-                                fontWeight: FontWeight.w700),
-                          )
-                        ]),
-                  ],
+    return Column(
+      children: [
+        SizedBox(
+          height: 15,
+        ),
+        Row(children: <Widget>[
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: EdgeInsets.only(
+                  left: widthOfScreen * 0.05, top: heightOfScreen * 0.05),
+              child: SizedBox(
+                width: widthOfScreen * 0.25,
+                child: AutoSizeText.rich(
+                  TextSpan(
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: 'How are you?\n',
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: FvColors.textview70FontColor,
+                              fontWeight: FontWeight.w600),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: _firstname,
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: FvColors.textview50FontColor,
+                                  fontWeight: FontWeight.w700),
+                            )
+                          ]),
+                    ],
+                  ),
+                  textAlign: TextAlign.left,
+                  minFontSize: 10,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                textAlign: TextAlign.left,
-                minFontSize: 10,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
               ),
             ),
           ),
-        ),
-        Align(
-          alignment: Alignment.center,
-          child: Padding(
-              padding: EdgeInsets.only(
-                  left: widthOfScreen * 0.08, top: heightOfScreen * 0.05),
-              child: Container(
-                  width: widthOfScreen * 0.45,
-                  height: heightOfScreen * 0.04,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(181),
-                    color: FvColors.offwhitepink,
-                  ),
-                  child: Row(
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Padding(
+          Align(
+            alignment: Alignment.center,
+            child: Padding(
+                padding: EdgeInsets.only(
+                    left: widthOfScreen * 0.08, top: heightOfScreen * 0.05),
+                child: Container(
+                    width: widthOfScreen * 0.45,
+                    height: heightOfScreen * 0.04,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(181),
+                      color: FvColors.offwhitepink,
+                    ),
+                    child: Row(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Padding(
+                              padding: EdgeInsets.only(
+                                  left: widthOfScreen * 0.04,
+                                  top: heightOfScreen * 0.01),
+                              child: Text(
+                                "Add Credit Card",
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontSize: widthOfScreen * 0.035,
+                                  color: FvColors.maintheme,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              )),
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
                             padding: EdgeInsets.only(
-                                left: widthOfScreen * 0.04,
-                                top: heightOfScreen * 0.01),
-                            child: Text(
-                              "Add Credit Card",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontSize: widthOfScreen * 0.035,
-                                color: FvColors.maintheme,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            )),
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              left: widthOfScreen * 0.02,
-                              top: heightOfScreen * 0.0001),
-                          child: FittedBox(
-                            // height: heightOfScreen * 0.04,
-                            // width: widthOfScreen * 0.04,
-                            child: IconButton(
-                              onPressed: () {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Loginscreen()));
-                              },
-                              icon: const FaIcon(
-                                FontAwesomeIcons.circlePlus,
-                                color: FvColors.maintheme,
+                                left: widthOfScreen * 0.02,
+                                top: heightOfScreen * 0.0001),
+                            child: FittedBox(
+                              // height: heightOfScreen * 0.04,
+                              // width: widthOfScreen * 0.04,
+                              child: IconButton(
+                                onPressed: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Loginscreen()));
+                                },
+                                icon: const FaIcon(
+                                  FontAwesomeIcons.circlePlus,
+                                  color: FvColors.maintheme,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ))),
-        ),
-        Align(
-          alignment: Alignment.topRight,
-          child: Padding(
-            padding: EdgeInsets.only(
-                left: widthOfScreen * 0.02, top: heightOfScreen * 0.05),
-            child: GestureDetector(
-              child: CircleAvatar(
-                radius: heightOfScreen * 0.02,
-                backgroundColor: FvColors.textview79FontColor,
-                child: FaIcon(
-                  FontAwesomeIcons.solidUser,
-                  color: FvColors.textview50FontColor,
+                      ],
+                    ))),
+          ),
+          Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: EdgeInsets.only(
+                  left: widthOfScreen * 0.02, top: heightOfScreen * 0.05),
+              child: GestureDetector(
+                child: CircleAvatar(
+                  radius: heightOfScreen * 0.02,
+                  backgroundColor: FvColors.textview79FontColor,
+                  child: FaIcon(
+                    FontAwesomeIcons.solidUser,
+                    color: FvColors.textview50FontColor,
+                  ),
                 ),
+                onTap: () {
+                  SharedService.logout(context);
+                },
               ),
-              onTap: () {
-                SharedService.logout(context);
-              },
             ),
           ),
-        ),
-      ]),
-    ]);
+        ]),
+      ],
+    );
   }
 
   Future<String> getTextFromFile() async {
     var userDetails = await SharedService.loginDetails();
     var name = userDetails!.payload!.user!.fullName;
-    return name.substring(0,name.indexOf(' '));
+    return name.substring(0, name.indexOf(' '));
   }
 }

@@ -1,8 +1,12 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_null_comparison
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:o3_cards/models/cardlistResponse.dart';
 import 'package:o3_cards/pages/cardList/widgets/bottomModal.dart';
+import 'package:o3_cards/services/api_service.dart';
 import 'package:o3_cards/ui/export.dart';
 
 class CardList extends StatefulWidget {
@@ -13,30 +17,35 @@ class CardList extends StatefulWidget {
 }
 
 class _CardListState extends State<CardList> {
+  late Future<CardListResponse> userCards;
+  @override
+  void initState() {
+    super.initState();
+    userCards = APIService.userCards();
+  }
+
   @override
   Widget build(BuildContext context) {
     double marginFromSafeArea = 24;
     var heightOfScreen =
         MediaQuery.of(context).size.height - marginFromSafeArea;
     var widthOfScreen = MediaQuery.of(context).size.width;
-    return Scaffold(
-      backgroundColor: FvColors.edittext51Background,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+    return SafeArea(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Padding(
-                padding: EdgeInsets.only(
-                    left: widthOfScreen * 0.05, top: heightOfScreen * 0.05),
-                child: SizedBox(
-                  width: widthOfScreen * 0.25,
-                  child: AutoSizeText.rich(
-                    TextSpan(
-                      children: <TextSpan>[
-                        TextSpan(children: const <TextSpan>[
+              SizedBox(
+                width: widthOfScreen * 0.25,
+                child: AutoSizeText.rich(
+                  TextSpan(
+                    children: <TextSpan>[
+                      TextSpan(
+                        children: const <TextSpan>[
                           TextSpan(
                             text: 'Your Cards',
                             style: TextStyle(
@@ -44,143 +53,312 @@ class _CardListState extends State<CardList> {
                                 color: FvColors.textview50FontColor,
                                 fontWeight: FontWeight.w700),
                           )
-                        ]),
-                      ],
-                    ),
-                    textAlign: TextAlign.left,
-                    minFontSize: 10,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                        ],
+                      ),
+                    ],
                   ),
+                  textAlign: TextAlign.left,
+                  minFontSize: 10,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
-              Align(
-                alignment: Alignment.topRight,
-                child: Padding(
-                    padding: EdgeInsets.only(
-                        left: widthOfScreen * 0.08, top: heightOfScreen * 0.05),
-                    child: Container(
-                        width: widthOfScreen * 0.34,
-                        height: heightOfScreen * 0.04,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(181),
-                          color: FvColors.offwhitepink,
+              Container(
+                width: widthOfScreen * 0.4,
+                height: heightOfScreen * 0.04,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(181),
+                  color: FvColors.offwhitepink,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Request Card",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: FvColors.maintheme,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    FittedBox(
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Loginscreen(),
+                            ),
+                          );
+                        },
+                        icon: const FaIcon(
+                          FontAwesomeIcons.circlePlus,
+                          color: FvColors.maintheme,
                         ),
-                        child: Row(
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Padding(
-                                  padding: EdgeInsets.only(
-                                      left: widthOfScreen * 0.02,
-                                      top: heightOfScreen * 0.01),
-                                  child: Text(
-                                    "Request Card",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontSize: widthOfScreen * 0.035,
-                                      color: FvColors.maintheme,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  )),
-                            ),
-                            FittedBox(
-                              // height: heightOfScreen * 0.04,
-                              // width: widthOfScreen * 0.04,
-                              child: IconButton(
-                                onPressed: () {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Loginscreen()));
-                                },
-                                icon: const FaIcon(
-                                  FontAwesomeIcons.circlePlus,
-                                  color: FvColors.maintheme,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ))),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: heightOfScreen * 0.03),
-                      child: Center(
-                        child: Stack(
-                          children: [
-                            GestureDetector(
-                              child: Image.asset('assets/card_classic.png'),
-                              onTap: () {
-                                showModalBottomSheet(
-                                    context: context,
-                                    shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(30),
-                                            topRight: Radius.circular(30))),
-                                    builder: (context) {
-                                      return (BottomModal());
-                                    });
-                              },
+          SizedBox(
+            height: 15,
+          ),
+          FutureBuilder<CardListResponse>(
+            future: userCards,
+            builder: (context, snapshot) {
+              var cards = snapshot.data?.payload;
+              if (snapshot.hasData) {
+                // return Text('${cards?.length}');
+                return Expanded(
+                  child: ListView.separated(
+                    itemCount: cards!.length,
+                    itemBuilder: (context, i) => (cards[i].id != null)
+                        ? GestureDetector(
+                            child: SizedBox(
+                              height: 216,
+                              width: 450,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: BoxFit.contain,
+                                    image: AssetImage(
+                                      (cards[i].orderLabel == 'Prestige Card')
+                                          ? 'assets/card_prestige.png'
+                                          : 'assets/card_classic.png',
+                                    ),
+                                  ),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                padding: EdgeInsets.all(20),
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 50,
+                                    ),
+                                    SizedBox(
+                                      width: double.infinity,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                          right: 40,
+                                        ),
+                                        child: Text(
+                                          // 'N'+ cards![i].balance,
+                                          cards[i].balance == '0.0' ||
+                                                  cards[i].balance.contains('-')
+                                              ? '₦ ' + cards[i].balance
+                                              : NumberFormat.currency(
+                                                  name: '₦ ',
+                                                  decimalDigits: 2,
+                                                ).format(cards[i].balance),
+                                          textAlign: TextAlign.right,
+                                          style: GoogleFonts.inconsolata(
+                                            fontSize: 20.0,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 30,
+                                    ),
+                                    Text(
+                                      (cards[i].first6 +
+                                              'XXXXXX' +
+                                              cards[i].last4)
+                                          .replaceAllMapped(RegExp(r".{4}"),
+                                              (match) => "${match.group(0)} ")
+                                          .trimRight(),
+                                      style: GoogleFonts.inconsolata(
+                                        fontSize: 22.0,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 30,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        RichText(
+                                          text: TextSpan(
+                                            text: 'Expiry ',
+                                            style: TextStyle(
+                                                fontSize: 10.0,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w600),
+                                            children: [
+                                              TextSpan(
+                                                text: DateFormat.yM().format(
+                                                  (DateTime.parse(
+                                                          cards[i].createdAt)
+                                                      .add(
+                                                    Duration(days: 730),
+                                                  )),
+                                                ),
+                                                style: GoogleFonts.inconsolata(
+                                                    fontSize: 15,
+                                                    color: Colors.white),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: widthOfScreen * 0.6,
-                                  top: heightOfScreen * 0.04),
-                              child: Text('Hellooooooo'),
-                            )
-                          ],
+                            onTap: () {
+                              showModalBottomSheet(
+                                context: context,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(30),
+                                    topRight: Radius.circular(30),
+                                  ),
+                                ),
+                                builder: (context) {
+                                  return (BottomModal());
+                                },
+                              );
+                            },
+                          )
+                        : Center(
+                            child: Padding(
+                              padding:
+                                  EdgeInsets.only(top: heightOfScreen * 0.4),
+                              child: Text(
+                                'You have no cards yet',
+                                style: GoogleFonts.lato(
+                                  textStyle: TextStyle(
+                                    fontSize: 20,
+                                    color: FvColors.maintheme,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                    separatorBuilder: (BuildContext context, int index) =>
+                        SizedBox(
+                      height: 10,
+                    ),
+                  ),
+                );
+              } else if (snapshot.hasError) {
+                return Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: heightOfScreen * 0.4),
+                    child: Text(
+                      'You have no cards yet',
+                      style: GoogleFonts.lato(
+                        textStyle: TextStyle(
+                          fontSize: widthOfScreen * 0.03,
+                          color: FvColors.maintheme,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
-                    width: widthOfScreen * 0.8,
                   ),
-                  SizedBox(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: heightOfScreen * 0.03),
-                      child: Center(
-                        child: Image.asset('assets/card_prestige.png'),
-                      ),
+                );
+              }
+              return SizedBox(
+                height: heightOfScreen * 0.8,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const CircularProgressIndicator(
+                      color: FvColors.maintheme,
                     ),
-                    width: widthOfScreen * 0.8,
-                  ),
-                  SizedBox(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: heightOfScreen * 0.03),
-                      child: Center(
-                        child: Image.asset('assets/card_prestige.png'),
-                      ),
-                    ),
-                    width: widthOfScreen * 0.8,
-                  ),
-                  SizedBox(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: heightOfScreen * 0.03),
-                      child: Center(
-                        child: Image.asset('assets/card_classic.png'),
-                      ),
-                    ),
-                    width: widthOfScreen * 0.8,
-                  ),
-                  SizedBox(
-                    child: Padding(
-                      padding: EdgeInsets.only(top: heightOfScreen * 0.03),
-                      child: Center(
-                        child: Image.asset('assets/card_classic.png'),
-                      ),
-                    ),
-                    width: widthOfScreen * 0.8,
-                  ),
-                ],
-              ),
-            ),
-          )
+                  ],
+                ),
+              );
+            },
+          ),
+          // Expanded(
+          //   child: SingleChildScrollView(
+          //     child: Column(
+          //       children: [
+          //         SizedBox(
+          //           child: Padding(
+          //             padding: EdgeInsets.only(top: heightOfScreen * 0.03),
+          //             child: Center(
+          //               child: Stack(
+          //                 children: [
+          //                   GestureDetector(
+          //                     child: Image.asset('assets/card_classic.png'),
+          //                     onTap: () {
+          //                       showModalBottomSheet(
+          //                         context: context,
+          //                         shape: const RoundedRectangleBorder(
+          //                           borderRadius: BorderRadius.only(
+          //                             topLeft: Radius.circular(30),
+          //                             topRight: Radius.circular(30),
+          //                           ),
+          //                         ),
+          //                         builder: (context) {
+          //                           return (BottomModal());
+          //                         },
+          //                       );
+          //                     },
+          //                   ),
+          //                   Padding(
+          //                     padding: EdgeInsets.only(
+          //                         left: widthOfScreen * 0.6,
+          //                         top: heightOfScreen * 0.04),
+          //                     child: Text('Hellooooooo'),
+          //                   )
+          //                 ],
+          //               ),
+          //             ),
+          //           ),
+          //           width: widthOfScreen * 0.8,
+          //         ),
+          //         SizedBox(
+          //           child: Padding(
+          //             padding: EdgeInsets.only(top: heightOfScreen * 0.03),
+          //             child: Center(
+          //               child: Image.asset('assets/card_prestige.png'),
+          //             ),
+          //           ),
+          //           width: widthOfScreen * 0.8,
+          //         ),
+          //         SizedBox(
+          //           child: Padding(
+          //             padding: EdgeInsets.only(top: heightOfScreen * 0.03),
+          //             child: Center(
+          //               child: Image.asset('assets/card_prestige.png'),
+          //             ),
+          //           ),
+          //           width: widthOfScreen * 0.8,
+          //         ),
+          //         SizedBox(
+          //           child: Padding(
+          //             padding: EdgeInsets.only(top: heightOfScreen * 0.03),
+          //             child: Center(
+          //               child: Image.asset('assets/card_classic.png'),
+          //             ),
+          //           ),
+          //           width: widthOfScreen * 0.8,
+          //         ),
+          //         SizedBox(
+          //           child: Padding(
+          //             padding: EdgeInsets.only(top: heightOfScreen * 0.03),
+          //             child: Center(
+          //               child: Image.asset('assets/card_classic.png'),
+          //             ),
+          //           ),
+          //           width: widthOfScreen * 0.8,
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );
