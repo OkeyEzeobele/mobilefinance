@@ -35,6 +35,20 @@ class _RecenttransactionsState extends State<Recenttransactions> {
         builder: (context, txnModel) {
           var transactions = txnModel.data?.payload;
           if (txnModel.hasData) {
+            if (txnModel.data!.payload.isEmpty) {
+              return Center(
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      left: widthOfScreen * 0.05,
+                      top: heightOfScreen * 0.01,
+                    ),
+                    child: const Text('No recent transactions'),
+                  ),
+                ),
+              );
+            }
             return SizedBox(
               height: heightOfScreen * 0.4,
               width: widthOfScreen * 0.8,
@@ -43,112 +57,92 @@ class _RecenttransactionsState extends State<Recenttransactions> {
                   Expanded(
                     child: ListView.separated(
                       itemCount: transactions!.length,
-                      itemBuilder: (context, i) => transactions.isEmpty
-                          ? Center(
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                    left: widthOfScreen * 0.05,
-                                    top: heightOfScreen * 0.01,
+                      itemBuilder: (context, i) => Column(
+                        children: [
+                          Card(
+                            elevation: 5,
+                            shadowColor: Colors.grey.shade50,
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: SizedBox(
+                              width: widthOfScreen * 0.9,
+                              height: heightOfScreen * 0.1,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: <Widget>[
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey,
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                    child: IconButton(
+                                      icon: const Icon(Icons.toll),
+                                      color: Colors.white,
+                                      iconSize: 15,
+                                      padding: EdgeInsets.all(0),
+                                      onPressed: () {},
+                                    ),
                                   ),
-                                  child: const Text('No recent transactions'),
-                                ),
-                              ),
-                            )
-                          : Column(
-                              children: [
-                                // Row(
-                                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                //   children: [
-                                //     Text(
-                                //       'Recent Transactions',
-                                //     ),
-                                //     Text('more')
-                                //   ],
-                                // ),
-                                Card(
-                                  elevation: 5,
-                                  shadowColor: Colors.grey.shade50,
-                                  color: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: SizedBox(
-                                    width: widthOfScreen * 0.9,
-                                    height: heightOfScreen * 0.1,
-                                    child: Row(
+                                  SizedBox(
+                                    width: widthOfScreen * 0.3,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
+                                          MainAxisAlignment.center,
                                       children: <Widget>[
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            color: Colors.grey,
-                                            borderRadius:
-                                                BorderRadius.circular(25),
-                                          ),
-                                          child: IconButton(
-                                            icon: const Icon(Icons.toll),
-                                            color: Colors.white,
-                                            iconSize: 15,
-                                            padding: EdgeInsets.all(0),
-                                            onPressed: () {},
+                                        Text(
+                                          (transactions[i].comment != null)
+                                              ? transactions[i]
+                                                  .comment
+                                                  .toString()
+                                              : transactions[i]
+                                                  .destination
+                                                  .toString(),
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        SizedBox(
-                                          width: widthOfScreen * 0.3,
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: <Widget>[
-                                              Text(
-                                                (transactions[i].comment != null)
-                                                    ? transactions[i]
-                                                        .comment
-                                                        .toString()
-                                                    : transactions[i]
-                                                        .destination
-                                                        .toString(),
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
+                                        Text(
+                                          DateFormat.MMMd()
+                                              .add_jm()
+                                              .format(
+                                                DateTime.parse(
+                                                  transactions[i].createdAt,
                                                 ),
-                                              ),
-                                              Text(
-                                                DateFormat.MMMd()
-                                                    .add_jm()
-                                                    .format(
-                                                      DateTime.parse(
-                                                          transactions[i]
-                                                              .createdAt),
-                                                    )
-                                                    .toString(),
-                                                style:
-                                                    TextStyle(color: Colors.grey),
-                                              ),
-                                            ],
+                                              )
+                                              .toString(),
+                                          style: TextStyle(
+                                            color: Colors.grey,
                                           ),
                                         ),
-                                        SizedBox(
-                                          width: 90,
-                                          child: Text(
-                                            NumberFormat.currency(
-                                              name: '₦',
-                                              decimalDigits: 0,
-                                            ).format(
-                                              double.parse(
-                                                transactions[i].amount.toString(),
-                                              ),
-                                            ),
-                                            textAlign: TextAlign.right,
-                                          ),
-                                        )
                                       ],
                                     ),
                                   ),
-                                ),
-                              ],
+                                  SizedBox(
+                                    width: 90,
+                                    child: Text(
+                                      NumberFormat.currency(
+                                        name: '₦',
+                                        decimalDigits: 0,
+                                      ).format(
+                                        double.parse(
+                                          transactions[i].amount.toString(),
+                                        ),
+                                      ),
+                                      textAlign: TextAlign.right,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
+                          ),
+                        ],
+                      ),
                       separatorBuilder: (BuildContext context, int index) =>
                           SizedBox(
                         height: 5,
