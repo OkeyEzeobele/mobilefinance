@@ -135,6 +135,9 @@ class _RecenttransactionsState extends State<Recenttransactions> {
                                         ),
                                       ),
                                       textAlign: TextAlign.right,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600
+                                      ),
                                     ),
                                   )
                                 ],

@@ -14,15 +14,12 @@ class APIService {
 
   static Future<LoginResponse> login(
     LoginRequest model,
-    ) async {
+  ) async {
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
     };
 
-    var url = Uri.http(
-      Config.baseUrl,
-      Config.authLogin
-    );
+    var url = Uri.http(Config.baseUrl, Config.authLogin);
 
     var response = await client.post(
       url,
@@ -31,12 +28,9 @@ class APIService {
     );
 
     if (response.statusCode == 200) {
-
       await SharedService.setLoginDetails(loginResponseJson(response.body));
     }
-    return loginResponseJson(
-      response.body
-    );
+    return loginResponseJson(response.body);
   }
 
   static Future<CardListResponse> userCards() async {
@@ -47,7 +41,10 @@ class APIService {
       'token': '${loginDetails!.payload!.token}'
     };
 
-    var url = Uri.http(Config.baseUrl, Config.fetchCards);
+    var url = Uri.http(
+      Config.baseUrl,
+      Config.fetchCards,
+    ); //http for live, http for debug
 
     final response = await client.get(
       url,
@@ -55,11 +52,8 @@ class APIService {
     );
 
     if (response.statusCode == 200) {
-      return cardListResponseJson(
-        response.body
-      );
-    }
-    else {
+      return cardListResponseJson(response.body);
+    } else {
       throw Exception('Failed to get cards');
     }
   }
@@ -72,7 +66,10 @@ class APIService {
       'token': '${loginDetails!.payload!.token}'
     };
 
-    var url = Uri.http(Config.baseUrl, Config.transactions);
+    var url = Uri.http(
+      Config.baseUrl,
+      Config.transactions,
+    );
 
     final response = await client.get(
       url,
@@ -80,11 +77,8 @@ class APIService {
     );
 
     if (response.statusCode == 200) {
-      return transactionlistResponseJson(
-        response.body
-      );
-    }
-    else {
+      return transactionlistResponseJson(response.body);
+    } else {
       throw Exception('Failed to get transactionss');
     }
   }

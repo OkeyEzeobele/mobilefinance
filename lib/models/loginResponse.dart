@@ -47,11 +47,11 @@ class Payload {
   late final String? password;
 
   Payload.fromJson(Map<String, dynamic> json) {
-    user = json['user'] != null ? User.fromJson(json['user']): null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
     token = json['token'];
     isVerified = json['isVerified'];
     isBvnVerified = json['isBvnVerified'];
-    cf = json['cf'] != null ? Cf.fromJson(json['cf']): null;
+    cf = json['cf'] != null ? Cf.fromJson(json['cf']) : null;
     password = json['password'];
   }
 
@@ -68,22 +68,22 @@ class Payload {
 }
 
 class User {
-  User({
-    required this.id,
-    required this.fullName,
-  });
+  User({required this.id, required this.fullName, required this.email});
   late final int id;
   late final String fullName;
+  late final String email;
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     fullName = json['fullName'];
+    email = json['email'];
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
     _data['id'] = id;
     _data['fullName'] = fullName;
+    _data['email'] = email;
     return _data;
   }
 }

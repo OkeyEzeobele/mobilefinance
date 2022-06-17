@@ -52,9 +52,9 @@ class Payload {
   late final String last4;
   late final String cardHash;
   late final String cifNumber;
-  late final String appNumber;
+  late final dynamic appNumber;
   late final String acctNumber;
-  late final String orderLabel;
+  late final dynamic orderLabel;
   late final dynamic balance;
   late final bool virtual;
   late final String type;

@@ -4,6 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:o3_cards/pages/login/loginscreen.dart';
+import 'package:o3_cards/pages/login/loginscreen2.dart';
 import 'package:o3_cards/services/shared_service.dart';
 import 'package:o3_cards/ui/pallete.dart';
 
@@ -118,9 +119,11 @@ class _GreetingState extends State<Greeting> {
                     IconButton(
                       onPressed: () {
                         Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Loginscreen()));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Loginscreen(),
+                          ),
+                        );
                       },
                       icon: const FaIcon(
                         FontAwesomeIcons.circlePlus,
@@ -141,7 +144,13 @@ class _GreetingState extends State<Greeting> {
                 ),
               ),
               onTap: () {
-                SharedService.logout(context);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Loginscreen2(),
+                  ),
+                );
+                // SharedService.logout(context);
               },
             ),
             GestureDetector(
@@ -150,7 +159,13 @@ class _GreetingState extends State<Greeting> {
                 color: FvColors.maintheme,
               ),
               onTap: () {
-                SharedService.logout(context);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Loginscreen2(),
+                  ),
+                );
+                // SharedService.logout(context);
               },
             ),
           ],
