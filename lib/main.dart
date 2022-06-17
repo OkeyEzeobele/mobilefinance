@@ -12,18 +12,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-        title: 'ApplicationName',
-        theme: ThemeData(
-          primarySwatch: Colors.red,
-          ),
-          // routes:{
-          //   '/dashboard':(context)=> const Dashboard(),
-          // },
-          // debugShowCheckedModeBanner: false,
-        home: const Splashscreenscreen1());
-
-
-
+    return MaterialApp(
+      title: 'ApplicationName',
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+      ),
+      // routes:{
+      //   '/dashboard':(context)=> const Dashboard(),
+      // },
+      // debugShowCheckedModeBanner: false,
+      home: const Splashscreenscreen1(),
+    );
   }
 }

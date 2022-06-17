@@ -7,6 +7,8 @@ import 'package:o3_cards/models/loginRequest.dart';
 import 'package:o3_cards/models/loginResponse.dart';
 import 'package:o3_cards/services/shared_service.dart';
 
+import '../models/transactionListResponse.dart';
+
 class APIService {
   static var client = http.Client();
 
@@ -59,6 +61,31 @@ class APIService {
     }
     else {
       throw Exception('Failed to get cards');
+    }
+  }
+
+  static Future<TransactionlistResponse> userTransactions() async {
+    var loginDetails = await SharedService.loginDetails();
+
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'token': '${loginDetails!.payload!.token}'
+    };
+
+    var url = Uri.http(Config.baseUrl, Config.transactions);
+
+    final response = await client.get(
+      url,
+      headers: requestHeaders,
+    );
+
+    if (response.statusCode == 200) {
+      return transactionlistResponseJson(
+        response.body
+      );
+    }
+    else {
+      throw Exception('Failed to get transactionss');
     }
   }
 }

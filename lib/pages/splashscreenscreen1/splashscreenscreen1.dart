@@ -22,9 +22,9 @@ class _Splashscreenscreen1State extends State<Splashscreenscreen1> {
           height: heightOfScreen,
           // ignore: prefer_const_constructors
           decoration: BoxDecoration(
-              image: const DecorationImage(
-                  image: AssetImage("assets/splash.gif"),
-                  fit: BoxFit.fitHeight)),
+            image: const DecorationImage(
+                image: AssetImage("assets/splash.gif"), fit: BoxFit.fill),
+          ),
           child: Column(children: [
             Align(
               alignment: Alignment.bottomCenter,
@@ -60,8 +60,7 @@ class _Splashscreenscreen1State extends State<Splashscreenscreen1> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  const Useronboardingscreen2()));
+                              builder: (context) => const Loginscreen()));
                     },
                   ),
                 ),

@@ -148,8 +148,12 @@ class _CardListState extends State<CardList> {
                                         child: Text(
                                           // 'N'+ cards![i].balance,
                                           cards[i].balance == '0.0' ||
-                                                  cards[i].balance.contains('-')
-                                              ? '₦ ' + cards[i].balance
+                                                  cards[i]
+                                                      .balance
+                                                      .toString()
+                                                      .contains('-')
+                                              ? '₦ ' +
+                                                  cards[i].balance.toString()
                                               : NumberFormat.currency(
                                                   name: '₦ ',
                                                   decimalDigits: 2,
@@ -181,34 +185,57 @@ class _CardListState extends State<CardList> {
                                       height: 30,
                                     ),
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        RichText(
-                                          text: TextSpan(
-                                            text: 'Expiry ',
-                                            style: TextStyle(
-                                                fontSize: 10.0,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w600),
-                                            children: [
-                                              TextSpan(
-                                                text: DateFormat.yM().format(
-                                                  (DateTime.parse(
-                                                          cards[i].createdAt)
-                                                      .add(
-                                                    Duration(days: 730),
-                                                  )),
-                                                ),
-                                                style: GoogleFonts.inconsolata(
-                                                    fontSize: 15,
-                                                    color: Colors.white),
-                                              )
-                                            ],
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      RichText(
+                                        text: TextSpan(
+                                          text: 'Exp: ',
+                                          style: TextStyle(
+                                            fontSize: 10.0,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w600,
                                           ),
+                                          children: [
+                                            TextSpan(
+                                              text: DateFormat.yM().format(
+                                                (DateTime.parse(
+                                                  cards[i].createdAt,
+                                                ).add(
+                                                  Duration(days: 730),
+                                                )),
+                                              ),
+                                              style: GoogleFonts.inconsolata(
+                                                fontSize: 15,
+                                                color: Colors.white,
+                                              ),
+                                            )
+                                          ],
                                         ),
-                                      ],
-                                    )
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      RichText(
+                                        text: TextSpan(
+                                          text: 'CIF Number: ',
+                                          style: TextStyle(
+                                            fontSize: 10.0,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                          children: [
+                                            TextSpan(
+                                              text: cards[i].cifNumber,
+                                              style: GoogleFonts.inconsolata(
+                                                fontSize: 15,
+                                                color: Colors.white,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )
                                   ],
                                 ),
                               ),
@@ -272,9 +299,17 @@ class _CardListState extends State<CardList> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const CircularProgressIndicator(
-                      color: FvColors.maintheme,
-                    ),
+                    SizedBox(
+                      width: widthOfScreen * 0.4,
+                      height: heightOfScreen * 0.2,
+                      child: FittedBox(
+                        
+                        child: Image.asset('assets/loadinganimation4.gif'),
+                      ),
+                    )
+                    // const CircularProgressIndicator(
+                    //   color: FvColors.maintheme,
+                    // ),
                   ],
                 ),
               );

@@ -29,189 +29,209 @@ class _QuickLinksState extends State<QuickLinks> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Card(
-          elevation: 5,
-          shadowColor: Colors.grey.shade50,
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: SizedBox(
-            height: heightOfScreen * 0.12,
-            width: widthOfScreen * 0.89,
-            child: Column(
-              // mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                SizedBox.square(
-                  dimension: widthOfScreen * 0.04,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+        SizedBox(
+          height: heightOfScreen * 0.15,
+          width: widthOfScreen * 0.9,
+          child: FittedBox(
+            child: Card(
+              elevation: 5,
+              shadowColor: Colors.grey.shade50,
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: SizedBox(
+                height: heightOfScreen * 0.12,
+                width: widthOfScreen * 0.89,
+                child: Column(
+                  // mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox.square(
-                          dimension: widthOfScreen * 0.13,
-                          child: OutlinedButton(
-                            child: const Icon(
-                              Iconsax.send_21,
-                              color: FvColors.maintheme,
-                              size: 24,
-                            ),
-                            style: TextButton.styleFrom(
-                              backgroundColor: FvColors.container166Background
-                                  .withOpacity(0.8),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                // side: const BorderSide(
-                                //   width: 1,
-                                //   color: Colors.transparent,
-                                // ),
-                              ),
-                            ),
-                            onPressed: () {},
-                          ),
-                        ),
-                        SizedBox.square(
-                          dimension: widthOfScreen * 0.02,
-                        ),
-                        Text(
-                          "Send Money",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: widthOfScreen * 0.025,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
+                    SizedBox.square(
+                      dimension: widthOfScreen * 0.04,
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox.square(
-                          dimension: widthOfScreen * 0.13,
-                          child: OutlinedButton(
-                            child: const Icon(
-                              Iconsax.wallet_35,
-                              color: FvColors.maintheme,
-                              size: 24,
-                            ),
-                            style: TextButton.styleFrom(
-                              backgroundColor: FvColors.container166Background
-                                  .withOpacity(0.8),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                // side: const BorderSide(
-                                //   width: 1,
-                                //   color: Colors.transparent,
-                                // ),
+                      children: <Widget>[
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox.square(
+                              dimension: widthOfScreen * 0.13,
+                              child: OutlinedButton(
+                                child: const Icon(
+                                  Iconsax.send_21,
+                                  color: FvColors.maintheme,
+                                ),
+                                style: TextButton.styleFrom(
+                                  backgroundColor: FvColors.container166Background
+                                      .withOpacity(0.8),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                    // side: const BorderSide(
+                                    //   width: 1,
+                                    //   color: Colors.transparent,
+                                    // ),
+                                  ),
+                                ),
+                                onPressed: () {},
                               ),
                             ),
-                            onPressed: () {},
-                          ),
-                        ),
-                        SizedBox.square(
-                          dimension: widthOfScreen * 0.02,
-                        ),
-                        Text(
-                          "Pay Bills",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: widthOfScreen * 0.025,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox.square(
-                          dimension: widthOfScreen * 0.13,
-                          child: OutlinedButton(
-                            child: const Icon(
-                              FontAwesomeIcons.solidCreditCard,
-                              color: FvColors.maintheme,
-                              size: 24,
+                            SizedBox.square(
+                              dimension: widthOfScreen * 0.02,
                             ),
-                            style: TextButton.styleFrom(
-                              backgroundColor: FvColors.container166Background
-                                  .withOpacity(0.8),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                // side: const BorderSide(
-                                //   width: 1,
-                                //   color: Colors.transparent,
-                                // ),
+                            SizedBox(
+                              height: heightOfScreen * 0.015,
+                              child: FittedBox(
+                                child: Text(
+                                  "Send Money",
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                               ),
                             ),
-                            onPressed: () {},
-                          ),
+                          ],
                         ),
-                        SizedBox.square(
-                          dimension: widthOfScreen * 0.02,
-                        ),
-                        Text(
-                          "Fund O3 Card",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: widthOfScreen * 0.025,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox.square(
-                          dimension: widthOfScreen * 0.13,
-                          child: OutlinedButton(
-                            child: const FaIcon(
-                              FontAwesomeIcons.gift,
-                              color: FvColors.maintheme,
-                              size: 24,
-                            ),
-                            style: TextButton.styleFrom(
-                              backgroundColor: FvColors.container166Background
-                                  .withOpacity(0.8),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                // side: const BorderSide(
-                                //   width: 1,
-                                //   color: Colors.transparent,
-                                // ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox.square(
+                              dimension: widthOfScreen * 0.13,
+                              child: OutlinedButton(
+                                child: const Icon(
+                                  Icons.wallet,
+                                  color: FvColors.maintheme,
+                                ),
+                                style: TextButton.styleFrom(
+                                  backgroundColor: FvColors.container166Background
+                                      .withOpacity(0.8),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                    // side: const BorderSide(
+                                    //   width: 1,
+                                    //   color: Colors.transparent,
+                                    // ),
+                                  ),
+                                ),
+                                onPressed: () {},
                               ),
                             ),
-                            onPressed: () {},
-                          ),
+                            SizedBox.square(
+                              dimension: widthOfScreen * 0.02,
+                            ),
+                            SizedBox(
+                              height: heightOfScreen * 0.015,
+                              child: FittedBox(
+                                child: Text(
+                                  "Pay Bills",
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox.square(
-                          dimension: widthOfScreen * 0.02,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox.square(
+                              dimension: widthOfScreen * 0.13,
+                              child: OutlinedButton(
+                                child: const Icon(
+                                  FontAwesomeIcons.solidCreditCard,
+                                  color: FvColors.maintheme,
+                                ),
+                                style: TextButton.styleFrom(
+                                  backgroundColor: FvColors.container166Background
+                                      .withOpacity(0.8),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                    // side: const BorderSide(
+                                    //   width: 1,
+                                    //   color: Colors.transparent,
+                                    // ),
+                                  ),
+                                ),
+                                onPressed: () {},
+                              ),
+                            ),
+                            SizedBox.square(
+                              dimension: widthOfScreen * 0.02,
+                            ),
+                            SizedBox(
+                              height: heightOfScreen * 0.015,
+                              child: FittedBox(
+                                child: Text(
+                                  "Fund O3 Card",
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        Text(
-                          "Rewards",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: widthOfScreen * 0.025,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox.square(
+                              dimension: widthOfScreen * 0.13,
+                              child: OutlinedButton(
+                                child: FittedBox(
+                                  child: const FaIcon(
+                                    FontAwesomeIcons.gift,
+                                    color: FvColors.maintheme,
+                                  ),
+                                ),
+                                style: TextButton.styleFrom(
+                                  backgroundColor: FvColors.container166Background
+                                      .withOpacity(0.8),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                    // side: const BorderSide(
+                                    //   width: 1,
+                                    //   color: Colors.transparent,
+                                    // ),
+                                  ),
+                                ),
+                                onPressed: () {},
+                              ),
+                            ),
+                            SizedBox.square(
+                              dimension: widthOfScreen * 0.02,
+                            ),
+                            SizedBox(
+                              height: heightOfScreen * 0.015,
+                              child: FittedBox(
+                                child: Text(
+                                  "Rewards",
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
                         )
                       ],
-                    )
+                    ),
                   ],
                 ),
-              ],
+              ),
             ),
           ),
         ),

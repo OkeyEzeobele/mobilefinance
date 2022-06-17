@@ -19,11 +19,17 @@ class _HomescreenState extends State<Homescreen> {
       backgroundColor: FvColors.edittext51Background,
       body: Column(
         children: [
+          SizedBox.square(
+            dimension: 20,
+          ),
           Greeting(),
           SizedBox.square(
             dimension: 20,
           ),
           CreditCards(),
+          SizedBox.square(
+            dimension: 20,
+          ),
           QuickLinks(),
           SizedBox.square(
             dimension: widthOfScreen * 0.07,

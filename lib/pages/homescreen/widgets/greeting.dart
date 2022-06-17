@@ -23,50 +23,65 @@ class _GreetingState extends State<Greeting> {
   String _firstname = '';
   _GreetingState() {
     getTextFromFile().then(
-      (val) => setState(() {
-        _firstname = val;
-      }),
+      (val) => setState(
+        () {
+          _firstname = val;
+        },
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    String _greeting() {
+      var hour = DateTime.now().hour;
+      if (hour < 12) {
+        return 'Good Morning,';
+      }
+      if (hour < 17) {
+        return 'Good Afternoon,';
+      }
+      return 'Good Evening,';
+    }
+
     double marginFromSafeArea = 24;
     var heightOfScreen =
         MediaQuery.of(context).size.height - marginFromSafeArea;
     var widthOfScreen = MediaQuery.of(context).size.width;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          height: 15,
+          height: 30,
         ),
-        Row(children: <Widget>[
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: EdgeInsets.only(
-                  left: widthOfScreen * 0.05, top: heightOfScreen * 0.05),
-              child: SizedBox(
-                width: widthOfScreen * 0.25,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            SizedBox(
+              width: widthOfScreen * 0.25,
+              height: heightOfScreen * 0.035,
+              child: FittedBox(
                 child: AutoSizeText.rich(
                   TextSpan(
                     // ignore: prefer_const_literals_to_create_immutables
                     children: <TextSpan>[
                       TextSpan(
-                          text: 'How are you?\n',
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: FvColors.textview70FontColor,
-                              fontWeight: FontWeight.w600),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: _firstname,
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  color: FvColors.textview50FontColor,
-                                  fontWeight: FontWeight.w700),
-                            )
-                          ]),
+                        text: _greeting() + '\n',
+                        style: TextStyle(
+                          color: FvColors.textview70FontColor,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: _firstname,
+                            style: TextStyle(
+                              color: FvColors.textview50FontColor,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          )
+                        ],
+                      ),
                     ],
                   ),
                   textAlign: TextAlign.left,
@@ -76,85 +91,70 @@ class _GreetingState extends State<Greeting> {
                 ),
               ),
             ),
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: Padding(
-                padding: EdgeInsets.only(
-                    left: widthOfScreen * 0.08, top: heightOfScreen * 0.05),
-                child: Container(
-                    width: widthOfScreen * 0.45,
-                    height: heightOfScreen * 0.04,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(181),
-                      color: FvColors.offwhitepink,
+            Container(
+              width: widthOfScreen * 0.3,
+              height: heightOfScreen * 0.035,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(181),
+                color: FvColors.offwhitepink,
+              ),
+              child: FittedBox(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 10,
                     ),
-                    child: Row(
-                      children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Padding(
-                              padding: EdgeInsets.only(
-                                  left: widthOfScreen * 0.04,
-                                  top: heightOfScreen * 0.01),
-                              child: Text(
-                                "Add Credit Card",
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  fontSize: widthOfScreen * 0.035,
-                                  color: FvColors.maintheme,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              )),
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                left: widthOfScreen * 0.02,
-                                top: heightOfScreen * 0.0001),
-                            child: FittedBox(
-                              // height: heightOfScreen * 0.04,
-                              // width: widthOfScreen * 0.04,
-                              child: IconButton(
-                                onPressed: () {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Loginscreen()));
-                                },
-                                icon: const FaIcon(
-                                  FontAwesomeIcons.circlePlus,
-                                  color: FvColors.maintheme,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ))),
-          ),
-          Align(
-            alignment: Alignment.topRight,
-            child: Padding(
-              padding: EdgeInsets.only(
-                  left: widthOfScreen * 0.02, top: heightOfScreen * 0.05),
-              child: GestureDetector(
-                child: CircleAvatar(
-                  radius: heightOfScreen * 0.02,
-                  backgroundColor: FvColors.textview79FontColor,
-                  child: FaIcon(
-                    FontAwesomeIcons.solidUser,
-                    color: FvColors.textview50FontColor,
-                  ),
+                    Text(
+                      "Add Credit Card",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: FvColors.maintheme,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Loginscreen()));
+                      },
+                      icon: const FaIcon(
+                        FontAwesomeIcons.circlePlus,
+                        color: FvColors.maintheme,
+                      ),
+                    ),
+                  ],
                 ),
-                onTap: () {
-                  SharedService.logout(context);
-                },
               ),
             ),
-          ),
-        ]),
+            GestureDetector(
+              child: CircleAvatar(
+                radius: heightOfScreen * 0.02,
+                backgroundColor: FvColors.textview79FontColor,
+                child: FaIcon(
+                  FontAwesomeIcons.solidUser,
+                  color: FvColors.textview50FontColor,
+                ),
+              ),
+              onTap: () {
+                SharedService.logout(context);
+              },
+            ),
+            GestureDetector(
+              child: FaIcon(
+                FontAwesomeIcons.solidBell,
+                color: FvColors.maintheme,
+              ),
+              onTap: () {
+                SharedService.logout(context);
+              },
+            ),
+          ],
+        ),
       ],
     );
   }
@@ -162,6 +162,9 @@ class _GreetingState extends State<Greeting> {
   Future<String> getTextFromFile() async {
     var userDetails = await SharedService.loginDetails();
     var name = userDetails!.payload!.user!.fullName;
-    return name.substring(0, name.indexOf(' '));
+    return name.substring(
+      0,
+      name.indexOf(' '),
+    );
   }
 }

@@ -1,10 +1,10 @@
 class Config {
   // ROUTES
   // static const baseUrl = 'api.o3virtual.com'; // live
-  // static const baseUrl = '10.0.2.2:5000'; // android emulator localhost maps to pc localhost
-  static const baseUrl = '127.0.0.1:5000'; // ios emulator
+  // static const baseUrl = '10.0.2.2:5000'; // android emulator
+  static const baseUrl = '127.0.0.1:5000'; // ios emulator localhost maps to pc localhost
   // static const baseUrl = 'https://0026ca16de46.ngrok.io/api/v1';
-
+  // static const baseUrl = '10.2.0.66:7526';
 
   static const transferAccountResolve = '/api/v1/verify-bank-account-number';
   static const cifAccountResolve = '/api/v1/verify-cif-number';

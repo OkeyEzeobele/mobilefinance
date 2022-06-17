@@ -24,7 +24,7 @@ class _DashboardState extends State<Dashboard> {
     Text(
       'Coming Soon',
     ),
-     Text(
+    Text(
       'Coming Soon',
     ),
   ];
@@ -37,30 +37,47 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    var heightOfScreen = MediaQuery.of(context).size.height;
     return Scaffold(
-        backgroundColor: FvColors.edittext51Background,
-        body: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
-        ),
-        bottomNavigationBar: ConvexAppBar.badge(
-          const {4: ''},
-          items: [
-            const TabItem(
-              icon: Iconsax.send_21,
-              title: 'Send',
-            ),
-            const TabItem(
-                icon: FontAwesomeIcons.solidCreditCard, title: 'Cards'),
-            const TabItem(icon: FontAwesomeIcons.houseUser, title: 'Home'),
-            const TabItem(icon: Icons.bar_chart_rounded, title: 'Stats'),
-            const TabItem(icon: Iconsax.more, title: 'More'),
-          ],
-          color: Colors.grey.shade500,
-          activeColor: FvColors.maintheme,
-          backgroundColor: Colors.white,
-          initialActiveIndex: 2, //optional, default as 0
-          onTap: _onItemTapped,
-          elevation: 5,
-        ));
+      backgroundColor: FvColors.edittext51Background,
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: ConvexAppBar.badge(
+        const {4: '3'},
+        items: [
+          const TabItem(
+            icon: Iconsax.send_21,
+            title: 'Send',
+          ),
+          const TabItem(
+            icon: FontAwesomeIcons.solidCreditCard,
+            title: 'Cards',
+          ),
+          const TabItem(
+            icon: FontAwesomeIcons.houseUser,
+            title: 'Home',
+          ),
+          const TabItem(
+            icon: Icons.bar_chart_rounded,
+            title: 'Stats',
+          ),
+          const TabItem(
+            icon: Iconsax.more,
+            title: 'More',
+          ),
+        ],
+        color: Colors.red[200],
+        activeColor: FvColors.maintheme,
+        backgroundColor: Colors.white,
+        initialActiveIndex: 2, //optional, default as 0
+        onTap: _onItemTapped,
+        elevation: 5,
+        style: TabStyle.fixedCircle,
+        height: heightOfScreen * 0.06,
+        curveSize: 100,
+        cornerRadius: 30,
+      ),
+    );
   }
 }

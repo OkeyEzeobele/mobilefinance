@@ -55,7 +55,7 @@ class Payload {
   late final String appNumber;
   late final String acctNumber;
   late final String orderLabel;
-  late final String balance;
+  late final dynamic balance;
   late final bool virtual;
   late final String type;
   late final int userId;

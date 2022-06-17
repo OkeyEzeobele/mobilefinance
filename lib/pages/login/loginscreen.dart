@@ -1,3 +1,4 @@
+// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:o3_cards/pages/dashboard/dashboard.dart';
@@ -30,17 +31,18 @@ class _LoginscreenState extends State<Loginscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: FvColors.offwhite,
-        body: ProgressHUD(
-          child: Form(
-            key: globalFormKey,
-            child: _loginUI(context),
-          ),
-          inAsyncCall: isAPIcallProcess,
-          opacity: 0.3,
-          key: UniqueKey(),
-        ));
+      resizeToAvoidBottomInset: false,
+      backgroundColor: FvColors.offwhite,
+      body: ProgressHUD(
+        child: Form(
+          key: globalFormKey,
+          child: _loginUI(context),
+        ),
+        inAsyncCall: isAPIcallProcess,
+        opacity: 0.3,
+        key: UniqueKey(),
+      ),
+    );
   }
 
   Widget _loginUI(BuildContext context) {
@@ -52,116 +54,106 @@ class _LoginscreenState extends State<Loginscreen> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Align(
-          alignment: Alignment.topCenter,
-          child: Padding(
-            padding: const EdgeInsets.only(
-              top: 0,
-            ),
-            child: SizedBox(
-              height: heightOfScreen * 0.08,
-              width: widthOfScreen * 0.5,
-              child: Image.asset(
-                  "assets/CapitalLogoIcon_ImageView_46-190x110.png"),
-            ),
+        SizedBox(
+          height: heightOfScreen * 0.08,
+          width: widthOfScreen * 0.5,
+          child: Image.asset(
+            "assets/CapitalLogoIcon_ImageView_46-190x110.png",
           ),
         ),
-        Align(
-          alignment: Alignment.topCenter,
-          child: Padding(
-              padding: EdgeInsets.only(
-                  left: widthOfScreen * 0.04, top: heightOfScreen * 0.08),
-              // ignore: prefer_const_constructors
-              child: FittedBox(
-                fit: BoxFit.fitWidth,
-                // ignore: prefer_const_constructors
-                child: Text("Don't have an account? Register",
-                    textAlign: TextAlign.left,
-                    // ignore: prefer_const_constructors
-                    style: TextStyle(
-                      color: FvColors.textview50FontColor,
-                      fontWeight: FontWeight.w400,
-                    )),
-              )),
+        SizedBox(
+          height: heightOfScreen * 0.1,
         ),
-        Align(
-          alignment: Alignment.topLeft,
-          child: Padding(
-            padding: EdgeInsets.only(
-                left: widthOfScreen * 0.13, top: heightOfScreen * 0.08),
-            child: SizedBox(
-              height: heightOfScreen * 0.1,
-              width: widthOfScreen * 0.75,
-              child: FormHelper.inputFieldWidget(context, "Email", "Email",
-                  (onValidateVal) {
-                if (onValidateVal.isEmpty) {
-                  return "Email cannot be empty";
-                } else if (!onValidateVal.contains('@')) {
-                  return 'Please enter a valid email address';
-                }
-                return null;
-              }, (onSavedVal) {
-                email = onSavedVal;
-              },
-                  initialValue: '',
-                  borderFocusColor: FvColors.maintheme,
-                  borderColor: Colors.white,
-                  backgroundColor: FvColors.edittext51Background,
-                  prefixIcon: const Icon(Icons.email_outlined),
-                  prefixIconColor: FvColors.maintheme,
-                  hintColor: FvColors.textview65FontColor,
-                  textColor: FvColors.textview70FontColor,
-                  showPrefixIcon: true,
-                  borderRadius: 20),
-            ),
+        const Text(
+          "Don't have an account? Register",
+          style: TextStyle(
+            color: FvColors.textview50FontColor,
+            fontWeight: FontWeight.w400,
           ),
         ),
-        Align(
-          alignment: Alignment.topLeft,
-          child: Padding(
-            padding: EdgeInsets.only(left: widthOfScreen * 0.13),
-            child: SizedBox(
-              height: heightOfScreen * 0.1,
-              width: widthOfScreen * 0.75,
-              child: FormHelper.inputFieldWidget(
-                context,
-                "Password",
-                "Password",
-                (onValidateVal) {
-                  if (onValidateVal.isEmpty) {
-                    return "Please enter password";
-                  } else if (onValidateVal.length < 6) {
-                    return "Password must have 6 or more characters ";
-                  }
-                  return null;
-                },
-                (onSavedVal) {
-                  password = onSavedVal;
-                },
-                initialValue: '',
-                borderFocusColor: FvColors.maintheme,
-                backgroundColor: FvColors.edittext51Background,
-                prefixIcon: const Icon(Icons.lock),
-                prefixIconColor: FvColors.maintheme,
-                borderColor: Colors.white,
-                hintColor: FvColors.textview65FontColor,
-                textColor: FvColors.textview70FontColor,
-                borderRadius: 20,
-                showPrefixIcon: true,
-                obscureText: hidePassword,
-                suffixIcon: IconButton(
-                  color: FvColors.maintheme,
-                  icon: Icon(
-                      hidePassword ? Icons.visibility_off : Icons.visibility),
-                  onPressed: () {
-                    setState(() {
-                      hidePassword = !hidePassword;
-                    });
+        SizedBox(
+          height: heightOfScreen * 0.1,
+        ),
+        SizedBox(
+          height: heightOfScreen * 0.05,
+          width: widthOfScreen * 0.75,
+          child: FormHelper.inputFieldWidget(
+            context,
+            "Email",
+            "Email",
+            (onValidateVal) {
+              if (onValidateVal.isEmpty) {
+                return "Email cannot be empty";
+              } else if (!onValidateVal.contains('@')) {
+                return 'Please enter a valid email address';
+              }
+              return null;
+            },
+            (onSavedVal) {
+              email = onSavedVal;
+            },
+            initialValue: '',
+            borderFocusColor: FvColors.maintheme,
+            borderColor: Colors.white,
+            backgroundColor: FvColors.edittext51Background,
+            prefixIcon: const Icon(Icons.email_outlined),
+            prefixIconColor: FvColors.maintheme,
+            hintColor: FvColors.textview65FontColor,
+            textColor: FvColors.textview70FontColor,
+            showPrefixIcon: true,
+            borderRadius: 20,
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        SizedBox(
+          height: heightOfScreen * 0.05,
+          width: widthOfScreen * 0.75,
+          child: FormHelper.inputFieldWidget(
+            context,
+            "Password",
+            "Password",
+            (
+              onValidateVal,
+            ) {
+              if (onValidateVal.isEmpty) {
+                return "Please enter password";
+              } else if (onValidateVal.length < 6) {
+                return "Password must have 6 or more characters ";
+              }
+              return null;
+            },
+            (onSavedVal) {
+              password = onSavedVal;
+            },
+            initialValue: '',
+            borderFocusColor: FvColors.maintheme,
+            backgroundColor: FvColors.edittext51Background,
+            prefixIcon: const Icon(Icons.lock),
+            prefixIconColor: FvColors.maintheme,
+            borderColor: Colors.white,
+            hintColor: FvColors.textview65FontColor,
+            textColor: FvColors.textview70FontColor,
+            borderRadius: 20,
+            showPrefixIcon: true,
+            obscureText: hidePassword,
+            suffixIcon: IconButton(
+              color: FvColors.maintheme,
+              icon:
+                  Icon(hidePassword ? Icons.visibility_off : Icons.visibility),
+              onPressed: () {
+                setState(
+                  () {
+                    hidePassword = !hidePassword;
                   },
-                ),
-              ),
+                );
+              },
             ),
           ),
+        ),
+        SizedBox(
+          height: heightOfScreen * 0.05,
         ),
         FormHelper.submitButton(
           'Sign In',
@@ -207,24 +199,17 @@ class _LoginscreenState extends State<Loginscreen> {
           borderColor: Colors.white,
           txtColor: Colors.white,
         ),
-
-        Align(
-          alignment: Alignment.topLeft,
-          child: Padding(
-              padding: EdgeInsets.only(
-                  left: widthOfScreen * 0.355, top: heightOfScreen * 0.02),
-              // ignore: prefer_const_constructors
-              child: Text(
-                "Forgot Password?",
-                textAlign: TextAlign.center,
-                // ignore: prefer_const_constructors
-                style: TextStyle(
-                  color: FvColors.maintheme,
-                  fontWeight: FontWeight.w400,
-                ),
-              )),
+        SizedBox(
+          height: 20,
         ),
-        // ignore: prefer_const_constructors
+        Text(
+          "Forgot Password?",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: FvColors.maintheme,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
         Align(
           alignment: Alignment.topCenter,
           child: Padding(
@@ -235,16 +220,17 @@ class _LoginscreenState extends State<Loginscreen> {
               width: widthOfScreen * 0.3,
               child: FittedBox(
                 child: IconButton(
-                    icon: const FaIcon(FontAwesomeIcons.fingerprint),
-                    color: FvColors.maintheme,
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Useronboardingscreen2(),
-                        ),
-                      );
-                    }),
+                  icon: const FaIcon(FontAwesomeIcons.fingerprint),
+                  color: FvColors.maintheme,
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Useronboardingscreen2(),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           ),
