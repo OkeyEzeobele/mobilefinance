@@ -140,7 +140,8 @@ class _ActivitiesState extends State<Activities> {
       ],
     );
 
-    return Container(
+    return SizedBox(
+      height: heightOfScreen * 0.35,
       child: body, //_isShowingDialog ? bodyWithDialog : bodyWithCharts
     );
   }

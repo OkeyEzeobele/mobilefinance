@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:o3_cards/ui/pallete.dart';
+// import '/ui/pallete.dart';
 
 // KeyPad widget
 // This widget is reusable and its buttons are customizable (color, size)
@@ -26,7 +26,7 @@ class NumPad extends StatelessWidget {
     double marginFromSafeArea = 24;
     var heightOfScreen =
         MediaQuery.of(context).size.height - marginFromSafeArea;
-    var widthOfScreen = MediaQuery.of(context).size.width;
+    // var widthOfScreen = MediaQuery.of(context).size.width;
     return Container(
       margin: const EdgeInsets.only(left: 30, right: 30),
       child: Column(
@@ -110,18 +110,30 @@ class NumPad extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               // this button is used to delete the last number
+              // SizedBox.square(
+              //   dimension: buttonSize,
+              //   child: TextButton(
+              //     style: TextButton.styleFrom(
+              //       primary: FvColors.maintheme,
+              //       textStyle: TextStyle(
+              //         fontSize: heightOfScreen * 0.017,
+              //         fontWeight: FontWeight.w700,
+              //         ),
+              //     ),
+              //     onPressed: () => delete(),
+              //     child: const Text('Delete'),
+              //   ),
+              // ),
               SizedBox.square(
-                dimension: buttonSize,
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    primary: FvColors.maintheme,
-                    textStyle: TextStyle(
-                      fontSize: heightOfScreen * 0.017,
-                      fontWeight: FontWeight.w700,
-                      ),
+                dimension: heightOfScreen * 0.1,
+                child: FittedBox(
+                  child: IconButton(
+                    onPressed: () => delete(),
+                    icon: Icon(
+                      Icons.keyboard_backspace_outlined,
+                      color: iconColor,
+                    ),
                   ),
-                  onPressed: () => delete(),
-                  child: const Text('Delete'),
                 ),
               ),
               NumberButton(
@@ -131,13 +143,18 @@ class NumPad extends StatelessWidget {
                 controller: controller,
               ),
               // this button is used to submit the entered value
-              IconButton(
-                onPressed: () => onSubmit(),
-                icon: Icon(
-                  Icons.done_rounded,
-                  color: iconColor,
+              SizedBox.square(
+                dimension: heightOfScreen * 0.1,
+                child: FittedBox(
+                  child: IconButton(
+                    onPressed: () => onSubmit(),
+                    icon: Icon(
+                      Icons.done_rounded,
+                      color: iconColor,
+                    ),
+                    // iconSize: heightOfScreen * 0.05,
+                  ),
                 ),
-                iconSize: widthOfScreen*0.1,
               ),
             ],
           ),
@@ -182,7 +199,10 @@ class NumberButton extends StatelessWidget {
           child: Text(
             number.toString(),
             style: const TextStyle(
-                fontWeight: FontWeight.bold, color: Colors.white, fontSize: 30),
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontSize: 30,
+            ),
           ),
         ),
       ),

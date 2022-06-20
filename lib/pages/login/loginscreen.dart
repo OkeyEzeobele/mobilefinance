@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:o3_cards/pages/dashboard/dashboard.dart';
 import 'package:o3_cards/models/loginRequest.dart';
@@ -75,7 +76,7 @@ class _LoginscreenState extends State<Loginscreen> {
           height: heightOfScreen * 0.1,
         ),
         SizedBox(
-          height: heightOfScreen * 0.05,
+          height: heightOfScreen * 0.08,
           width: widthOfScreen * 0.75,
           child: FormHelper.inputFieldWidget(
             context,
@@ -84,7 +85,7 @@ class _LoginscreenState extends State<Loginscreen> {
             (onValidateVal) {
               if (onValidateVal.isEmpty) {
                 return "Email cannot be empty";
-              } else if (!onValidateVal.contains('@')) {
+              } else if (!EmailValidator.validate(onValidateVal)) {
                 return 'Please enter a valid email address';
               }
               return null;
@@ -108,7 +109,7 @@ class _LoginscreenState extends State<Loginscreen> {
           height: 10,
         ),
         SizedBox(
-          height: heightOfScreen * 0.05,
+          height: heightOfScreen * 0.08,
           width: widthOfScreen * 0.75,
           child: FormHelper.inputFieldWidget(
             context,

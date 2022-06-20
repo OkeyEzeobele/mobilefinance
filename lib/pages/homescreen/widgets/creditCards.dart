@@ -1,12 +1,12 @@
 // ignore_for_file: file_names, prefer_const_constructors,prefer_const_literals_to_create_immutables,, unnecessary_null_comparison
 
-// import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import '../../../models/cardlistResponse.dart';
 import '../../../services/api_service.dart';
+import '../../../services/shared_service.dart';
 
 class CreditCards extends StatefulWidget {
   const CreditCards({Key? key}) : super(key: key);
@@ -16,11 +16,19 @@ class CreditCards extends StatefulWidget {
 }
 
 class _CreditCardsState extends State<CreditCards> {
-  late Future<CardListResponse> userCards;
+  late Future<CardListResponse?> userCards;
+
+  Future<CardListResponse?> _getCardsModel() async {
+    Future<CardListResponse?> model = await SharedService.isCardsSaved()
+        ? SharedService.cardDetails()
+        : APIService.userCards();
+    return model;
+  }
+
   @override
   void initState() {
     super.initState();
-    userCards = APIService.userCards();
+    userCards = _getCardsModel();
   }
 
   @override
@@ -28,7 +36,7 @@ class _CreditCardsState extends State<CreditCards> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        FutureBuilder<CardListResponse>(
+        FutureBuilder<CardListResponse?>(
           future: userCards,
           builder: (context, cardModel) {
             var cards = cardModel.data?.payload;

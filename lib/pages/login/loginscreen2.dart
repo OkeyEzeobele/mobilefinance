@@ -114,7 +114,7 @@ class _Loginscreen2State extends State<Loginscreen2> {
           height: 10,
         ),
         SizedBox(
-          height: heightOfScreen * 0.05,
+          height: heightOfScreen * 0.08,
           width: widthOfScreen * 0.75,
           child: FormHelper.inputFieldWidget(
             context,
@@ -208,20 +208,20 @@ class _Loginscreen2State extends State<Loginscreen2> {
         SizedBox(
           height: 20,
         ),
-        Row(
+        Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Not ' + _firstname + '? ',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: FvColors.textview50FontColor,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+            // Text(
+            //   'Not ' + _firstname + '? ',
+            //   textAlign: TextAlign.center,
+            //   style: TextStyle(
+            //     color: FvColors.textview50FontColor,
+            //     fontWeight: FontWeight.w500,
+            //   ),
+            // ),
             GestureDetector(
               child: Text(
-                'Sign in as a different user',
+                'I am not '+ _firstname,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: FvColors.maintheme,

@@ -11,6 +11,7 @@ dependencies:
   carousel_slider: ^4.1.1
   convex_bottom_bar: ^3.0.0
   dots_indicator: ^2.1.0
+  email_validator: ^2.0.1
   flutter:
     sdk: flutter
   flutter_conditional_rendering: ^2.0.0
@@ -54,4 +55,5 @@ flutter:
       - assets/loadinganimation2.gif
       - assets/loadinganimation3.gif
       - assets/loadinganimation4.gif
+      - 03CapitalLogoSoloIcon1.png
 

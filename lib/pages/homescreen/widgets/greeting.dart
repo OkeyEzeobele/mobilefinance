@@ -49,128 +49,133 @@ class _GreetingState extends State<Greeting> {
     var heightOfScreen =
         MediaQuery.of(context).size.height - marginFromSafeArea;
     var widthOfScreen = MediaQuery.of(context).size.width;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(
-          height: 30,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            SizedBox(
-              width: widthOfScreen * 0.25,
-              height: heightOfScreen * 0.035,
-              child: FittedBox(
-                child: AutoSizeText.rich(
-                  TextSpan(
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: _greeting() + '\n',
-                        style: TextStyle(
-                          color: FvColors.textview70FontColor,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: _firstname,
-                            style: TextStyle(
-                              color: FvColors.textview50FontColor,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  textAlign: TextAlign.left,
-                  minFontSize: 10,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ),
-            Container(
-              width: widthOfScreen * 0.3,
-              height: heightOfScreen * 0.035,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(181),
-                color: FvColors.offwhitepink,
-              ),
-              child: FittedBox(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "Add Credit Card",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: FvColors.maintheme,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Loginscreen(),
+    return SizedBox(
+      height: heightOfScreen *0.08,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 30,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              SizedBox(
+                width: widthOfScreen * 0.25,
+                height: heightOfScreen * 0.035,
+                child: FittedBox(
+                  child: AutoSizeText.rich(
+                    TextSpan(
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: _greeting() + '\n',
+                          style: TextStyle(
+                            color: FvColors.textview70FontColor,
+                            fontWeight: FontWeight.w500,
                           ),
-                        );
-                      },
-                      icon: const FaIcon(
-                        FontAwesomeIcons.circlePlus,
-                        color: FvColors.maintheme,
-                      ),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: _firstname,
+                              style: TextStyle(
+                                color: FvColors.textview50FontColor,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
                     ),
-                  ],
+                    textAlign: TextAlign.left,
+                    minFontSize: 10,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ),
-            ),
-            GestureDetector(
-              child: CircleAvatar(
-                radius: heightOfScreen * 0.02,
-                backgroundColor: FvColors.textview79FontColor,
+              FittedBox(
+                child: Container(
+                  width: widthOfScreen * 0.3,
+                  height: heightOfScreen * 0.035,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(181),
+                    color: FvColors.offwhitepink,
+                  ),
+                  child: FittedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Add Credit Card",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: FvColors.maintheme,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Loginscreen(),
+                              ),
+                            );
+                          },
+                          icon: const FaIcon(
+                            FontAwesomeIcons.circlePlus,
+                            color: FvColors.maintheme,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                child: CircleAvatar(
+                  radius: heightOfScreen * 0.02,
+                  backgroundColor: FvColors.textview79FontColor,
+                  child: FaIcon(
+                    FontAwesomeIcons.solidUser,
+                    color: FvColors.textview50FontColor,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Loginscreen2(),
+                    ),
+                  );
+                  // SharedService.logout(context);
+                },
+              ),
+              GestureDetector(
                 child: FaIcon(
-                  FontAwesomeIcons.solidUser,
-                  color: FvColors.textview50FontColor,
+                  FontAwesomeIcons.solidBell,
+                  color: FvColors.maintheme,
                 ),
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Loginscreen2(),
+                    ),
+                  );
+                  // SharedService.logout(context);
+                },
               ),
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Loginscreen2(),
-                  ),
-                );
-                // SharedService.logout(context);
-              },
-            ),
-            GestureDetector(
-              child: FaIcon(
-                FontAwesomeIcons.solidBell,
-                color: FvColors.maintheme,
-              ),
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Loginscreen2(),
-                  ),
-                );
-                // SharedService.logout(context);
-              },
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 

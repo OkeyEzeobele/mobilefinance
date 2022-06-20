@@ -60,9 +60,11 @@ class _QuickLinksState extends State<QuickLinks> {
                             SizedBox.square(
                               dimension: widthOfScreen * 0.13,
                               child: OutlinedButton(
-                                child: const Icon(
-                                  Iconsax.send_21,
-                                  color: FvColors.maintheme,
+                                child: FittedBox(
+                                  child: const Icon(
+                                    Iconsax.send_21,
+                                    color: FvColors.maintheme,
+                                  ),
                                 ),
                                 style: TextButton.styleFrom(
                                   backgroundColor: FvColors.container166Background
@@ -103,9 +105,11 @@ class _QuickLinksState extends State<QuickLinks> {
                             SizedBox.square(
                               dimension: widthOfScreen * 0.13,
                               child: OutlinedButton(
-                                child: const Icon(
-                                  Icons.wallet,
-                                  color: FvColors.maintheme,
+                                child: FittedBox(
+                                  child: const Icon(
+                                    Icons.wallet,
+                                    color: FvColors.maintheme,
+                                  ),
                                 ),
                                 style: TextButton.styleFrom(
                                   backgroundColor: FvColors.container166Background
@@ -146,9 +150,11 @@ class _QuickLinksState extends State<QuickLinks> {
                             SizedBox.square(
                               dimension: widthOfScreen * 0.13,
                               child: OutlinedButton(
-                                child: const Icon(
-                                  FontAwesomeIcons.solidCreditCard,
-                                  color: FvColors.maintheme,
+                                child: FittedBox(
+                                  child: const Icon(
+                                    FontAwesomeIcons.solidCreditCard,
+                                    color: FvColors.maintheme,
+                                  ),
                                 ),
                                 style: TextButton.styleFrom(
                                   backgroundColor: FvColors.container166Background

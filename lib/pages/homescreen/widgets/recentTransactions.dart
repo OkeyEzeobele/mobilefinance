@@ -6,6 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:o3_cards/ui/pallete.dart';
 
 import '../../../services/api_service.dart';
+import '../../../services/shared_service.dart';
 
 class Recenttransactions extends StatefulWidget {
   const Recenttransactions({Key? key}) : super(key: key);
@@ -15,11 +16,19 @@ class Recenttransactions extends StatefulWidget {
 }
 
 class _RecenttransactionsState extends State<Recenttransactions> {
-  late Future<TransactionlistResponse> transactionList;
+  late Future<TransactionlistResponse?> transactionList;
+
+  Future<TransactionlistResponse?> _getTxnsModel() async {
+    Future<TransactionlistResponse?> model = await SharedService.isTxnsSaved()
+        ? SharedService.txnList()
+        : APIService.userTransactions();
+    return model;
+  }
+
   @override
   void initState() {
     super.initState();
-    transactionList = APIService.userTransactions();
+    transactionList = _getTxnsModel();
   }
 
   @override
@@ -29,8 +38,8 @@ class _RecenttransactionsState extends State<Recenttransactions> {
     var heightOfScreen =
         MediaQuery.of(context).size.height - marginFromSafeArea;
     return SizedBox(
-      height: heightOfScreen * 0.3,
-      child: FutureBuilder<TransactionlistResponse>(
+      height: heightOfScreen * 0.29,
+      child: FutureBuilder<TransactionlistResponse?>(
         future: transactionList,
         builder: (context, txnModel) {
           var transactions = txnModel.data?.payload;
@@ -50,7 +59,7 @@ class _RecenttransactionsState extends State<Recenttransactions> {
               );
             }
             return SizedBox(
-              height: heightOfScreen * 0.4,
+              height: heightOfScreen * 0.2,
               width: widthOfScreen * 0.8,
               child: Column(
                 children: [

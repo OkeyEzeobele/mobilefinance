@@ -63,7 +63,7 @@ class _DashboardState extends State<Dashboard> {
             title: 'Stats',
           ),
           const TabItem(
-            icon: Iconsax.more,
+            icon: Icons.grid_view_rounded,
             title: 'More',
           ),
         ],

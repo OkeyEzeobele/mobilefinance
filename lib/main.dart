@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'pages/splashscreenscreen1/splashscreenscreen1.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MyApp(),);
 }
 
 class MyApp extends StatelessWidget {
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'ApplicationName',
+      title: 'O3 Cards',
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),

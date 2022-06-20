@@ -44,7 +44,7 @@ class APIService {
     var url = Uri.http(
       Config.baseUrl,
       Config.fetchCards,
-    ); //http for live, http for debug
+    ); //https for live, http for debug
 
     final response = await client.get(
       url,
@@ -52,10 +52,9 @@ class APIService {
     );
 
     if (response.statusCode == 200) {
-      return cardListResponseJson(response.body);
-    } else {
-      throw Exception('Failed to get cards');
+      await SharedService.setCardDetails(cardListResponseJson(response.body));
     }
+    return cardListResponseJson(response.body);
   }
 
   static Future<TransactionlistResponse> userTransactions() async {
@@ -77,9 +76,9 @@ class APIService {
     );
 
     if (response.statusCode == 200) {
-      return transactionlistResponseJson(response.body);
-    } else {
-      throw Exception('Failed to get transactionss');
+      await SharedService.setTxnList(
+          transactionlistResponseJson(response.body));
     }
+    return transactionlistResponseJson(response.body);
   }
 }

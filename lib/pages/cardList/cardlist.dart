@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:o3_cards/models/cardlistResponse.dart';
 import 'package:o3_cards/pages/cardList/widgets/bottomModal.dart';
 import 'package:o3_cards/services/api_service.dart';
+import 'package:o3_cards/services/shared_service.dart';
 import 'package:o3_cards/ui/export.dart';
 
 class CardList extends StatefulWidget {
@@ -17,11 +18,19 @@ class CardList extends StatefulWidget {
 }
 
 class _CardListState extends State<CardList> {
-  late Future<CardListResponse> userCards;
+  late Future<CardListResponse?> userCards;
+
+  Future<CardListResponse?>_getCardsModel() async {
+   Future<CardListResponse?> model = await SharedService.isCardsSaved()
+        ? SharedService.cardDetails()
+        : APIService.userCards();
+    return model;
+  }
+
   @override
   void initState() {
     super.initState();
-    userCards = APIService.userCards();
+    userCards = _getCardsModel();
   }
 
   @override
@@ -36,69 +45,74 @@ class _CardListState extends State<CardList> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
                 width: widthOfScreen * 0.25,
-                child: AutoSizeText.rich(
-                  TextSpan(
-                    children: <TextSpan>[
+                child: FittedBox(
+                  child: FittedBox(
+                    child: AutoSizeText.rich(
                       TextSpan(
-                        children: const <TextSpan>[
+                        children: <TextSpan>[
                           TextSpan(
-                            text: 'Your Cards',
-                            style: TextStyle(
-                                fontSize: 15,
-                                color: FvColors.textview50FontColor,
-                                fontWeight: FontWeight.w700),
-                          )
+                            children: const <TextSpan>[
+                              TextSpan(
+                                text: 'Your Cards',
+                                style: TextStyle(
+                                  color: FvColors.textview50FontColor,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              )
+                            ],
+                          ),
                         ],
                       ),
-                    ],
+                      textAlign: TextAlign.left,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                  textAlign: TextAlign.left,
-                  minFontSize: 10,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               Container(
-                width: widthOfScreen * 0.4,
+                width: widthOfScreen * 0.3,
                 height: heightOfScreen * 0.04,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(181),
                   color: FvColors.offwhitepink,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Request Card",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: FvColors.maintheme,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    FittedBox(
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Loginscreen(),
-                            ),
-                          );
-                        },
-                        icon: const FaIcon(
-                          FontAwesomeIcons.circlePlus,
+                child: FittedBox(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Request Card",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 16,
                           color: FvColors.maintheme,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                    ),
-                  ],
+                      FittedBox(
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Loginscreen(),
+                              ),
+                            );
+                          },
+                          icon: const FaIcon(
+                            FontAwesomeIcons.circlePlus,
+                            color: FvColors.maintheme,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -106,7 +120,7 @@ class _CardListState extends State<CardList> {
           SizedBox(
             height: 15,
           ),
-          FutureBuilder<CardListResponse>(
+          FutureBuilder<CardListResponse?>(
             future: userCards,
             builder: (context, snapshot) {
               var cards = snapshot.data?.payload;
