@@ -20,8 +20,8 @@ class CardList extends StatefulWidget {
 class _CardListState extends State<CardList> {
   late Future<CardListResponse?> userCards;
 
-  Future<CardListResponse?>_getCardsModel() async {
-   Future<CardListResponse?> model = await SharedService.isCardsSaved()
+  Future<CardListResponse?> _getCardsModel() async {
+    Future<CardListResponse?> model = await SharedService.isCardsSaved()
         ? SharedService.cardDetails()
         : APIService.userCards();
     return model;
@@ -144,142 +144,152 @@ class _CardListState extends State<CardList> {
                 return Expanded(
                   child: ListView.separated(
                     itemCount: cards!.length,
-                    itemBuilder: (context, i) => GestureDetector(
-                      child: SizedBox(
-                        height: 216,
-                        width: 450,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              fit: BoxFit.contain,
-                              image: AssetImage(
-                                (cards[i].orderLabel == 'Prestige Card')
-                                    ? 'assets/card_prestige.png'
-                                    : 'assets/card_classic.png',
+                    itemBuilder: (context, i) {
+                      String _setImage() {
+                        if (cards[i].type == 'prepaid') {
+                          return 'assets/cardimgprepaid.png';
+                        } else if (cards[i]
+                            .orderLabel
+                            .toString()
+                            .contains('Platinum')) {
+                          return 'assets/cardimgplatinum.png';
+                        }
+                        return 'assets/cardimgbusinesscredit.png';
+                      }
+
+                      return GestureDetector(
+                        child: SizedBox(
+                          height: 216,
+                          width: 450,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.contain,
+                                image: AssetImage(_setImage()),
                               ),
+                              borderRadius: BorderRadius.circular(15),
                             ),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          padding: EdgeInsets.all(20),
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: 50,
-                              ),
-                              SizedBox(
-                                width: double.infinity,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                    right: 40,
-                                  ),
-                                  child: Text(
-                                    // 'N'+ cards![i].balance,
-                                    cards[i].balance == '0.0' ||
-                                            cards[i]
-                                                .balance
-                                                .toString()
-                                                .contains('-')
-                                        ? '₦ ' + cards[i].balance.toString()
-                                        : NumberFormat.currency(
-                                            name: '₦ ',
-                                            decimalDigits: 2,
-                                          ).format(cards[i].balance),
-                                    textAlign: TextAlign.right,
-                                    style: GoogleFonts.inconsolata(
-                                      fontSize: 20.0,
-                                      color: Colors.white,
+                            margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                            padding: EdgeInsets.all(20),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 50,
+                                ),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                      right: 40,
+                                    ),
+                                    child: Text(
+                                      // 'N'+ cards![i].balance,
+                                      cards[i].balance == '0.0' ||
+                                              cards[i]
+                                                  .balance
+                                                  .toString()
+                                                  .contains('-')
+                                          ? '₦ ' + cards[i].balance.toString()
+                                          : NumberFormat.currency(
+                                              name: '₦ ',
+                                              decimalDigits: 2,
+                                            ).format(cards[i].balance),
+                                      textAlign: TextAlign.right,
+                                      style: GoogleFonts.inconsolata(
+                                        fontSize: 20.0,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              Text(
-                                (cards[i].first6 + 'XXXXXX' + cards[i].last4)
-                                    .replaceAllMapped(RegExp(r".{4}"),
-                                        (match) => "${match.group(0)} ")
-                                    .trimRight(),
-                                style: GoogleFonts.inconsolata(
-                                  fontSize: 22.0,
-                                  color: Colors.white,
+                                SizedBox(
+                                  height: 30,
                                 ),
-                              ),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  RichText(
-                                    text: TextSpan(
-                                      text: 'Exp: ',
-                                      style: TextStyle(
-                                        fontSize: 10.0,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
+                                Text(
+                                  (cards[i].first6 + 'XXXXXX' + cards[i].last4)
+                                      .replaceAllMapped(RegExp(r".{4}"),
+                                          (match) => "${match.group(0)} ")
+                                      .trimRight(),
+                                  style: GoogleFonts.inconsolata(
+                                    fontSize: 22.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    RichText(
+                                      text: TextSpan(
+                                        text: 'Exp: ',
+                                        style: TextStyle(
+                                          fontSize: 10.0,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                        children: [
+                                          TextSpan(
+                                            text: DateFormat.yM().format(
+                                              (DateTime.parse(
+                                                cards[i].createdAt,
+                                              ).add(
+                                                Duration(days: 730),
+                                              )),
+                                            ),
+                                            style: GoogleFonts.inconsolata(
+                                              fontSize: 15,
+                                              color: Colors.white,
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                      children: [
-                                        TextSpan(
-                                          text: DateFormat.yM().format(
-                                            (DateTime.parse(
-                                              cards[i].createdAt,
-                                            ).add(
-                                              Duration(days: 730),
-                                            )),
-                                          ),
-                                          style: GoogleFonts.inconsolata(
-                                            fontSize: 15,
-                                            color: Colors.white,
-                                          ),
-                                        )
-                                      ],
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  RichText(
-                                    text: TextSpan(
-                                      text: 'CIF Number: ',
-                                      style: TextStyle(
-                                        fontSize: 10.0,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    RichText(
+                                      text: TextSpan(
+                                        text: 'CIF Number: ',
+                                        style: TextStyle(
+                                          fontSize: 10.0,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                        children: [
+                                          TextSpan(
+                                            text: cards[i].cifNumber,
+                                            style: GoogleFonts.inconsolata(
+                                              fontSize: 15,
+                                              color: Colors.white,
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                      children: [
-                                        TextSpan(
-                                          text: cards[i].cifNumber,
-                                          style: GoogleFonts.inconsolata(
-                                            fontSize: 15,
-                                            color: Colors.white,
-                                          ),
-                                        )
-                                      ],
                                     ),
-                                  ),
-                                ],
-                              )
-                            ],
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      onTap: () {
-                        showModalBottomSheet(
-                          context: context,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30),
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(30),
+                                topRight: Radius.circular(30),
+                              ),
                             ),
-                          ),
-                          builder: (context) {
-                            return (BottomModal());
-                          },
-                        );
-                      },
-                    ),
+                            builder: (context) {
+                              return (BottomModal());
+                            },
+                          );
+                        },
+                      );
+                    },
                     separatorBuilder: (BuildContext context, int index) =>
                         SizedBox(
                       height: 10,

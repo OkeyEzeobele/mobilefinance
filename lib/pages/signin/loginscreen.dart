@@ -2,6 +2,7 @@
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 import 'package:o3_cards/pages/dashboard/dashboard.dart';
 import 'package:o3_cards/models/loginRequest.dart';
 import 'package:o3_cards/services/api_service.dart';
@@ -9,6 +10,8 @@ import 'package:o3_cards/ui/export.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
+
+import '../signup/signup.dart';
 
 class Loginscreen extends StatefulWidget {
   const Loginscreen({Key? key}) : super(key: key);
@@ -65,12 +68,32 @@ class _LoginscreenState extends State<Loginscreen> {
         SizedBox(
           height: heightOfScreen * 0.1,
         ),
-        const Text(
-          "Don't have an account? Register",
-          style: TextStyle(
-            color: FvColors.textview50FontColor,
-            fontWeight: FontWeight.w400,
-          ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Don't have an account? ",
+              style: TextStyle(
+                color: FvColors.textview50FontColor,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            GestureDetector(
+              child: Text(
+                "Register",
+                style: TextStyle(color: FvColors.maintheme),
+              ),
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Signupscreen(),
+                  ),
+                );
+              },
+            ),
+          ],
         ),
         SizedBox(
           height: heightOfScreen * 0.1,
@@ -108,50 +131,77 @@ class _LoginscreenState extends State<Loginscreen> {
         SizedBox(
           height: 10,
         ),
-        SizedBox(
-          height: heightOfScreen * 0.08,
-          width: widthOfScreen * 0.75,
-          child: FormHelper.inputFieldWidget(
-            context,
-            "Password",
-            "Password",
-            (
-              onValidateVal,
-            ) {
-              if (onValidateVal.isEmpty) {
-                return "Please enter password";
-              } else if (onValidateVal.length < 6) {
-                return "Password must have 6 or more characters ";
-              }
-              return null;
-            },
-            (onSavedVal) {
-              password = onSavedVal;
-            },
-            initialValue: '',
-            borderFocusColor: FvColors.maintheme,
-            backgroundColor: FvColors.edittext51Background,
-            prefixIcon: const Icon(Icons.lock),
-            prefixIconColor: FvColors.maintheme,
-            borderColor: Colors.white,
-            hintColor: FvColors.textview65FontColor,
-            textColor: FvColors.textview70FontColor,
-            borderRadius: 20,
-            showPrefixIcon: true,
-            obscureText: hidePassword,
-            suffixIcon: IconButton(
-              color: FvColors.maintheme,
-              icon:
-                  Icon(hidePassword ? Icons.visibility_off : Icons.visibility),
-              onPressed: () {
-                setState(
-                  () {
-                    hidePassword = !hidePassword;
+        Column(
+          children: [
+            SizedBox(
+              height: heightOfScreen * 0.08,
+              width: widthOfScreen * 0.75,
+              child: FormHelper.inputFieldWidget(
+                context,
+                "Password",
+                "Password",
+                (
+                  onValidateVal,
+                ) {
+                  if (onValidateVal.isEmpty) {
+                    return "Please enter password";
+                  } else if (onValidateVal.length < 6) {
+                    return "Password must have 6 or more characters ";
+                  }
+                  return null;
+                },
+                (onSavedVal) {
+                  password = onSavedVal;
+                },
+                initialValue: '',
+                borderFocusColor: FvColors.maintheme,
+                backgroundColor: FvColors.edittext51Background,
+                prefixIcon: const Icon(Icons.lock),
+                prefixIconColor: FvColors.maintheme,
+                borderColor: Colors.white,
+                hintColor: FvColors.textview65FontColor,
+                textColor: FvColors.textview70FontColor,
+                borderRadius: 20,
+                showPrefixIcon: true,
+                obscureText: hidePassword,
+                suffixIcon: IconButton(
+                  color: FvColors.maintheme,
+                  icon: Icon(
+                      hidePassword ? Icons.visibility_off : Icons.visibility),
+                  onPressed: () {
+                    setState(
+                      () {
+                        hidePassword = !hidePassword;
+                      },
+                    );
                   },
-                );
-              },
+                ),
+              ),
             ),
-          ),
+            // FlutterPwValidator(
+            //   controller: _passwordController,
+            //   minLength: 6,
+            //   uppercaseCharCount: 1,
+            //   numericCharCount: 1,
+            //   specialCharCount: 1,
+            //   width: 400,
+            //   height: 150,
+            //   onSuccess: () {
+            //     ScaffoldMessenger.of(context).showSnackBar(
+            //       SnackBar(
+            //         content: Text("Password is matched"),
+            //       ),
+            //     );
+            //   },
+            //   onFail: () {
+            //     ScaffoldMessenger.of(context).showSnackBar(
+            //       SnackBar(
+            //         content: Text("Password is not matched"),
+            //       ),
+            //     );
+            //   },
+            // )
+          ],
         ),
         SizedBox(
           height: heightOfScreen * 0.05,

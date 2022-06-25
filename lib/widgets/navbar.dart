@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:o3_cards/pages/cardList/cardlist.dart';
 import 'package:o3_cards/pages/homescreen/homescreen.dart';
-import 'package:o3_cards/pages/login/loginscreen.dart';
+import 'package:o3_cards/pages/signin/loginscreen.dart';
 import 'package:o3_cards/ui/pallete.dart';
 
 class NavBar extends StatefulWidget {

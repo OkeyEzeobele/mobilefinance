@@ -58,9 +58,11 @@ class _Splashscreenscreen1State extends State<Splashscreenscreen1> {
                     ),
                     onPressed: () {
                       Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Loginscreen()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Loginscreen(),
+                        ),
+                      );
                     },
                   ),
                 ),

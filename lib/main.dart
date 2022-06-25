@@ -1,9 +1,20 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 // import 'package:o3_cards/pages/dashboard/dashboard.dart';
 import 'pages/splashscreenscreen1/splashscreenscreen1.dart';
 
-void main() {
-  runApp(const MyApp(),);
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  ByteData data =
+      await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
+  SecurityContext.defaultContext
+      .setTrustedCertificatesBytes(data.buffer.asUint8List());
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {

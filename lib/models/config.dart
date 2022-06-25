@@ -5,10 +5,12 @@ class Config {
   static const baseUrl = '127.0.0.1:5000'; // ios emulator localhost maps to pc localhost
   // static const baseUrl = 'https://0026ca16de46.ngrok.io/api/v1';
   // static const baseUrl = '10.2.0.66:7526';
+  // static const baseUrl = '10.1.3.16:8443';
 
-  static const transferAccountResolve = '/api/v1/verify-bank-account-number';
+  static const transferAccountResolve = '/api/v1/verify-acct-name';
   static const cifAccountResolve = '/api/v1/verify-cif-number';
   static const transfer = '/api/v1/request-transfer';
+  static const banklist = '/api/v1/get-banks-list';
 
   static const profileCheckRequired = '/api/v1/check-required-info';
   static const profileCreatePersonal = '/api/v1/create-personal-info';
@@ -31,6 +33,7 @@ class Config {
   static const requestLoan = '/api/v1/request-loan';
   static const requestBill = '/api/v1/request-bill';
 
+  // static const authLogin = '/o3c-api/rest/api/v1/login';
   static const authLogin = '/api/v1/login';
   static const authRegister = '/api/v1/signup';
   static const resetPassword = '/api/v1/password-reset';

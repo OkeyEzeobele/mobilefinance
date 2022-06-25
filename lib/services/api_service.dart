@@ -1,10 +1,13 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:o3_cards/models/account_details.dart';
+import 'package:o3_cards/models/banklist.dart';
 import 'package:o3_cards/models/cardlistResponse.dart';
 import 'package:o3_cards/models/config.dart';
 import 'package:o3_cards/models/loginRequest.dart';
 import 'package:o3_cards/models/loginResponse.dart';
+import 'package:o3_cards/models/request_account_details.dart';
 import 'package:o3_cards/services/shared_service.dart';
 
 import '../models/transactionListResponse.dart';
@@ -24,11 +27,15 @@ class APIService {
     var response = await client.post(
       url,
       headers: requestHeaders,
-      body: jsonEncode(model.toJson()),
+      body: jsonEncode(
+        model.toJson(),
+      ),
     );
 
     if (response.statusCode == 200) {
-      await SharedService.setLoginDetails(loginResponseJson(response.body));
+      await SharedService.setLoginDetails(
+        loginResponseJson(response.body),
+      );
     }
     return loginResponseJson(response.body);
   }
@@ -52,7 +59,9 @@ class APIService {
     );
 
     if (response.statusCode == 200) {
-      await SharedService.setCardDetails(cardListResponseJson(response.body));
+      await SharedService.setCardDetails(
+        cardListResponseJson(response.body),
+      );
     }
     return cardListResponseJson(response.body);
   }
@@ -77,8 +86,60 @@ class APIService {
 
     if (response.statusCode == 200) {
       await SharedService.setTxnList(
-          transactionlistResponseJson(response.body));
+        transactionlistResponseJson(response.body),
+      );
     }
     return transactionlistResponseJson(response.body);
+  }
+
+  static Future<Banklist?> banklist() async {
+    var loginDetails = await SharedService.loginDetails();
+
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'token': '${loginDetails!.payload!.token}'
+    };
+
+    var url = Uri.http(
+      Config.baseUrl,
+      Config.banklist,
+    );
+
+    final response = await client.get(
+      url,
+      headers: requestHeaders,
+    );
+
+    if (response.statusCode == 200) {
+      return banklistJson(response.body);
+    }
+    return null;
+  }
+
+  static Future<AccountDetails?> accountDetails(RequestAccountDetails model) async {
+    var loginDetails = await SharedService.loginDetails();
+
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'token': '${loginDetails!.payload!.token}'
+    };
+
+    var url = Uri.http(
+      Config.baseUrl,
+      Config.transferAccountResolve,
+    );
+
+    final response = await client.post(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode(
+        model.toJson(),
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      return accountDetailsJson(response.body);
+    }
+    return null;
   }
 }

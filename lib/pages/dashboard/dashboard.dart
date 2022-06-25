@@ -7,6 +7,8 @@ import 'package:o3_cards/pages/cardList/cardlist.dart';
 import 'package:o3_cards/pages/sendmoney/sendmoney.dart';
 import 'package:o3_cards/ui/export.dart';
 
+import '../moreoptions/more.dart';
+
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
 
@@ -24,9 +26,7 @@ class _DashboardState extends State<Dashboard> {
     Text(
       'Coming Soon',
     ),
-    Text(
-      'Coming Soon',
-    ),
+    More(),
   ];
 
   void _onItemTapped(int i) {
@@ -44,7 +44,7 @@ class _DashboardState extends State<Dashboard> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: ConvexAppBar.badge(
-        const {4: '3'},
+        const {4: ''},
         items: [
           const TabItem(
             icon: Iconsax.send_21,

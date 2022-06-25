@@ -3,8 +3,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:o3_cards/pages/login/loginscreen.dart';
-import 'package:o3_cards/pages/login/loginscreen2.dart';
+import 'package:o3_cards/pages/signin/loginscreen2.dart';
 import 'package:o3_cards/services/shared_service.dart';
 import 'package:o3_cards/ui/pallete.dart';
 
@@ -111,7 +110,7 @@ class _GreetingState extends State<Greeting> {
                           width: 10,
                         ),
                         Text(
-                          "Add Credit Card",
+                          "Link Credit Card",
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontSize: 18,
@@ -120,14 +119,7 @@ class _GreetingState extends State<Greeting> {
                           ),
                         ),
                         IconButton(
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Loginscreen(),
-                              ),
-                            );
-                          },
+                          onPressed: () {},
                           icon: const FaIcon(
                             FontAwesomeIcons.circlePlus,
                             color: FvColors.maintheme,
@@ -148,12 +140,6 @@ class _GreetingState extends State<Greeting> {
                   ),
                 ),
                 onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Loginscreen2(),
-                    ),
-                  );
                   // SharedService.logout(context);
                 },
               ),

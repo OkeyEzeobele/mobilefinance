@@ -43,6 +43,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  cached_network_image:
+    dependency: transitive
+    description:
+      name: cached_network_image
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.1"
+  cached_network_image_platform_interface:
+    dependency: transitive
+    description:
+      name: cached_network_image_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
+  cached_network_image_web:
+    dependency: transitive
+    description:
+      name: cached_network_image_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   carousel_slider:
     dependency: "direct main"
     description:
@@ -57,6 +78,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.1"
+  circular_profile_avatar:
+    dependency: "direct main"
+    description:
+      name: circular_profile_avatar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.5"
   clock:
     dependency: transitive
     description:
@@ -132,6 +160,20 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_blurhash:
+    dependency: transitive
+    description:
+      name: flutter_blurhash
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.7.0"
+  flutter_cache_manager:
+    dependency: transitive
+    description:
+      name: flutter_cache_manager
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.3.0"
   flutter_conditional_rendering:
     dependency: "direct main"
     description:
@@ -153,6 +195,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.6"
+  flutter_pw_validator:
+    dependency: "direct main"
+    description:
+      name: flutter_pw_validator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.4.2"
   flutter_spinkit:
     dependency: "direct main"
     description:
@@ -165,6 +214,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_toggle_tab:
+    dependency: "direct main"
+    description:
+      name: flutter_toggle_tab
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -184,6 +240,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+  hexcolor:
+    dependency: "direct main"
+    description:
+      name: hexcolor
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.7"
   http:
     dependency: "direct main"
     description:
@@ -268,6 +331,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.4"
+  keyboard_actions:
+    dependency: "direct main"
+    description:
+      name: keyboard_actions
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.1"
   lints:
     dependency: transitive
     description:
@@ -331,6 +401,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+  octo_image:
+    dependency: transitive
+    description:
+      name: octo_image
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
+  page_view_indicators:
+    dependency: "direct main"
+    description:
+      name: page_view_indicators
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   path:
     dependency: transitive
     description:
@@ -387,6 +471,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.7"
+  pedantic:
+    dependency: transitive
+    description:
+      name: pedantic
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.11.1"
   petitparser:
     dependency: transitive
     description:
@@ -429,6 +520,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
+  rxdart:
+    dependency: transitive
+    description:
+      name: rxdart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.27.4"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -525,6 +623,69 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.4"
+  url_launcher:
+    dependency: "direct main"
+    description:
+      name: url_launcher
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "6.1.4"
+  url_launcher_android:
+    dependency: transitive
+    description:
+      name: url_launcher_android
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "6.0.17"
+  url_launcher_ios:
+    dependency: transitive
+    description:
+      name: url_launcher_ios
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "6.0.17"
+  url_launcher_linux:
+    dependency: transitive
+    description:
+      name: url_launcher_linux
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.1"
+  url_launcher_macos:
+    dependency: transitive
+    description:
+      name: url_launcher_macos
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.1"
+  url_launcher_platform_interface:
+    dependency: transitive
+    description:
+      name: url_launcher_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
+  url_launcher_web:
+    dependency: transitive
+    description:
+      name: url_launcher_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.12"
+  url_launcher_windows:
+    dependency: transitive
+    description:
+      name: url_launcher_windows
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.1"
+  uuid:
+    dependency: transitive
+    description:
+      name: uuid
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.6"
   vector_math:
     dependency: transitive
     description:
@@ -561,5 +722,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.17.0-0 <3.0.0"
-  flutter: ">=2.10.0-0"
+  dart: ">=2.17.0 <3.0.0"
+  flutter: ">=3.0.0"

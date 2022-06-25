@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:o3_cards/pages/signup/signup.dart';
 import 'package:o3_cards/ui/export.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -210,10 +211,12 @@ class _Useronboardingscreen2State extends State<Useronboardingscreen2> {
                                             ),
                                             onPressed: () {
                                               Navigator.pushReplacement(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const Loginscreen()));
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const Signupscreen(),
+                                                ),
+                                              );
                                             },
                                           ),
                                         ),
