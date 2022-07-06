@@ -377,13 +377,7 @@ class _MoreState extends State<More> {
                                             ),
                                           ),
                                           onPressed: () {
-                                            Navigator.pushReplacement(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Loginscreen2(),
-                                              ),
-                                            );
+                                            SharedService.softlogout(context);
                                           },
                                         ),
                                       ),

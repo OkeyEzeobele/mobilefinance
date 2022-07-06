@@ -100,7 +100,7 @@ class _CardsModalState extends State<CardsModal> {
                                                 image: AssetImage(
                                                   (cards[i].first6[0] == '5')
                                                       ? 'assets/vervelogo.png'
-                                                      : 'assets/amex.png',
+                                                      : 'assets/amexlogo.png',
                                                 ),
                                               ),
                                               borderRadius:

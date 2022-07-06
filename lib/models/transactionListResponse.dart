@@ -59,10 +59,10 @@ class Payload {
   });
   late final int id;
   late final int userId;
-  late final int amount;
+  late final num amount;
   late final String status;
   late final int fee;
-  late final int? extfee;
+  late final dynamic extfee;
   late final String destination;
   late final int destId;
   late final String source;
@@ -70,16 +70,16 @@ class Payload {
   late final String txref;
   late final dynamic response;
   late final String? comment;
-  late final String? narration;
+  late final dynamic narration;
   late final String createdAt;
   late final String updatedAt;
-  late final String? sourceCif;
-  late final String? acctNumber;
+  late final dynamic sourceCif;
+  late final dynamic acctNumber;
   late final dynamic recepient;
   late final dynamic type;
-  late final String? bankCode;
-  late final String? accountNumber;
-  late final String? cifNumber;
+  late final dynamic bankCode;
+  late final dynamic accountNumber;
+  late final dynamic cifNumber;
   late final dynamic tenure;
 
   Payload.fromJson(Map<String, dynamic> json) {

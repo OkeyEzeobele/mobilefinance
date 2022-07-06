@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:o3_cards/models/account_details.dart';
 import 'package:o3_cards/models/banklist.dart';
@@ -111,9 +112,14 @@ class APIService {
     );
 
     if (response.statusCode == 200) {
-      return banklistJson(response.body);
+      await SharedService.setBankList(
+        banklistJson(response.body)
+      );
+      // if (kDebugMode) {
+      //   print('Response body: ${response.body}');
+      // }
     }
-    return null;
+    return banklistJson(response.body);
   }
 
   static Future<AccountDetails?> accountDetails(RequestAccountDetails model) async {

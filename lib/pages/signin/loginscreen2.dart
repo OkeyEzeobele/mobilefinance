@@ -228,7 +228,7 @@ class _Loginscreen2State extends State<Loginscreen2> {
                 ),
               ),
               onTap: () {
-                SharedService.logout(context);
+                SharedService.hardlogout(context);
               },
             ),
           ],

@@ -3,6 +3,7 @@ import 'dart:convert';
 Banklist banklistJson(String str) =>
     Banklist.fromJson(json.decode(str));
 
+
 class Banklist {
   Banklist({
     required this.success,
@@ -11,49 +12,32 @@ class Banklist {
   });
   late final bool success;
   late final String message;
-  late final Payload payload;
+  late final List<Payload> payload;
 
   Banklist.fromJson(Map<String, dynamic> json){
     success = json['success'];
     message = json['message'];
-    payload = Payload.fromJson(json['payload']);
+    payload = List.from(json['payload']).map((e)=>Payload.fromJson(e)).toList();
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
     _data['success'] = success;
     _data['message'] = message;
-    _data['payload'] = payload.toJson();
+    _data['payload'] = payload.map((e)=>e.toJson()).toList();
     return _data;
   }
 }
 
 class Payload {
   Payload({
-    required this.banks,
-  });
-  late final List<Banks> banks;
-
-  Payload.fromJson(Map<String, dynamic> json){
-    banks = List.from(json['banks']).map((e)=>Banks.fromJson(e)).toList();
-  }
-
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['banks'] = banks.map((e)=>e.toJson()).toList();
-    return _data;
-  }
-}
-
-class Banks {
-  Banks({
     required this.bankName,
     required this.bankCode,
   });
   late final String bankName;
   late final String bankCode;
 
-  Banks.fromJson(Map<String, dynamic> json){
+  Payload.fromJson(Map<String, dynamic> json){
     bankName = json['bank_name'];
     bankCode = json['bank_code'];
   }

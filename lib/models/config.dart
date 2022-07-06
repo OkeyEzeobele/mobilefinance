@@ -6,6 +6,7 @@ class Config {
   // static const baseUrl = 'https://0026ca16de46.ngrok.io/api/v1';
   // static const baseUrl = '10.2.0.66:7526';
   // static const baseUrl = '10.1.3.16:8443';
+  // static const baseUrl = '62.173.44.66:4043';
 
   static const transferAccountResolve = '/api/v1/verify-acct-name';
   static const cifAccountResolve = '/api/v1/verify-cif-number';

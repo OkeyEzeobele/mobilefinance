@@ -279,7 +279,9 @@ class _TransfertoBankState extends State<TransfertoBank> {
                   );
                   setState(
                     () {
-                      code = bankSelected[1];
+                      bankSelected != null ?
+                      code = bankSelected[1]
+                      :code = null;
                     },
                   );
                 },

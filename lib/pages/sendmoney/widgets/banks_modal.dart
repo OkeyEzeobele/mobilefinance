@@ -2,11 +2,12 @@
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:o3_cards/models/banklist.dart';
 import 'package:o3_cards/ui/export.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
+import '../../../models/banklist.dart';
 import '../../../services/api_service.dart';
+import '../../../services/shared_service.dart';
 
 class BanksModal extends StatefulWidget {
   const BanksModal({Key? key}) : super(key: key);
@@ -20,7 +21,9 @@ class _BanksModalState extends State<BanksModal> {
   String bankSelected = '';
   String bankCode = '';
   Future<Banklist?> _getBanksModel() async {
-    Banklist? model = await APIService.banklist();
+    Future<Banklist?> model = await SharedService.isBanksSaved()
+        ? SharedService.bankList()
+        : APIService.banklist();
     return model;
   }
 
@@ -48,9 +51,9 @@ class _BanksModalState extends State<BanksModal> {
               return FutureBuilder<Banklist?>(
                 future: banks,
                 builder: (context, snapshot) {
-                  var banklist = snapshot.data?.payload.banks;
+                  var banklist = snapshot.data?.payload;
                   if (snapshot.hasData) {
-                    if (snapshot.data!.payload.banks.isEmpty) {
+                    if (snapshot.data!.payload.isEmpty) {
                       return Center(
                         child: Text(
                           'There was an error',
@@ -63,17 +66,17 @@ class _BanksModalState extends State<BanksModal> {
                         ),
                       );
                     }
-                    void searchBanks(String query) {
-                      List<Banks>? initSuggestions = banklist;
-                      final suggestions = initSuggestions!.where((suggestion) {
-                        final title = suggestion.bankName.toLowerCase();
-                        final input = query.toLowerCase();
-                        return title.contains(input);
-                      }).toList();
-                      setState(
-                        () => banklist = suggestions,
-                      );
-                    }
+                    // void searchBanks(String query) {
+                    //   List<Banks>? initSuggestions = banklist;
+                    //   final suggestions = initSuggestions!.where((suggestion) {
+                    //     final title = suggestion.bankName.toLowerCase();
+                    //     final input = query.toLowerCase();
+                    //     return title.contains(input);
+                    //   }).toList();
+                    //   setState(
+                    //     () => banklist = suggestions,
+                    //   );
+                    // }
 
                     return Column(
                       children: [
@@ -81,7 +84,7 @@ class _BanksModalState extends State<BanksModal> {
                           height: heightOfScreen * 0.07,
                           width: widthOfScreen * 0.9,
                           child: TextField(
-                            onChanged: searchBanks,
+                            // onChanged: searchBanks,
                             decoration: InputDecoration(
                               prefixIcon: Icon(
                                 Icons.search,
@@ -102,11 +105,8 @@ class _BanksModalState extends State<BanksModal> {
                           child: ListView.builder(
                             itemCount: banklist!.length,
                             itemBuilder: (context, i) {
-                              var secondletter = banklist![i]
-                                  .bankName
-                                  .substring(
-                                      banklist![i].bankName.indexOf(' ') +
-                                          1)[0];
+                              var secondletter = banklist[i].bankName.substring(
+                                  banklist[i].bankName.indexOf(' ') + 1)[0];
                               return GestureDetector(
                                 child: SizedBox(
                                   height: heightOfScreen * 0.128,
@@ -133,7 +133,7 @@ class _BanksModalState extends State<BanksModal> {
                                                 '',
                                                 backgroundColor: Colors.grey,
                                                 initialsText: Text(
-                                                  banklist![i].bankName[0] +
+                                                  banklist[i].bankName[0] +
                                                       secondletter,
                                                   style: TextStyle(
                                                       fontWeight:
@@ -148,10 +148,10 @@ class _BanksModalState extends State<BanksModal> {
                                               SizedBox(
                                                 width: widthOfScreen * 0.5,
                                                 child: Text(
-                                                  banklist![i].bankName,
+                                                  banklist[i].bankName,
                                                   style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w600),
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -163,8 +163,8 @@ class _BanksModalState extends State<BanksModal> {
                                 ),
                                 onTap: () {
                                   setState(() {
-                                    bankSelected = banklist![i].bankName;
-                                    bankCode = banklist![i].bankCode;
+                                    bankSelected = banklist[i].bankName;
+                                    bankCode = banklist[i].bankCode;
                                   });
                                   var bankFinal = [bankSelected, bankCode];
 

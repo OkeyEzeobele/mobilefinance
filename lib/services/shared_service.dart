@@ -8,7 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:o3_cards/models/cardlistResponse.dart';
 import 'package:o3_cards/models/loginResponse.dart';
 import 'package:o3_cards/models/transactionListResponse.dart';
+import 'package:o3_cards/pages/signin/loginscreen2.dart';
 import 'package:o3_cards/ui/export.dart';
+
+import '../models/banklist.dart';
 
 class SharedService {
   static Future<bool> isLoggedIn() async {
@@ -27,6 +30,12 @@ class SharedService {
   static Future<bool> isTxnsSaved() async {
     var isKeyExist = await APICacheManager().isAPICacheKeyExist(
       'txn_list',
+    );
+    return isKeyExist;
+  }
+  static Future<bool> isBanksSaved() async {
+    var isKeyExist = await APICacheManager().isAPICacheKeyExist(
+      'bank_list',
     );
     return isKeyExist;
   }
@@ -59,6 +68,15 @@ class SharedService {
       var cacheData = await APICacheManager().getCacheData('txn_list');
 
       return transactionlistResponseJson(cacheData.syncData);
+    }
+  }
+  static Future<Banklist?> bankList() async {
+    var isKeyExist = await APICacheManager().isAPICacheKeyExist('bank_list');
+
+    if (isKeyExist) {
+      var cacheData = await APICacheManager().getCacheData('bank_list');
+
+      return banklistJson(cacheData.syncData);
     }
   }
 
@@ -101,15 +119,40 @@ class SharedService {
     await APICacheManager().addCacheData(cacheDBModel);
   }
 
-  static Future<void> logout(BuildContext context) async {
-    await APICacheManager().deleteCache(
-      'login_details',
+  static Future<void> setBankList(
+    Banklist model,
+  ) async {
+    APICacheDBModel cacheDBModel = APICacheDBModel(
+      key: 'bank_list',
+      syncData: jsonEncode(
+        model.toJson(),
+      ),
     );
+
+    await APICacheManager().addCacheData(cacheDBModel);
+  }
+
+  static Future<void> softlogout(BuildContext context) async {
     await APICacheManager().deleteCache(
       'card_list',
     );
     await APICacheManager().deleteCache(
       'txn_list',
+    );
+    await APICacheManager().deleteCache(
+      'bank_list',
+    );
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const Loginscreen2(),
+      ),
+    );
+  }
+
+  static Future<void> hardlogout(BuildContext context) async {
+    await APICacheManager().deleteCache(
+      'login_details',
     );
     Navigator.pushReplacement(
       context,
