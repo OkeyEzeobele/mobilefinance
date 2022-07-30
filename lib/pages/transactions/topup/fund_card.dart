@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:o3_cards/pages/dashboard/dashboard.dart';
+import 'package:o3_cards/pages/transactions/topup/amount_foreign.dart';
 import 'package:o3_cards/pages/transactions/topup/amount_naira.dart';
 
 import 'package:o3_cards/ui/export.dart';
@@ -190,14 +191,12 @@ class _FundCardState extends State<FundCard> {
                       ),
                       IconButton(
                         onPressed: () {
-                          // Navigator.pushReplacement(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => TransfertoBank(
-                          //       amount: widget.amount,
-                          //     ),
-                          //   ),
-                          // );
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AmountForeign(id: widget.id,),
+                            ),
+                          );
                         },
                         icon: Icon(
                           Icons.chevron_right_rounded,

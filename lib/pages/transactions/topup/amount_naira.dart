@@ -70,26 +70,23 @@ class _AmountNairaState extends State<AmountNaira> {
           color: FvColors.edittext51Background,
         ),
         child: isAPIcallProcess
-            ? Scaffold(
-                backgroundColor: FvColors.edittext51Background,
-                body: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: SizedBox(
-                        width: widthOfScreen * 0.4,
-                        height: heightOfScreen * 0.2,
-                        child: FittedBox(
-                          child: Image.asset('assets/loadinganimation4.gif'),
-                        ),
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Center(
+                    child: SizedBox(
+                      width: widthOfScreen * 0.4,
+                      height: heightOfScreen * 0.2,
+                      child: FittedBox(
+                        child: Image.asset('assets/loadinganimation4.gif'),
                       ),
-                    )
-                    // const CircularProgressIndicator(
-                    //   color: FvColors.maintheme,
-                    // ),
-                  ],
-                ),
+                    ),
+                  )
+                  // const CircularProgressIndicator(
+                  //   color: FvColors.maintheme,
+                  // ),
+                ],
               )
             : Column(
                 // mainAxisAlignment: MainAxisAlignment.center,
@@ -250,6 +247,7 @@ class _AmountNairaState extends State<AmountNaira> {
                                 TopupRequest model = TopupRequest(
                                   email: _email,
                                   amount: amount!,
+                                  equivalentAmount: amount!,
                                   cardId: widget.id,
                                   currency: 'NGN',
                                 );
@@ -260,7 +258,8 @@ class _AmountNairaState extends State<AmountNaira> {
                                     });
                                     if (response.success) {
                                       final Uri _url = Uri.parse(
-                                          response.payload.authorizationUrl);
+                                        response.payload.authorizationUrl,
+                                      );
                                       void _launchUrl() async {
                                         if (!await launchUrl(_url)) {
                                           FormHelper.showSimpleAlertDialog(
@@ -276,6 +275,16 @@ class _AmountNairaState extends State<AmountNaira> {
                                       }
 
                                       _launchUrl();
+                                    } else {
+                                      FormHelper.showSimpleAlertDialog(
+                                        context,
+                                        '',
+                                        response.message,
+                                        'Ok',
+                                        () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      );
                                     }
 
                                     debugPrint(response.message);
