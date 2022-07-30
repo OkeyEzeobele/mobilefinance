@@ -105,12 +105,12 @@ class _RecenttransactionsState extends State<Recenttransactions> {
                                             MainAxisAlignment.center,
                                         children: <Widget>[
                                           Text(
-                                            (transactions[i].comment != null)
+                                            (transactions[i].narration != null)
                                                 ? transactions[i]
-                                                    .comment
+                                                    .narration
                                                     .toString()
                                                 : transactions[i]
-                                                    .destination
+                                                    .comment
                                                     .toString(),
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
@@ -329,10 +329,10 @@ class _RecenttransactionsState extends State<Recenttransactions> {
                                                             widthOfScreen * 0.35,
                                                         child: Text(
                                                           (transactions[i]
-                                                                      .comment !=
+                                                                      .narration !=
                                                                   null)
                                                               ? transactions[i]
-                                                                  .comment
+                                                                  .narration
                                                                   .toString()
                                                               : transactions[i]
                                                                   .destination
@@ -366,29 +366,29 @@ class _RecenttransactionsState extends State<Recenttransactions> {
                                                     )
                                                   ],
                                                 ),
-                                                DataRow(
-                                                  cells: [
-                                                    DataCell(
-                                                      Text(
-                                                        'Transaction Status',
-                                                        style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    DataCell(
-                                                      SizedBox(
-                                                        width:
-                                                            widthOfScreen * 0.4,
-                                                        child: Text(
-                                                          transactions[i]
-                                                              .status,
-                                                        ),
-                                                      ),
-                                                    )
-                                                  ],
-                                                )
+                                                // DataRow(
+                                                //   cells: [
+                                                //     DataCell(
+                                                //       Text(
+                                                //         'Transaction Status',
+                                                //         style: TextStyle(
+                                                //           fontWeight:
+                                                //               FontWeight.w600,
+                                                //         ),
+                                                //       ),
+                                                //     ),
+                                                //     DataCell(
+                                                //       SizedBox(
+                                                //         width:
+                                                //             widthOfScreen * 0.4,
+                                                //         child: Text(
+                                                //           transactions[i]
+                                                //               .status,
+                                                //         ),
+                                                //       ),
+                                                //     )
+                                                //   ],
+                                                // )
                                               ],
                                             )
                                           ],

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:o3_cards/pages/dashboard/dashboard.dart';
 import 'package:o3_cards/ui/pallete.dart';
 
 class QuickLinks extends StatefulWidget {
@@ -67,7 +68,8 @@ class _QuickLinksState extends State<QuickLinks> {
                                   ),
                                 ),
                                 style: TextButton.styleFrom(
-                                  backgroundColor: FvColors.container166Background
+                                  backgroundColor: FvColors
+                                      .container166Background
                                       .withOpacity(0.8),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15),
@@ -77,7 +79,15 @@ class _QuickLinksState extends State<QuickLinks> {
                                     // ),
                                   ),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          Dashboard(pageIndex: 0),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                             SizedBox.square(
@@ -112,7 +122,8 @@ class _QuickLinksState extends State<QuickLinks> {
                                   ),
                                 ),
                                 style: TextButton.styleFrom(
-                                  backgroundColor: FvColors.container166Background
+                                  backgroundColor: FvColors
+                                      .container166Background
                                       .withOpacity(0.8),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15),
@@ -157,7 +168,8 @@ class _QuickLinksState extends State<QuickLinks> {
                                   ),
                                 ),
                                 style: TextButton.styleFrom(
-                                  backgroundColor: FvColors.container166Background
+                                  backgroundColor: FvColors
+                                      .container166Background
                                       .withOpacity(0.8),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15),
@@ -202,7 +214,8 @@ class _QuickLinksState extends State<QuickLinks> {
                                   ),
                                 ),
                                 style: TextButton.styleFrom(
-                                  backgroundColor: FvColors.container166Background
+                                  backgroundColor: FvColors
+                                      .container166Background
                                       .withOpacity(0.8),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15),

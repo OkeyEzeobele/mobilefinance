@@ -2,9 +2,8 @@
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 import 'package:o3_cards/pages/dashboard/dashboard.dart';
-import 'package:o3_cards/models/loginRequest.dart';
+import 'package:o3_cards/models/login_request.dart';
 import 'package:o3_cards/services/api_service.dart';
 import 'package:o3_cards/ui/export.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -228,7 +227,7 @@ class _LoginscreenState extends State<Loginscreen> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Dashboard(),
+                        builder: (context) => const Dashboard(pageIndex: 2,),
                       ),
                     );
                   } else {

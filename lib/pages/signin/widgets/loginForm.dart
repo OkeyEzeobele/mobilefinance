@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:o3_cards/models/loginRequest.dart';
+import 'package:o3_cards/models/login_request.dart';
 import 'package:o3_cards/services/api_service.dart';
 import 'package:o3_cards/ui/pallete.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';

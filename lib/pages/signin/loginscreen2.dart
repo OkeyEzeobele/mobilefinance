@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors,prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
 import 'package:o3_cards/pages/dashboard/dashboard.dart';
-import 'package:o3_cards/models/loginRequest.dart';
+import 'package:o3_cards/models/login_request.dart';
 import 'package:o3_cards/services/api_service.dart';
 import 'package:o3_cards/ui/export.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -183,7 +183,7 @@ class _Loginscreen2State extends State<Loginscreen2> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Dashboard(),
+                        builder: (context) => const Dashboard(pageIndex: 2,),
                       ),
                     );
                   } else {

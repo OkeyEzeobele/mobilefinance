@@ -1,13 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, file_names
-import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:o3_cards/ui/export.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
-import '../../../models/banklist.dart';
-import '../../../services/api_service.dart';
-import '../../../services/shared_service.dart';
+import '../../../../models/banklist.dart';
+import '../../../../services/api_service.dart';
+import '../../../../services/shared_service.dart';
 
 class BanksModal extends StatefulWidget {
   const BanksModal({Key? key}) : super(key: key);
@@ -105,11 +104,11 @@ class _BanksModalState extends State<BanksModal> {
                           child: ListView.builder(
                             itemCount: banklist!.length,
                             itemBuilder: (context, i) {
-                              var secondletter = banklist[i].bankName.substring(
-                                  banklist[i].bankName.indexOf(' ') + 1)[0];
+                              // var secondletter = banklist[i].bankName.substring(
+                              //     banklist[i].bankName.indexOf(' ') + 1)[0];
                               return GestureDetector(
                                 child: SizedBox(
-                                  height: heightOfScreen * 0.128,
+                                  height: heightOfScreen * 0.1,
                                   width: widthOfScreen,
                                   child: Column(
                                     children: [
@@ -117,7 +116,7 @@ class _BanksModalState extends State<BanksModal> {
                                         height: 15,
                                       ),
                                       SizedBox(
-                                        height: heightOfScreen * 0.11,
+                                        height: heightOfScreen * 0.08,
                                         width: widthOfScreen * 0.8,
                                         child: Card(
                                           shape: RoundedRectangleBorder(
@@ -127,24 +126,24 @@ class _BanksModalState extends State<BanksModal> {
                                           elevation: 5,
                                           child: Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
+                                                MainAxisAlignment.center,
                                             children: [
-                                              CircularProfileAvatar(
-                                                '',
-                                                backgroundColor: Colors.grey,
-                                                initialsText: Text(
-                                                  banklist[i].bankName[0] +
-                                                      secondletter,
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w800),
-                                                ),
-                                                elevation: 2,
-                                                radius: heightOfScreen * 0.04,
-                                              ),
-                                              SizedBox(
-                                                width: widthOfScreen * 0.001,
-                                              ),
+                                              // CircularProfileAvatar(
+                                              //   '',
+                                              //   backgroundColor: Colors.grey,
+                                              //   initialsText: Text(
+                                              //     banklist[i].bankName[0] +
+                                              //         secondletter,
+                                              //     style: TextStyle(
+                                              //         fontWeight:
+                                              //             FontWeight.w800),
+                                              //   ),
+                                              //   elevation: 2,
+                                              //   radius: heightOfScreen * 0.04,
+                                              // ),
+                                              // SizedBox(
+                                              //   width: widthOfScreen * 0.001,
+                                              // ),
                                               SizedBox(
                                                 width: widthOfScreen * 0.5,
                                                 child: Text(

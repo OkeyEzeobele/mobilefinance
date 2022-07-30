@@ -4,7 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '/pages/dashboard/dashboard.dart';
-import '/models/loginRequest.dart';
+import '../../models/login_request.dart';
 import '/services/api_service.dart';
 import '/ui/export.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
@@ -264,7 +264,7 @@ class _SignupscreenState extends State<Signupscreen> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Dashboard(),
+                            builder: (context) => const Dashboard(pageIndex: 2,),
                           ),
                         );
                       } else {

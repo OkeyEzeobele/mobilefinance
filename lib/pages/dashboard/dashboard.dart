@@ -4,20 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:o3_cards/pages/cardList/cardlist.dart';
-import 'package:o3_cards/pages/sendmoney/sendmoney.dart';
+import 'package:o3_cards/pages/transactions/sendmoney/sendmoney.dart';
 import 'package:o3_cards/ui/export.dart';
 
 import '../moreoptions/more.dart';
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({Key? key}) : super(key: key);
+  final int pageIndex;
+  const Dashboard({Key? key, required this.pageIndex}) : super(key: key);
 
   @override
   _DashboardState createState() => _DashboardState();
 }
 
 class _DashboardState extends State<Dashboard> {
-  int _selectedIndex = 2;
+  late int _selectedIndex;
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.pageIndex;
+  }
 
   static const List<Widget> _widgetOptions = <Widget>[
     Sendmoney(),

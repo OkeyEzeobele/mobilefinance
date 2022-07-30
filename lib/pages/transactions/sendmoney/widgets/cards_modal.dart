@@ -5,9 +5,9 @@ import 'package:intl/intl.dart';
 import 'package:o3_cards/ui/export.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
-import '../../../models/cardlistResponse.dart';
-import '../../../services/api_service.dart';
-import '../../../services/shared_service.dart';
+import '../../../../models/cardlistResponse.dart';
+import '../../../../services/api_service.dart';
+import '../../../../services/shared_service.dart';
 
 class CardsModal extends StatefulWidget {
   const CardsModal({Key? key}) : super(key: key);

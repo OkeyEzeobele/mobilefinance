@@ -1,5 +1,3 @@
-// ignore_for_file: file_names
-
 import 'dart:convert';
 
 TransferRequest transferRequestJson(String str) => TransferRequest.fromJson(json.decode(str));
@@ -12,6 +10,7 @@ class TransferRequest {
     required this.cardId,
     required this.cifNumber,
     required this.bankCode,
+    required this.bankName,
     required this.accountNumber,
     required this.narration,
   });
@@ -21,8 +20,9 @@ class TransferRequest {
   late final int cardId;
   late final String cifNumber;
   late final String bankCode;
+  late final String bankName;
   late final String accountNumber;
-  late final dynamic narration;
+  late final String narration;
 
   TransferRequest.fromJson(Map<String, dynamic> json){
     amount = json['amount'];
@@ -31,6 +31,7 @@ class TransferRequest {
     cardId = json['cardId'];
     cifNumber = json['cifNumber'];
     bankCode = json['bankCode'];
+    bankName = json['bankName'];
     accountNumber = json['accountNumber'];
     narration = json['narration'];
   }
@@ -43,6 +44,7 @@ class TransferRequest {
     _data['cardId'] = cardId;
     _data['cifNumber'] = cifNumber;
     _data['bankCode'] = bankCode;
+    _data['bankName'] = bankName;
     _data['accountNumber'] = accountNumber;
     _data['narration'] = narration;
     return _data;

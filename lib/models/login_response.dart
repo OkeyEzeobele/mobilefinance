@@ -15,7 +15,7 @@ class LoginResponse {
   late final Payload? payload;
 
   LoginResponse.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
+    success = json['success'] ?? false;
     message = json['message'];
     payload =
         json['payload'] != null ? Payload.fromJson(json['payload']) : null;

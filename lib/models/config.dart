@@ -10,7 +10,8 @@ class Config {
 
   static const transferAccountResolve = '/api/v1/verify-acct-name';
   static const cifAccountResolve = '/api/v1/verify-cif-number';
-  static const transfer = '/api/v1/request-transfer';
+  // static const transfer = '/api/v1/request-transfer';
+  static const transfer = '/api/v1/request-bud-transfer';
   static const banklist = '/api/v1/get-banks-list';
 
   static const profileCheckRequired = '/api/v1/check-required-info';
@@ -28,8 +29,10 @@ class Config {
   static const fetchBills = '/api/v1/get-bill-categories';
 
   static const requestTopup = '/api/v1/request-topup';
+  static const requestTopupBudpay = '/api/v1/request-topup-budpay';
   static const requestLoanCharge = '/api/v1/request-loanpayment';
   static const transactions = '/api/v1/get-transactions';
+  static const externalTransactions = '/api/v1/save-external-transactions';
 
   static const requestLoan = '/api/v1/request-loan';
   static const requestBill = '/api/v1/request-bill';

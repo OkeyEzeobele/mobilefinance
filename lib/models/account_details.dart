@@ -11,19 +11,20 @@ class AccountDetails {
   });
   late final bool success;
   late final String message;
-  late final Payload payload;
+  late final Payload? payload;
 
   AccountDetails.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
+    success = json['success'] ?? false;
     message = json['message'];
-    payload = Payload.fromJson(json['payload']);
+    payload =
+        json['payload'] != null ? Payload.fromJson(json['payload']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
     _data['success'] = success;
     _data['message'] = message;
-    _data['payload'] = payload.toJson();
+    _data['payload'] = payload!.toJson();
     return _data;
   }
 }
@@ -32,15 +33,15 @@ class Payload {
   Payload({
     required this.details,
   });
-  late final Details details;
+  late final Details? details;
 
   Payload.fromJson(Map<String, dynamic> json) {
-    details = Details.fromJson(json['details']);
+    details = json['details']!=null? Details.fromJson(json['details']):null;
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
-    _data['details'] = details.toJson();
+    _data['details'] = details!.toJson();
     return _data;
   }
 }
@@ -52,10 +53,10 @@ class Details {
     required this.bankCode,
     required this.bankName,
   });
-  late final String accountNumber;
+  late final String? accountNumber;
   late final String accountName;
-  late final String bankCode;
-  late final String bankName;
+  late final String? bankCode;
+  late final String? bankName;
 
   Details.fromJson(Map<String, dynamic> json) {
     accountNumber = json['account_number'];

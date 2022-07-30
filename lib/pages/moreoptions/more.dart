@@ -7,7 +7,6 @@ import 'package:o3_cards/ui/export.dart';
 import '../../services/shared_service.dart';
 import '../../widgets/slider.dart';
 import '../dashboard/dashboard.dart';
-import '../signin/loginscreen2.dart';
 
 class More extends StatefulWidget {
   const More({Key? key}) : super(key: key);
@@ -61,7 +60,7 @@ class _MoreState extends State<More> {
                     Navigator.pushReplacement(
                       context,
                       SlideRightRoute(
-                        page: Dashboard(),
+                        page: Dashboard(pageIndex: 2,),
                       ),
                     );
                   },

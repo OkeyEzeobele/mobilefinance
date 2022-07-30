@@ -5,10 +5,12 @@ import 'package:intl/intl.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:o3_cards/models/cardlistResponse.dart';
-import 'package:o3_cards/pages/cardList/widgets/bottomModal.dart';
+import 'package:o3_cards/pages/transactions/topup/fund_card.dart';
 import 'package:o3_cards/services/api_service.dart';
 import 'package:o3_cards/services/shared_service.dart';
 import 'package:o3_cards/ui/export.dart';
+
+import '../dashboard/dashboard.dart';
 
 class CardList extends StatefulWidget {
   const CardList({Key? key}) : super(key: key);
@@ -284,7 +286,93 @@ class _CardListState extends State<CardList> {
                               ),
                             ),
                             builder: (context) {
-                              return (BottomModal());
+                              return (SizedBox(
+                                height: heightOfScreen * 0.25,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    SizedBox(
+                                      height: heightOfScreen * 0.07,
+                                      width: widthOfScreen * 0.7,
+                                      child: TextButton(
+                                        child: FittedBox(
+                                          fit: BoxFit.fitWidth,
+                                          child: const Text(
+                                            'Fund Card',
+                                            style: TextStyle(
+                                              color: FvColors.offwhite,
+                                              fontWeight: FontWeight.w900,
+                                            ),
+                                          ),
+                                        ),
+                                        style: TextButton.styleFrom(
+                                          backgroundColor: FvColors.maintheme,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                16.31081199645996),
+                                            side: const BorderSide(
+                                              width: 1,
+                                              color: Colors.transparent,
+                                            ),
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => FundCard(
+                                                id: cards[i].id,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    SizedBox(
+                                      height: heightOfScreen * 0.07,
+                                      width: widthOfScreen * 0.7,
+                                      child: TextButton(
+                                        child: FittedBox(
+                                          fit: BoxFit.fitWidth,
+                                          child: const Text(
+                                            'Delete Card',
+                                            style: TextStyle(
+                                              color:
+                                                  FvColors.textview50FontColor,
+                                              fontWeight: FontWeight.w900,
+                                            ),
+                                          ),
+                                        ),
+                                        style: TextButton.styleFrom(
+                                          backgroundColor:
+                                              FvColors.textview79FontColor,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                                16.31081199645996),
+                                            side: const BorderSide(
+                                              width: 1,
+                                              color: Colors.transparent,
+                                            ),
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const Dashboard(pageIndex: 2),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ));
                             },
                           );
                         },

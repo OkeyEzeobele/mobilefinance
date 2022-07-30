@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:o3_cards/ui/pallete.dart';
 // import 'package:o3_cards/pages/dashboard/dashboard.dart';
 import 'pages/splashscreenscreen1/splashscreenscreen1.dart';
 
@@ -26,7 +27,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'O3 Cards',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: FvColors.maintheme
+        ),
+        // primarySwatch: FvColors.maintheme,
       ),
       // routes:{
       //   '/dashboard':(context)=> const Dashboard(),

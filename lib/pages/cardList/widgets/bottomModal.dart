@@ -52,7 +52,7 @@ class _BottomModalState extends State<BottomModal> {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const Dashboard(),
+                    builder: (context) => const Dashboard(pageIndex: 2,),
                   ),
                 );
               },
@@ -90,7 +90,7 @@ class _BottomModalState extends State<BottomModal> {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const Dashboard(),
+                    builder: (context) => const Dashboard(pageIndex: 2,),
                   ),
                 );
               },

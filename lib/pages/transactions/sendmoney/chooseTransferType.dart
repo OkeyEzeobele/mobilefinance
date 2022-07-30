@@ -2,11 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:o3_cards/pages/dashboard/dashboard.dart';
-import 'package:o3_cards/pages/sendmoney/transferTobank.dart';
+import 'package:o3_cards/pages/transactions/sendmoney/transferTobank.dart';
 
 import 'package:o3_cards/ui/export.dart';
 
-import '../../widgets/slider.dart';
+import '../../../widgets/slider.dart';
 
 class TransferType extends StatefulWidget {
   final String amount;
@@ -46,7 +46,7 @@ class _TransferTypeState extends State<TransferType> {
                     Navigator.pushReplacement(
                       context,
                       SlideRightRoute(
-                        page: Dashboard(),
+                        page: Dashboard(pageIndex: 0,),
                       ),
                     );
                   },
@@ -88,6 +88,7 @@ class _TransferTypeState extends State<TransferType> {
                           backgroundColor: FvColors.offwhitepink,
                           child: FaIcon(
                             FontAwesomeIcons.buildingColumns,
+                            color: FvColors.maintheme,
                           ),
                         ),
                       ),
