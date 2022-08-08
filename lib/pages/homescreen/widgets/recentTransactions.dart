@@ -294,19 +294,21 @@ class _RecenttransactionsState extends State<Recenttransactions> {
                                                     ),
                                                     DataCell(
                                                       SizedBox(
-                                                        width: widthOfScreen * 0.35,
+                                                        width: widthOfScreen *
+                                                            0.35,
                                                         child: Text(
                                                           DateFormat.yMMMEd()
                                                               .add_jm()
                                                               .format(
                                                                 DateTime.parse(
-                                                                  transactions[i]
+                                                                  transactions[
+                                                                          i]
                                                                       .createdAt,
                                                                 ),
                                                               )
                                                               .toString(),
-                                                               overflow: TextOverflow
-                                                                .visible,
+                                                          overflow: TextOverflow
+                                                              .visible,
                                                         ),
                                                       ),
                                                     )
@@ -325,8 +327,8 @@ class _RecenttransactionsState extends State<Recenttransactions> {
                                                     ),
                                                     DataCell(
                                                       SizedBox(
-                                                        width:
-                                                            widthOfScreen * 0.35,
+                                                        width: widthOfScreen *
+                                                            0.35,
                                                         child: Text(
                                                           (transactions[i]
                                                                       .narration !=
@@ -335,10 +337,9 @@ class _RecenttransactionsState extends State<Recenttransactions> {
                                                                   .narration
                                                                   .toString()
                                                               : transactions[i]
-                                                                  .destination
+                                                                  .comment
                                                                   .toString(),
-                                                          overflow: TextOverflow
-                                                              .visible,
+                                                          overflow: TextOverflow.visible,
                                                         ),
                                                       ),
                                                     )

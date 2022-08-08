@@ -6,8 +6,10 @@ import 'package:o3_cards/models/account_details.dart';
 import 'package:o3_cards/models/banklist.dart';
 import 'package:o3_cards/models/cardlistResponse.dart';
 import 'package:o3_cards/models/config.dart';
+import 'package:o3_cards/models/exchange_rates.dart';
 import 'package:o3_cards/models/login_request.dart';
 import 'package:o3_cards/models/login_response.dart';
+import 'package:o3_cards/models/rate_request.dart';
 import 'package:o3_cards/models/request_account_details.dart';
 import 'package:o3_cards/services/shared_service.dart';
 
@@ -219,5 +221,26 @@ class APIService {
       ),
     );
     return topupResponseJson(response.body);
+  }
+
+  static Future<ExchangeRates> rates(
+    RateRequest model
+  ) async {
+    var loginDetails = await SharedService.loginDetails();
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'token': '${loginDetails!.payload!.token}'
+    };
+
+    var url = Uri.http(Config.baseUrl, Config.getRates);
+
+    var response = await client.post(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode(
+        model.toJson(),
+      ),
+    );
+    return exchangeRatesJson(response.body);
   }
 }

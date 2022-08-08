@@ -1,13 +1,14 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:o3_cards/models/exchange_rates.dart';
 import 'package:o3_cards/models/topup_request.dart';
 import 'package:o3_cards/pages/transactions/topup/fund_card.dart';
-import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:o3_cards/services/api_service.dart';
 import 'package:o3_cards/services/shared_service.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../models/rate_request.dart';
 import '../../../widgets/slider.dart';
 import '/ui/export.dart';
 // import 'package:intl/intl.dart';
@@ -38,8 +39,8 @@ class _AmountForeignState extends State<AmountForeign> {
 
   String selectedCurrency = '';
 
-  int usdRate = 700;
-  int gbpRate = 750;
+  int usdRate = 710;
+  int gbpRate = 758;
   String convertedAmount = '0.00';
   bool isAPIcallProcess = false;
   final _formKey = GlobalKey<FormState>();
@@ -94,23 +95,17 @@ class _AmountForeignState extends State<AmountForeign> {
                     convertedAmount = 'Please wait...';
                   });
 
-                  if (selectedCurrency == 'USD') {
-                    var amountInt = int.parse(amount!);
-                    int finalAmount = amountInt * usdRate;
-                    setState(() {
-                      convertedAmount = finalAmount.toString();
-                    });
-                  } else if (selectedCurrency == 'GBP') {
-                    var amountInt = int.parse(amount!);
-                    int finalAmount = amountInt * gbpRate;
-                    setState(() {
-                      convertedAmount = finalAmount.toString();
-                    });
-                  } else {
-                    setState(() {
-                      convertedAmount == 'Please Select Currency';
-                    });
-                  }
+                  RateRequest model = RateRequest(currency: selectedCurrency);
+                  APIService.rates(model).then((response) {
+                    if (response.success) {
+                      var equivalentAmountInt =
+                          response.payload.rate * int.parse(amount!);
+                      var finalAmount = equivalentAmountInt.toString();
+                      setState(() {
+                        convertedAmount = finalAmount;
+                      });
+                    }
+                  });
                 }
               },
               child: Scaffold(
@@ -231,30 +226,20 @@ class _AmountForeignState extends State<AmountForeign> {
                                     selectedCurrency = value!;
                                   });
                                   if (amount!.isNotEmpty) {
-                                    setState(() {
-                                      convertedAmount = 'Please wait...';
+                                    RateRequest model =
+                                        RateRequest(currency: selectedCurrency);
+                                    APIService.rates(model).then((response) {
+                                      if (response.success) {
+                                        var equivalentAmountInt =
+                                            response.payload.rate *
+                                                int.parse(amount!);
+                                        var finalAmount =
+                                            equivalentAmountInt.toString();
+                                        setState(() {
+                                          convertedAmount = finalAmount;
+                                        });
+                                      }
                                     });
-
-                                    if (selectedCurrency == 'USD') {
-                                      var amountInt = int.parse(amount!);
-                                      int finalAmount = amountInt * usdRate;
-                                      setState(() {
-                                        convertedAmount =
-                                            finalAmount.toString();
-                                      });
-                                    } else if (selectedCurrency == 'GBP') {
-                                      var amountInt = int.parse(amount!);
-                                      int finalAmount = amountInt * gbpRate;
-                                      setState(() {
-                                        convertedAmount =
-                                            finalAmount.toString();
-                                      });
-                                    } else {
-                                      setState(() {
-                                        convertedAmount ==
-                                            'Please Select Currency';
-                                      });
-                                    }
                                   }
                                 },
                               ),
@@ -425,7 +410,6 @@ class _AmountForeignState extends State<AmountForeign> {
                                   TopupRequest model = TopupRequest(
                                     email: _email,
                                     amount: amount!,
-                                    equivalentAmount: convertedAmount,
                                     cardId: widget.id,
                                     currency: selectedCurrency,
                                   );
@@ -486,5 +470,12 @@ class _AmountForeignState extends State<AmountForeign> {
     var userDetails = await SharedService.loginDetails();
     var email = userDetails!.payload!.user!.email;
     return email;
+  }
+
+  Future getExchangeRate() async {
+    RateRequest model = RateRequest(currency: selectedCurrency);
+    ExchangeRates rateResponse = await APIService.rates(model);
+    int rate = rateResponse.payload.rate;
+    return rate;
   }
 }

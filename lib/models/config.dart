@@ -30,6 +30,7 @@ class Config {
 
   static const requestTopup = '/api/v1/request-topup';
   static const requestTopupBudpay = '/api/v1/request-topup-budpay';
+  static const getRates = '/api/v1/get-exchange-rate';
   static const requestLoanCharge = '/api/v1/request-loanpayment';
   static const transactions = '/api/v1/get-transactions';
   static const externalTransactions = '/api/v1/save-external-transactions';

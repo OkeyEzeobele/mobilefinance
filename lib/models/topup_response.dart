@@ -14,7 +14,7 @@ class TopupResponse {
   late final Payload payload;
 
   TopupResponse.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
+    success = json['success'] ?? false;
     message = json['message'];
     payload = Payload.fromJson(json['payload']);
   }

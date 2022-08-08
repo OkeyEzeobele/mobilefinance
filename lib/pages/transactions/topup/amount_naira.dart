@@ -247,7 +247,6 @@ class _AmountNairaState extends State<AmountNaira> {
                                 TopupRequest model = TopupRequest(
                                   email: _email,
                                   amount: amount!,
-                                  equivalentAmount: amount!,
                                   cardId: widget.id,
                                   currency: 'NGN',
                                 );
