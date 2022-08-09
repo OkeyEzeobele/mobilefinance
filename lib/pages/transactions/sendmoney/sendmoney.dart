@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
-import 'package:o3_cards/pages/transactions/sendmoney/chooseTransferType.dart';
+import 'package:o3_cards/pages/transactions/sendmoney/choose_transfer_type.dart';
 import '/ui/export.dart';
 import '/widgets/numpad.dart';
 // import 'package:intl/intl.dart';

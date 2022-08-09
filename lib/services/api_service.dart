@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:o3_cards/models/account_details.dart';
 import 'package:o3_cards/models/banklist.dart';
-import 'package:o3_cards/models/cardlistResponse.dart';
+import 'package:o3_cards/models/cardlist.dart';
 import 'package:o3_cards/models/config.dart';
 import 'package:o3_cards/models/exchange_rates.dart';
 import 'package:o3_cards/models/login_request.dart';

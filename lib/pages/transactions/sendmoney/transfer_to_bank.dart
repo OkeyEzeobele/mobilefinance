@@ -13,7 +13,7 @@ import '/models/request_account_details.dart';
 import '../../cardList/cardlist.dart';
 import 'widgets/banks_modal.dart';
 import 'widgets/cards_modal.dart';
-import '../sendmoney/chooseTransferType.dart';
+import 'choose_transfer_type.dart';
 import '/services/api_service.dart';
 import '/../ui/export.dart';
 import '../../../widgets/slider.dart';

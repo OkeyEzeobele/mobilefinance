@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:o3_cards/ui/pallete.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
 import 'package:progress_indicators/progress_indicators.dart';
-import '../../../models/cardlistResponse.dart';
+import '../../../models/cardlist.dart';
 import '../../../services/api_service.dart';
 import '../../../services/shared_service.dart';
 

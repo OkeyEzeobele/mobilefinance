@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:o3_cards/ui/export.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
-import '../../../../models/cardlistResponse.dart';
+import '../../../../models/cardlist.dart';
 import '../../../../services/api_service.dart';
 import '../../../../services/shared_service.dart';
 

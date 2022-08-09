@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:o3_cards/pages/dashboard/dashboard.dart';
-import 'package:o3_cards/pages/transactions/sendmoney/transferTobank.dart';
+import 'package:o3_cards/pages/transactions/sendmoney/transfer_to_bank.dart';
 
 import 'package:o3_cards/ui/export.dart';
 

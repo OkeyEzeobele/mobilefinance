@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:o3_cards/models/cardlistResponse.dart';
+import 'package:o3_cards/models/cardlist.dart';
 import 'package:o3_cards/pages/transactions/topup/fund_card.dart';
 import 'package:o3_cards/services/api_service.dart';
 import 'package:o3_cards/services/shared_service.dart';

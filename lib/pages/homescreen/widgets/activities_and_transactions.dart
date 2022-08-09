@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_declarations, file_names, prefer_const_constructors
 import 'package:flutter/material.dart';
-import 'package:o3_cards/pages/homescreen/widgets/activitiesBody.dart';
-import 'package:o3_cards/pages/homescreen/widgets/recentTransactions.dart';
+import 'package:o3_cards/pages/homescreen/widgets/activities_body.dart';
+import 'package:o3_cards/pages/homescreen/widgets/recent_transactions.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:o3_cards/ui/export.dart';
 

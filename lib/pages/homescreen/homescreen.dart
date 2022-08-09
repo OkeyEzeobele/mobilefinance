@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
 import 'package:o3_cards/pages/homescreen/widgets/greeting.dart';
-import 'package:o3_cards/pages/homescreen/widgets/quickLinks.dart';
+import 'package:o3_cards/pages/homescreen/widgets/quick_links.dart';
 import 'package:o3_cards/ui/export.dart';
 
 class Homescreen extends StatefulWidget {
