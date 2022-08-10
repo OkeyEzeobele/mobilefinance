@@ -1,5 +1,3 @@
-// ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
 
 import 'package:o3_cards/models/login_request.dart';

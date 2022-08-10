@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:o3_cards/models/cardlist.dart';
+import 'package:o3_cards/pages/creditCardApplication/select_card_type.dart';
 import 'package:o3_cards/pages/transactions/topup/fund_card.dart';
 import 'package:o3_cards/services/api_service.dart';
 import 'package:o3_cards/services/shared_service.dart';
@@ -103,7 +104,7 @@ class _CardListState extends State<CardList> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Loginscreen(),
+                                builder: (context) => CardType(),
                               ),
                             );
                           },

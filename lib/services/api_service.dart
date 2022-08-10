@@ -15,7 +15,7 @@ import 'package:o3_cards/services/shared_service.dart';
 
 import '../models/topup_request.dart';
 import '../models/topup_response.dart';
-import '../models/transactionListResponse.dart';
+import '../models/transaction_list_response.dart';
 import '../models/transfer_request.dart';
 import '../models/transfer_response.dart';
 

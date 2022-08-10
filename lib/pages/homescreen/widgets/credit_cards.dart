@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, prefer_const_constructors,prefer_const_literals_to_create_immutables,, unnecessary_null_comparison
+// ignore_for_file: prefer_const_constructors,prefer_const_literals_to_create_immutables,, unnecessary_null_comparison
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -79,6 +79,7 @@ class _CreditCardsState extends State<CreditCards> {
               }
               _buildCircleIndicator() {
                 return Positioned(
+                  top: 215,
                   left: 0.0,
                   right: 0.0,
                   bottom: 0.0,

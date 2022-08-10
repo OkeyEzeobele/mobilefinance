@@ -7,7 +7,7 @@ import 'package:api_cache_manager/utils/cache_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:o3_cards/models/cardlist.dart';
 import 'package:o3_cards/models/login_response.dart';
-import 'package:o3_cards/models/transactionListResponse.dart';
+import 'package:o3_cards/models/transaction_list_response.dart';
 import 'package:o3_cards/pages/signin/loginscreen2.dart';
 import 'package:o3_cards/ui/export.dart';
 

@@ -51,6 +51,11 @@ flutter:
       - assets/CapitalLogoSoloIcon_ImageView_7-1596x1824.png
       - assets/card_prestige.png
       - assets/card_classic.png
+      - assets/classic_card.jpg
+      - assets/card_prestige_ptr.png
+      - assets/cardimgplatinum_ptr.png
+      - assets/cardimgprepaid_ptr.png
+      - assets/classic_card_Ptr.jpg
       - assets/CapitalLogoIcon_ImageView_46-190x110.png
       - assets/1vrfyidentity.png
       - assets/onboardbgrd.png

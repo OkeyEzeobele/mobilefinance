@@ -1,7 +1,7 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, file_names
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:o3_cards/models/transactionListResponse.dart';
+import 'package:o3_cards/models/transaction_list_response.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:o3_cards/ui/pallete.dart';
 

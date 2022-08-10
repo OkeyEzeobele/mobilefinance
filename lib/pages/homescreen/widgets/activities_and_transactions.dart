@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_declarations, file_names, prefer_const_constructors
+// ignore_for_file: prefer_const_declarations, prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:o3_cards/pages/homescreen/widgets/activities_body.dart';
 import 'package:o3_cards/pages/homescreen/widgets/recent_transactions.dart';

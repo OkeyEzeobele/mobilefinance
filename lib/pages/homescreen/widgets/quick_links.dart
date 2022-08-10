@@ -1,8 +1,9 @@
-// ignore_for_file: file_names, prefer_const_constructors
+// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:o3_cards/pages/creditCardApplication/select_card_type.dart';
 import 'package:o3_cards/pages/dashboard/dashboard.dart';
 import 'package:o3_cards/ui/pallete.dart';
 
@@ -179,7 +180,15 @@ class _QuickLinksState extends State<QuickLinks> {
                                     // ),
                                   ),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                   Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          CardType(),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                             SizedBox.square(
@@ -189,7 +198,7 @@ class _QuickLinksState extends State<QuickLinks> {
                               height: heightOfScreen * 0.015,
                               child: FittedBox(
                                 child: Text(
-                                  "Fund O3 Card",
+                                  "Get an O3 Card",
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                     color: Colors.black,
@@ -225,7 +234,9 @@ class _QuickLinksState extends State<QuickLinks> {
                                     // ),
                                   ),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                 
+                                },
                               ),
                             ),
                             SizedBox.square(
