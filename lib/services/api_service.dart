@@ -13,6 +13,8 @@ import 'package:o3_cards/models/rate_request.dart';
 import 'package:o3_cards/models/request_account_details.dart';
 import 'package:o3_cards/services/shared_service.dart';
 
+import '../models/signup_request.dart';
+import '../models/signup_response.dart';
 import '../models/topup_request.dart';
 import '../models/topup_response.dart';
 import '../models/transaction_list_response.dart';
@@ -21,6 +23,25 @@ import '../models/transfer_response.dart';
 
 class APIService {
   static var client = http.Client();
+
+  static Future<SignupResponse> signup(
+    SignupRequest model,
+  ) async {
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+    };
+
+    var url = Uri.http(Config.baseUrl, Config.authRegister);
+
+    var response = await client.post(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode(
+        model.toJson(),
+      ),
+    );
+    return signupResponseJson(response.body);
+  }
 
   static Future<LoginResponse> login(
     LoginRequest model,
