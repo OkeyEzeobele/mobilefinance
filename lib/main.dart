@@ -4,15 +4,18 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:o3_cards/ui/pallete.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 // import 'package:o3_cards/pages/dashboard/dashboard.dart';
 import 'pages/splashscreenscreen1/splashscreenscreen1.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  ByteData data =
-      await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
-  SecurityContext.defaultContext
-      .setTrustedCertificatesBytes(data.buffer.asUint8List());
+  // ByteData data = await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
+  // SecurityContext.defaultContext.setTrustedCertificatesBytes(data.buffer.asUint8List());
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     const MyApp(),
   );
@@ -27,9 +30,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'O3 Cards',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: FvColors.maintheme
-        ),
+        colorScheme:
+            ColorScheme.fromSwatch().copyWith(primary: FvColors.maintheme),
         // primarySwatch: FvColors.maintheme,
       ),
       // routes:{

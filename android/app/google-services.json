@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "985888370081",
+    "project_id": "o3cards-17a2c",
+    "storage_bucket": "o3cards-17a2c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:985888370081:android:e9e1c8cbe9ca059c77afe0",
+        "android_client_info": {
+          "package_name": "com.o3capital.o3cards"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "985888370081-k9nctlkti7pimhc4kr1ighbur683kghr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAw-X-izAas2CyhwB295HwU3UHBEbL_350"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "985888370081-k9nctlkti7pimhc4kr1ighbur683kghr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "985888370081-1b9s5uuh03h1jjfbigpko12qccvd8pdg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.O3cards"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
