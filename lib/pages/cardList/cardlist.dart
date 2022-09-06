@@ -151,10 +151,9 @@ class _CardListState extends State<CardList> {
                       String _setImage() {
                         if (cards[i].type == 'prepaid') {
                           return 'assets/cardimgprepaid.png';
-                        } else if (cards[i]
-                            .orderLabel
-                            .toString()
-                            .contains('Platinum')) {
+                        } else if (cards[i].orderLabel.toString().contains(
+                              'Platinum',
+                            )) {
                           return 'assets/cardimgplatinum.png';
                         }
                         return 'assets/cardimgbusinesscredit.png';

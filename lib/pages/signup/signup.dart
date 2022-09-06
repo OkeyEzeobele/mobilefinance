@@ -593,179 +593,193 @@ class _SignupscreenState extends State<Signupscreen> {
               height: heightOfScreen * 0.01,
             ),
             SizedBox(
-              width: widthOfScreen * 0.8,
-              child: Row(
+              width: widthOfScreen ,
+              child: Column(
                 children: [
-                  AnimatedContainer(
-                    duration: Duration(milliseconds: 500),
-                    width: 12,
-                    height: 12,
-                    decoration: BoxDecoration(
-                      border: has8char
-                          ? Border.all(color: Colors.transparent)
-                          : Border.all(color: Colors.grey.shade400),
-                      borderRadius: BorderRadius.circular(50),
-                      color: has8char ? Colors.green : FvColors.offwhite,
-                    ),
-                    child: Center(
-                      child: Icon(
-                        Icons.check,
-                        color: FvColors.offwhite,
-                        size: 10,
-                      ),
+                  SizedBox(
+                    width: widthOfScreen * 0.8,
+                    child: Row(
+                      children: [
+                        AnimatedContainer(
+                          duration: Duration(milliseconds: 500),
+                          width: 12,
+                          height: 12,
+                          decoration: BoxDecoration(
+                            border: has8char
+                                ? Border.all(color: Colors.transparent)
+                                : Border.all(color: Colors.grey.shade400),
+                            borderRadius: BorderRadius.circular(50),
+                            color: has8char ? Colors.green : FvColors.offwhite,
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.check,
+                              color: FvColors.offwhite,
+                              size: 10,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Contains at least 8 characters',
+                          style: TextStyle(color: Colors.grey.shade400),
+                        )
+                      ],
                     ),
                   ),
                   SizedBox(
-                    width: 10,
+                    height: 10,
                   ),
-                  Text(
-                    'Contains at least 8 characters',
-                    style: TextStyle(color: Colors.grey.shade400),
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              width: widthOfScreen * 0.8,
-              child: Row(
-                children: [
-                  AnimatedContainer(
-                    duration: Duration(milliseconds: 500),
-                    width: 12,
-                    height: 12,
-                    decoration: BoxDecoration(
-                      border: hasnumber
-                          ? Border.all(color: Colors.transparent)
-                          : Border.all(color: Colors.grey.shade400),
-                      borderRadius: BorderRadius.circular(50),
-                      color: hasnumber ? Colors.green : FvColors.offwhite,
-                    ),
-                    child: Center(
-                      child: Icon(
-                        Icons.check,
-                        color: FvColors.offwhite,
-                        size: 10,
-                      ),
+                  SizedBox(
+                    width: widthOfScreen * 0.8,
+                    child: Row(
+                      children: [
+                        AnimatedContainer(
+                          duration: Duration(milliseconds: 500),
+                          width: 12,
+                          height: 12,
+                          decoration: BoxDecoration(
+                            border: hasnumber
+                                ? Border.all(color: Colors.transparent)
+                                : Border.all(color: Colors.grey.shade400),
+                            borderRadius: BorderRadius.circular(50),
+                            color: hasnumber ? Colors.green : FvColors.offwhite,
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.check,
+                              color: FvColors.offwhite,
+                              size: 10,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Contains at least 1 number',
+                          style: TextStyle(color: Colors.grey.shade400),
+                        )
+                      ],
                     ),
                   ),
                   SizedBox(
-                    width: 10,
+                    height: 10,
                   ),
-                  Text(
-                    'Contains at least 1 number',
-                    style: TextStyle(color: Colors.grey.shade400),
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              width: widthOfScreen * 0.8,
-              child: Row(
-                children: [
-                  AnimatedContainer(
-                    duration: Duration(milliseconds: 500),
-                    width: 12,
-                    height: 12,
-                    decoration: BoxDecoration(
-                      border: hasUpperCase
-                          ? Border.all(color: Colors.transparent)
-                          : Border.all(color: Colors.grey.shade400),
-                      borderRadius: BorderRadius.circular(50),
-                      color: hasUpperCase ? Colors.green : FvColors.offwhite,
-                    ),
-                    child: Center(
-                      child: Icon(
-                        Icons.check,
-                        color: FvColors.offwhite,
-                        size: 10,
-                      ),
+                  SizedBox(
+                    width: widthOfScreen * 0.8,
+                    child: Row(
+                      children: [
+                        AnimatedContainer(
+                          duration: Duration(milliseconds: 500),
+                          width: 12,
+                          height: 12,
+                          decoration: BoxDecoration(
+                            border: hasUpperCase
+                                ? Border.all(color: Colors.transparent)
+                                : Border.all(color: Colors.grey.shade400),
+                            borderRadius: BorderRadius.circular(50),
+                            color:
+                                hasUpperCase ? Colors.green : FvColors.offwhite,
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.check,
+                              color: FvColors.offwhite,
+                              size: 10,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        FittedBox(
+                          fit: BoxFit.contain,
+                          child: Text(
+                            'Contains at least 1 uppercase letter',
+                            style: TextStyle(color: Colors.grey.shade400),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                   SizedBox(
-                    width: 10,
+                    height: 10,
                   ),
-                  Text(
-                    'Contains at least 1 uppercase letter',
-                    style: TextStyle(color: Colors.grey.shade400),
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              width: widthOfScreen * 0.8,
-              child: Row(
-                children: [
-                  AnimatedContainer(
-                    duration: Duration(milliseconds: 500),
-                    width: 12,
-                    height: 12,
-                    decoration: BoxDecoration(
-                      border: hasLowerCase
-                          ? Border.all(color: Colors.transparent)
-                          : Border.all(color: Colors.grey.shade400),
-                      borderRadius: BorderRadius.circular(50),
-                      color: hasLowerCase ? Colors.green : FvColors.offwhite,
-                    ),
-                    child: Center(
-                      child: Icon(
-                        Icons.check,
-                        color: FvColors.offwhite,
-                        size: 10,
-                      ),
+                  SizedBox(
+                    width: widthOfScreen * 0.8,
+                    child: Row(
+                      children: [
+                        AnimatedContainer(
+                          duration: Duration(milliseconds: 500),
+                          width: 12,
+                          height: 12,
+                          decoration: BoxDecoration(
+                            border: hasLowerCase
+                                ? Border.all(color: Colors.transparent)
+                                : Border.all(color: Colors.grey.shade400),
+                            borderRadius: BorderRadius.circular(50),
+                            color:
+                                hasLowerCase ? Colors.green : FvColors.offwhite,
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.check,
+                              color: FvColors.offwhite,
+                              size: 10,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Contains at least 1 lowercase letter',
+                          style: TextStyle(color: Colors.grey.shade400),
+                        )
+                      ],
                     ),
                   ),
                   SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    'Contains at least 1 lowercase letter',
-                    style: TextStyle(color: Colors.grey.shade400),
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              width: widthOfScreen * 0.8,
-              child: Row(
-                children: [
-                  AnimatedContainer(
-                    duration: Duration(milliseconds: 500),
-                    width: 12,
-                    height: 12,
-                    decoration: BoxDecoration(
-                      border: hasSpecialChar
-                          ? Border.all(color: Colors.transparent)
-                          : Border.all(color: Colors.grey.shade400),
-                      borderRadius: BorderRadius.circular(50),
-                      color: hasSpecialChar ? Colors.green : FvColors.offwhite,
-                    ),
-                    child: Center(
-                      child: Icon(
-                        Icons.check,
-                        color: FvColors.offwhite,
-                        size: 10,
-                      ),
-                    ),
+                    height: 10,
                   ),
                   SizedBox(
-                    width: 10,
+                    width: widthOfScreen * 0.8,
+                    child: Row(
+                      children: [
+                        AnimatedContainer(
+                          duration: Duration(milliseconds: 500),
+                          width: 12,
+                          height: 12,
+                          decoration: BoxDecoration(
+                            border: hasSpecialChar
+                                ? Border.all(color: Colors.transparent)
+                                : Border.all(color: Colors.grey.shade400),
+                            borderRadius: BorderRadius.circular(50),
+                            color: hasSpecialChar
+                                ? Colors.green
+                                : FvColors.offwhite,
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.check,
+                              color: FvColors.offwhite,
+                              size: 10,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Contains at least 1 special character',
+                          style: TextStyle(color: Colors.grey.shade400),
+                        )
+                      ],
+                    ),
                   ),
-                  Text(
-                    'Contains at least 1 special character',
-                    style: TextStyle(color: Colors.grey.shade400),
-                  )
                 ],
               ),
             ),

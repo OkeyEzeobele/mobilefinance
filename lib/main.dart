@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       // routes:{
       //   '/dashboard':(context)=> const Dashboard(),
       // },
-      // debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       home: const Splashscreenscreen1(),
     );
   }

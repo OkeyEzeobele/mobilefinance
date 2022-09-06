@@ -32,28 +32,28 @@ class _CardTypeState extends State<CardType> {
         productCode: 100,
         productType: 'credit',
         productDescription:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet massa vitae tortor condimentum lacinia quis vel. Nisi scelerisque eu ultrices vitae auctor eu augue.',
-      ),
-      Cards(
-        productName: "Prestige Card",
-        productCode: 110,
-        productType: 'credit',
-        productDescription:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet massa vitae tortor condimentum lacinia quis vel. Nisi scelerisque eu ultrices vitae auctor eu augue.',
+            'This card of convenience is perfect for lower income households who are just beginning to build a line of credit. Join THE O3 WORLD with our CLASSIC credit card. You can upgrade or increase your limit when you are ready.',
       ),
       Cards(
         productName: "Platinum Card",
         productCode: 105,
         productType: 'credit',
         productDescription:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet massa vitae tortor condimentum lacinia quis vel. Nisi scelerisque eu ultrices vitae auctor eu augue.',
+            'Level up with our O3 Platinum card. Like the precious metal it’s made from, the O3 platinum card is perfect for a working professional on the go with little precious moments to spare. Discover a new level of financial freedom with the maximum limit of 1,000,000 that the O3 platinum card allows. Join THE O3 WORLD with our platinum verve card. You can upgrade or increase your limit when you are ready.',
+      ),
+      Cards(
+        productName: "Prestige Card",
+        productCode: 110,
+        productType: 'credit',
+        productDescription:
+            'Nurture your family with the O3 prestige card. Its maximum limit of 1,500,000 is perfect for the unexpectedness of everyday domestic life. Anticipate the unexpected and take care of your boisterous, happy family with O3. Join THE O3 WORLD with our platinum verve card. You can upgrade or increase your limit when you are ready.',
       ),
       Cards(
         productName: "Prepaid Card",
         productCode: 101,
         productType: 'debit',
         productDescription:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet massa vitae tortor condimentum lacinia quis vel. Nisi scelerisque eu ultrices vitae auctor eu augue.',
+            'Are you a student or someone on a strict budget? The O3 prepaid card might just be for you. A prepaid card is much like a gift card: It allows you to spend whatever amount of money is stored on the card. Once the balance is used up, you can reload the card right here on the app!',
       )
     ];
     double marginFromSafeArea = 24;
@@ -149,14 +149,37 @@ class _CardTypeState extends State<CardType> {
 
                 _setIcon() {
                   if (cards[i].productCode == productId) {
-                    return Icon(
-                      Icons.check_circle_rounded,
-                      color: Colors.green,
+                    return Container(
+                      width: 12,
+                      height: 12,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.transparent),
+                          borderRadius: BorderRadius.circular(50),
+                          color: Colors.green),
+                      child: Center(
+                        child: Icon(
+                          Icons.check,
+                          color: FvColors.offwhite,
+                          size: 10,
+                        ),
+                      ),
                     );
                   } else {
-                    return Icon(
-                      Icons.check_circle_rounded,
-                      color: Colors.green.withOpacity(0),
+                    return Container(
+                      width: 12,
+                      height: 12,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey.shade400),
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.transparent,
+                      ),
+                      child: Center(
+                        child: Icon(
+                          Icons.check,
+                          color: Colors.transparent,
+                          size: 10,
+                        ),
+                      ),
                     );
                   }
                 }
@@ -209,6 +232,7 @@ class _CardTypeState extends State<CardType> {
                         ),
                       ),
                       builder: (context) {
+                        var data = cards[i];
                         return (SizedBox(
                           height: heightOfScreen * 0.4,
                           child: Column(
@@ -221,7 +245,7 @@ class _CardTypeState extends State<CardType> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      cards[i].productName,
+                                      data.productName,
                                       style: TextStyle(
                                         fontWeight: FontWeight.w900,
                                         color: FvColors.textview50FontColor,
@@ -232,9 +256,9 @@ class _CardTypeState extends State<CardType> {
                                       height: heightOfScreen * 0.02,
                                     ),
                                     Text(
-                                      cards[i].productDescription,
+                                      data.productDescription,
                                       style: TextStyle(
-                                        fontWeight: FontWeight.w600,
+                                        fontWeight: FontWeight.w500,
                                         color: FvColors.textview50FontColor,
                                       ),
                                     ),
@@ -268,9 +292,9 @@ class _CardTypeState extends State<CardType> {
                                   ),
                                   onPressed: () {
                                     setState(() {
-                                      cardName = cards[i].productName;
-                                      cardType = cards[i].productType;
-                                      productId = cards[i].productCode;
+                                      cardName = data.productName;
+                                      cardType = data.productType;
+                                      productId = data.productCode;
                                     });
                                     Navigator.pop(context);
                                   },
