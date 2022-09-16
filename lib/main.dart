@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:o3_cards/ui/pallete.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -16,6 +17,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await dotenv.load(fileName: ".env");
   runApp(
     const MyApp(),
   );
@@ -30,8 +32,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'O3 Cards',
       theme: ThemeData(
-        colorScheme:
-            ColorScheme.fromSwatch().copyWith(primary: FvColors.maintheme),
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: FvColors.maintheme,
+        ),
         // primarySwatch: FvColors.maintheme,
       ),
       // routes:{
