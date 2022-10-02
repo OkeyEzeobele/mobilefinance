@@ -16,6 +16,7 @@ class _HomescreenState extends State<Homescreen> {
   Widget build(BuildContext context) {
     var widthOfScreen = MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: FvColors.edittext51Background,
       body: Column(
         children: [

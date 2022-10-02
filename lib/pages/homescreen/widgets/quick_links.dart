@@ -26,8 +26,8 @@ class _QuickLinksState extends State<QuickLinks> {
     var heightOfScreen =
         MediaQuery.of(context).size.height - marginFromSafeArea;
     var widthOfScreen = MediaQuery.of(context).size.width;
-    debugPrint('Screen Height: $heightOfScreen');
-    debugPrint('Screen Width: $widthOfScreen');
+    // debugPrint('Screen Height: $heightOfScreen');
+    // debugPrint('Screen Width: $widthOfScreen');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [

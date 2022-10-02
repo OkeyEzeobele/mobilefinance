@@ -6,13 +6,21 @@ import 'package:o3_cards/models/account_details.dart';
 import 'package:o3_cards/models/banklist.dart';
 import 'package:o3_cards/models/cardlist.dart';
 import 'package:o3_cards/models/config.dart';
+import 'package:o3_cards/models/create_employer_response.dart';
+import 'package:o3_cards/models/employment_details.dart';
 import 'package:o3_cards/models/exchange_rates.dart';
 import 'package:o3_cards/models/login_request.dart';
 import 'package:o3_cards/models/login_response.dart';
+import 'package:o3_cards/models/mono_auth_request.dart';
 import 'package:o3_cards/models/rate_request.dart';
 import 'package:o3_cards/models/request_account_details.dart';
 import 'package:o3_cards/services/shared_service.dart';
 
+import '../models/create_employer_request.dart';
+import '../models/create_personal_info_request.dart';
+import '../models/create_personal_info_response.dart';
+import '../models/mono_auth_response.dart';
+import '../models/personal_details.dart';
 import '../models/signup_request.dart';
 import '../models/signup_response.dart';
 import '../models/topup_request.dart';
@@ -20,6 +28,7 @@ import '../models/topup_response.dart';
 import '../models/transaction_list_response.dart';
 import '../models/transfer_request.dart';
 import '../models/transfer_response.dart';
+import '../models/user_info.dart';
 
 class APIService {
   static var client = http.Client();
@@ -244,9 +253,7 @@ class APIService {
     return topupResponseJson(response.body);
   }
 
-  static Future<ExchangeRates> rates(
-    RateRequest model
-  ) async {
+  static Future<ExchangeRates> rates(RateRequest model) async {
     var loginDetails = await SharedService.loginDetails();
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
@@ -263,5 +270,150 @@ class APIService {
       ),
     );
     return exchangeRatesJson(response.body);
+  }
+
+  static Future<CreateEmployerResponse> createEmployer(
+    CreateEmployerRequest model,
+  ) async {
+    var loginDetails = await SharedService.loginDetails();
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'token': '${loginDetails!.payload!.token}'
+    };
+
+    var url = Uri.http(Config.baseUrl, Config.profileCreateEmployer);
+
+    var response = await client.post(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode(
+        model.toJson(),
+      ),
+    );
+    if (response.statusCode == 200) {
+      await getEmploymentDetails();
+    }
+    return createEmployerJson(response.body);
+  }
+
+  static Future<EmployerDetails> getEmploymentDetails() async {
+    var loginDetails = await SharedService.loginDetails();
+
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'token': '${loginDetails!.payload!.token}'
+    };
+
+    var url = Uri.http(
+      Config.baseUrl,
+      Config.profileGetEmployer,
+    );
+
+    final response = await client.get(
+      url,
+      headers: requestHeaders,
+    );
+
+    if (response.statusCode == 200) {
+      await SharedService.setEmploymentDetails(
+        employmentDetailsJson(response.body),
+      );
+    }
+    return employmentDetailsJson(response.body);
+  }
+
+  static Future<PersonalDetailsResponse> createPersonalDetails(
+    PersonalDetailsRequest model,
+  ) async {
+    var loginDetails = await SharedService.loginDetails();
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'token': '${loginDetails!.payload!.token}'
+    };
+
+    var url = Uri.http(Config.baseUrl, Config.profileCreatePersonal);
+
+    var response = await client.post(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode(
+        model.toJson(),
+      ),
+    );
+    if (response.statusCode == 200) {
+      await getPersonalDetails();
+    }
+    return createPersonalDetailsJson(response.body);
+  }
+
+  static Future<PersonalDetails> getPersonalDetails() async {
+    var loginDetails = await SharedService.loginDetails();
+
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'token': '${loginDetails!.payload!.token}'
+    };
+
+    var url = Uri.http(
+      Config.baseUrl,
+      Config.profilePersonalDetails,
+    );
+
+    final response = await client.get(
+      url,
+      headers: requestHeaders,
+    );
+
+    if (response.statusCode == 200) {
+      await SharedService.setPersonalDetails(
+        personalDetailsJson(response.body),
+      );
+    }
+    return personalDetailsJson(response.body);
+  }
+
+  static Future<UserInfo> getUserInfo() async {
+    var loginDetails = await SharedService.loginDetails();
+
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'token': '${loginDetails!.payload!.token}'
+    };
+
+    var url = Uri.http(
+      Config.baseUrl,
+      Config.profileUserInfo,
+    );
+
+    final response = await client.get(
+      url,
+      headers: requestHeaders,
+    );
+
+    if (response.statusCode == 200) {
+      await SharedService.setUserInfo(
+        userInfoJson(response.body),
+      );
+    }
+    return userInfoJson(response.body);
+  }
+
+  static Future<MonoAuth> authenticateMono(RequestMonoAuth model) async {
+    var loginDetails = await SharedService.loginDetails();
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'token': '${loginDetails!.payload!.token}'
+    };
+
+    var url = Uri.http(Config.baseUrl, Config.monoAuth);
+
+    var response = await client.post(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode(
+        model.toJson(),
+      ),
+    );
+    return monoAuthJson(response.body);
   }
 }

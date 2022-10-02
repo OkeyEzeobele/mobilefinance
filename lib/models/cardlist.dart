@@ -15,7 +15,7 @@ class CardListResponse {
   late final List<Payload> payload;
 
   CardListResponse.fromJson(Map<String, dynamic> json){
-    success = json['success'];
+    success = json['success']?? false;
     message = json['message'];
     payload = List.from(json['payload']).map((e)=>Payload.fromJson(e)).toList();
   }

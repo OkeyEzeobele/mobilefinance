@@ -6,12 +6,15 @@ import 'package:api_cache_manager/models/cache_db_model.dart';
 import 'package:api_cache_manager/utils/cache_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:o3_cards/models/cardlist.dart';
+import 'package:o3_cards/models/employment_details.dart';
 import 'package:o3_cards/models/login_response.dart';
+import 'package:o3_cards/models/personal_details.dart';
 import 'package:o3_cards/models/transaction_list_response.dart';
 import 'package:o3_cards/pages/signin/loginscreen2.dart';
 import 'package:o3_cards/ui/export.dart';
 
 import '../models/banklist.dart';
+import '../models/user_info.dart';
 
 class SharedService {
   static Future<bool> isLoggedIn() async {
@@ -36,6 +39,24 @@ class SharedService {
   static Future<bool> isBanksSaved() async {
     var isKeyExist = await APICacheManager().isAPICacheKeyExist(
       'bank_list',
+    );
+    return isKeyExist;
+  }
+  static Future<bool> isEmploymentSaved() async {
+    var isKeyExist = await APICacheManager().isAPICacheKeyExist(
+      'employment_details',
+    );
+    return isKeyExist;
+  }
+  static Future<bool> isPersonalSaved() async {
+    var isKeyExist = await APICacheManager().isAPICacheKeyExist(
+      'personal_details',
+    );
+    return isKeyExist;
+  }
+  static Future<bool> isUserSaved() async {
+    var isKeyExist = await APICacheManager().isAPICacheKeyExist(
+      'user_details',
     );
     return isKeyExist;
   }
@@ -77,6 +98,36 @@ class SharedService {
       var cacheData = await APICacheManager().getCacheData('bank_list');
 
       return banklistJson(cacheData.syncData);
+    }
+  }
+
+  static Future<EmployerDetails?> employerDetails() async {
+    var isKeyExist = await APICacheManager().isAPICacheKeyExist('employment_details');
+
+    if (isKeyExist) {
+      var cacheData = await APICacheManager().getCacheData('employment_details');
+
+      return employmentDetailsJson(cacheData.syncData);
+    }
+  }
+
+  static Future<PersonalDetails?> personalDetails() async {
+    var isKeyExist = await APICacheManager().isAPICacheKeyExist('personal_details');
+
+    if (isKeyExist) {
+      var cacheData = await APICacheManager().getCacheData('personal_details');
+
+      return personalDetailsJson(cacheData.syncData);
+    }
+  }
+
+  static Future<UserInfo?> userInfo() async {
+    var isKeyExist = await APICacheManager().isAPICacheKeyExist('user_details');
+
+    if (isKeyExist) {
+      var cacheData = await APICacheManager().getCacheData('user_details');
+
+      return userInfoJson(cacheData.syncData);
     }
   }
 
@@ -132,6 +183,45 @@ class SharedService {
     await APICacheManager().addCacheData(cacheDBModel);
   }
 
+  static Future<void> setEmploymentDetails(
+    EmployerDetails model,
+  ) async {
+    APICacheDBModel cacheDBModel = APICacheDBModel(
+      key: 'employment_details',
+      syncData: jsonEncode(
+        model.toJson(),
+      ),
+    );
+
+    await APICacheManager().addCacheData(cacheDBModel);
+  }
+
+  static Future<void> setPersonalDetails(
+    PersonalDetails model,
+  ) async {
+    APICacheDBModel cacheDBModel = APICacheDBModel(
+      key: 'personal_details',
+      syncData: jsonEncode(
+        model.toJson(),
+      ),
+    );
+
+    await APICacheManager().addCacheData(cacheDBModel);
+  }
+
+  static Future<void> setUserInfo(
+    UserInfo model,
+  ) async {
+    APICacheDBModel cacheDBModel = APICacheDBModel(
+      key: 'user_details',
+      syncData: jsonEncode(
+        model.toJson(),
+      ),
+    );
+
+    await APICacheManager().addCacheData(cacheDBModel);
+  }
+
   static Future<void> softlogout(BuildContext context) async {
     await APICacheManager().deleteCache(
       'card_list',
@@ -141,6 +231,12 @@ class SharedService {
     );
     await APICacheManager().deleteCache(
       'bank_list',
+    );
+    await APICacheManager().deleteCache(
+      'employment_details',
+    );
+    await APICacheManager().deleteCache(
+      'personal_details',
     );
     Navigator.pushReplacement(
       context,
@@ -153,6 +249,9 @@ class SharedService {
   static Future<void> hardlogout(BuildContext context) async {
     await APICacheManager().deleteCache(
       'login_details',
+    );
+    await APICacheManager().deleteCache(
+      'user_details',
     );
     Navigator.pushReplacement(
       context,

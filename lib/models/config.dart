@@ -2,7 +2,8 @@ class Config {
   // ROUTES
   // static const baseUrl = 'api.o3virtual.com'; // live
   // static const baseUrl = '10.0.2.2:5000'; // android emulator
-  static const baseUrl = '127.0.0.1:5000'; // ios emulator localhost maps to pc localhost
+  static const baseUrl =
+      '127.0.0.1:5000'; // ios emulator localhost maps to pc localhost
   // static const baseUrl = 'https://0026ca16de46.ngrok.io/api/v1';
   // static const baseUrl = '10.2.0.66:7526';
   // static const baseUrl = '10.1.3.16:8443';
@@ -18,6 +19,9 @@ class Config {
   static const profileCreatePersonal = '/api/v1/create-personal-info';
   static const profileCreateAddress = '/api/v1/create-address-info';
   static const profileCreateEmployer = '/api/v1/create-employer-info';
+  static const profileGetEmployer = '/api/v1/get-employer-info';
+  static const profilePersonalDetails = '/api/v1/get-personal-info';
+  static const profileUserInfo = '/api/v1/get-user-info';
   static const profileUploadDoc = '/api/v1/manage-document-info';
   static const checkBvn = '/api/v1/verify-bvn';
 
@@ -44,4 +48,5 @@ class Config {
   static const resetPassword = '/api/v1/password-reset';
   static const forgotPassword = '/api/v1/initiate-password-reset';
   static const setupPin = '/api/v1/spin';
+  static const monoAuth = '/api/v1/mono-auth';
 }
