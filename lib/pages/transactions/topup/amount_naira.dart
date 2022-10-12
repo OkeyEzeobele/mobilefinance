@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutterbudpay/flutterbudpay.dart';
 import 'package:o3_cards/models/topup_request.dart';
 import 'package:o3_cards/pages/transactions/topup/fund_card.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
@@ -23,9 +25,12 @@ class AmountNaira extends StatefulWidget {
 }
 
 class _AmountNairaState extends State<AmountNaira> {
+  final plugin = Budpay();
   @override
   void initState() {
     super.initState();
+
+    // plugin.initialize(publicKey: publicKey,secretKey:secretKey);
   }
 
   bool isAPIcallProcess = false;
@@ -33,6 +38,9 @@ class _AmountNairaState extends State<AmountNaira> {
   final FocusNode _nodeText1 = FocusNode();
   String? amount = '';
   String _email = '';
+  String publicKey = dotenv.env['BUDPAY_PUBLIC_KEY']!;
+  String secretKey = dotenv.env['BUDPAY_SECRET_KEY']!;
+  
   _AmountNairaState() {
     getTextFromFile().then(
       (val) => setState(

@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:mono_flutter/mono_flutter.dart';
 
-class Mono extends ModalRoute<void> {
-
-  String monoKey = dotenv.env['MONO_KEY']!;
-
+class Popup extends ModalRoute<void> {
   @override
   Duration get transitionDuration => const Duration(milliseconds: 500);
 
@@ -45,10 +40,10 @@ class Mono extends ModalRoute<void> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // MonoWebView(apiKey: monoKey),
+          const Text('data'),
           ElevatedButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Dismiss'),
+            child: const Text('Dismiss'),
           )
         ],
       ),

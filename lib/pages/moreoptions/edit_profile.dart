@@ -69,12 +69,45 @@ class _EditprofileState extends State<Editprofile> {
           SizedBox(
             height: heightOfScreen * 0.05,
           ),
-          GestureDetector(
-            child: CircleAvatar(
-              radius: heightOfScreen * 0.05,
-              backgroundColor: Colors.grey,
-              backgroundImage: AssetImage('assets/person.png'),
-            ),
+          Stack(
+            alignment: AlignmentDirectional.bottomEnd,
+            children: [
+              Card(
+                elevation: 15,
+                shape: CircleBorder(),
+                child: Container(
+                  width: heightOfScreen * 0.1,
+                  height: heightOfScreen * 0.1,
+                  decoration: BoxDecoration(
+                    // border: Border.all(
+                    //   color: FvColors.textview79FontColor,
+                    // ),
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: AssetImage('assets/person.png'),
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                height: heightOfScreen * 0.03,
+                width: heightOfScreen * 0.03,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: FvColors.maintheme,
+                ),
+                child: IconButton(
+                  padding: EdgeInsets.zero,
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.add_a_photo_outlined,
+                    color: FvColors.edittext51Background,
+                    size: heightOfScreen * 0.02,
+                  ),
+                ),
+              )
+            ],
           ),
           SizedBox(
             height: heightOfScreen * 0.05,

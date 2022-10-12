@@ -24,6 +24,7 @@ class Config {
   static const profileUserInfo = '/api/v1/get-user-info';
   static const profileUploadDoc = '/api/v1/manage-document-info';
   static const checkBvn = '/api/v1/verify-bvn';
+  static const profilePicture = '/api/v1/get-selfie';
 
   static const createCreditcard = '/api/v1/create-O3-card';
   static const createPrepaidcard = 'request-prepaid-card';

@@ -1,11 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:auto_size_text/auto_size_text.dart';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:o3_cards/pages/signin/loginscreen2.dart';
+import 'package:o3_cards/models/profile_image.dart';
 import 'package:o3_cards/services/shared_service.dart';
 import 'package:o3_cards/ui/pallete.dart';
+
+import '../../../services/api_service.dart';
 
 class Greeting extends StatefulWidget {
   const Greeting({Key? key}) : super(key: key);
@@ -15,9 +18,19 @@ class Greeting extends StatefulWidget {
 }
 
 class _GreetingState extends State<Greeting> {
+  late Future<ProfileImage?> imageRoute;
+
+  Future<ProfileImage?> _getImageRoute() async {
+    Future<ProfileImage?> model = await SharedService.isProfilePictureSaved()
+        ? SharedService.profileImage()
+        : APIService.getProfileImage();
+    return model;
+  }
+
   @override
   void initState() {
     super.initState();
+    imageRoute = _getImageRoute();
   }
 
   String _firstname = '';
@@ -49,7 +62,7 @@ class _GreetingState extends State<Greeting> {
         MediaQuery.of(context).size.height - marginFromSafeArea;
     var widthOfScreen = MediaQuery.of(context).size.width;
     return SizedBox(
-      height: heightOfScreen *0.08,
+      height: heightOfScreen * 0.08,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -130,17 +143,81 @@ class _GreetingState extends State<Greeting> {
                   ),
                 ),
               ),
-              GestureDetector(
-                child: CircleAvatar(
-                  radius: heightOfScreen * 0.02,
-                  backgroundColor: FvColors.textview79FontColor,
-                  child: FaIcon(
-                    FontAwesomeIcons.solidUser,
-                    color: FvColors.textview50FontColor,
-                  ),
-                ),
-                onTap: () {
-                  // SharedService.logout(context);
+              FutureBuilder<ProfileImage?>(
+                future: imageRoute,
+                builder: (context, model) {
+                  var response = model.data?.payload;
+                  if (model.hasData) {
+                    if (model.data!.success) {
+                      return GestureDetector(
+                        child: Container(
+                          width: heightOfScreen * 0.045,
+                          height: heightOfScreen * 0.045,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: FvColors.textview79FontColor,
+                            ),
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: NetworkImage(response!.data!.data),
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
+
+                        // child: CircleAvatar(
+                        //   backgroundImage: NetworkImage(response!.data!.data),
+                        //   radius: heightOfScreen * 0.02,
+                        //   // backgroundColor: FvColors.edittext51Background,
+                        //   backgroundColor: Colors.black,
+                        // ),
+                        onTap: () {
+                          // SharedService.logout(context);
+                        },
+                      );
+                    } else {
+                      return GestureDetector(
+                        child: CircleAvatar(
+                          radius: heightOfScreen * 0.02,
+                          backgroundColor: FvColors.textview79FontColor,
+                          child: FaIcon(
+                            FontAwesomeIcons.solidUser,
+                            color: FvColors.textview50FontColor,
+                          ),
+                        ),
+                        onTap: () {
+                          // SharedService.logout(context);
+                        },
+                      );
+                    }
+                  } else if (model.hasError) {
+                    return GestureDetector(
+                      child: CircleAvatar(
+                        radius: heightOfScreen * 0.02,
+                        backgroundColor: FvColors.textview79FontColor,
+                        child: FaIcon(
+                          FontAwesomeIcons.solidUser,
+                          color: FvColors.textview50FontColor,
+                        ),
+                      ),
+                      onTap: () {
+                        // SharedService.logout(context);
+                      },
+                    );
+                  }
+                  return GestureDetector(
+                    child: CircleAvatar(
+                      radius: heightOfScreen * 0.02,
+                      backgroundColor: FvColors.textview79FontColor,
+                      child: FaIcon(
+                        FontAwesomeIcons.solidUser,
+                        color: FvColors.textview50FontColor,
+                      ),
+                    ),
+                    onTap: () {
+                      // SharedService.logout(context);
+                    },
+                  );
                 },
               ),
               GestureDetector(
@@ -149,12 +226,6 @@ class _GreetingState extends State<Greeting> {
                   color: FvColors.maintheme,
                 ),
                 onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Loginscreen2(),
-                    ),
-                  );
                   // SharedService.logout(context);
                 },
               ),
@@ -172,5 +243,17 @@ class _GreetingState extends State<Greeting> {
       0,
       name.indexOf(' '),
     );
+  }
+}
+
+class MyClipper extends CustomClipper<Rect> {
+  @override
+  Rect getClip(Size size) {
+    return Rect.fromCircle(center: const Offset(200, 100), radius: 150);
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Rect> oldClipper) {
+    return false;
   }
 }

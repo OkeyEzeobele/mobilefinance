@@ -1819,20 +1819,6 @@ class _PersonalInfo extends State<PersonalInfo> {
     return userDetails;
   }
 
-  Future<String> _getFirstName() async {
-    var info = await SharedService.userInfo();
-    var text = info!.payload!.fullName!.split(' ');
-    var firstName = text[0];
-    return firstName;
-  }
-
-  Future<String> _getLastName() async {
-    var info = await SharedService.userInfo();
-    var text = info!.payload!.fullName!.split(' ');
-    var firstName = text[0];
-    return firstName;
-  }
-
   Future<int?> _getIncome() async {
     var isIncomeSaved = await SharedService.isEmploymentSaved();
     if (isIncomeSaved) {

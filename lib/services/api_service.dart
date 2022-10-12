@@ -21,6 +21,7 @@ import '../models/create_personal_info_request.dart';
 import '../models/create_personal_info_response.dart';
 import '../models/mono_auth_response.dart';
 import '../models/personal_details.dart';
+import '../models/profile_image.dart';
 import '../models/signup_request.dart';
 import '../models/signup_response.dart';
 import '../models/topup_request.dart';
@@ -396,6 +397,32 @@ class APIService {
       );
     }
     return userInfoJson(response.body);
+  }
+
+  static Future<ProfileImage> getProfileImage() async {
+    var loginDetails = await SharedService.loginDetails();
+
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'token': '${loginDetails!.payload!.token}'
+    };
+
+    var url = Uri.http(
+      Config.baseUrl,
+      Config.profilePicture,
+    );
+
+    final response = await client.get(
+      url,
+      headers: requestHeaders,
+    );
+
+    if (response.statusCode == 200) {
+      await SharedService.setProfileImage(
+        profileImageJson(response.body),
+      );
+    }
+    return profileImageJson(response.body);
   }
 
   static Future<MonoAuth> authenticateMono(RequestMonoAuth model) async {

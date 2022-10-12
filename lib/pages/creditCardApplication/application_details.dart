@@ -7,6 +7,7 @@ import 'package:o3_cards/pages/creditCardApplication/personal_info.dart';
 import 'package:o3_cards/pages/creditCardApplication/select_card_type.dart';
 
 import 'package:o3_cards/ui/export.dart';
+import 'package:snippet_coder_utils/FormHelper.dart';
 
 import '../../../widgets/slider.dart';
 import '../../models/mono_auth_request.dart';
@@ -228,7 +229,7 @@ class _ApplicationDetailsState extends State<ApplicationDetails> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        // if (!personalSaved) {
+                        if (!personalSaved) {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
@@ -242,7 +243,7 @@ class _ApplicationDetailsState extends State<ApplicationDetails> {
                               ),
                             ),
                           );
-                        // }
+                        }
                       },
                       child: SizedBox(
                         height: heightOfScreen * 0.15,
@@ -629,7 +630,31 @@ class _ApplicationDetailsState extends State<ApplicationDetails> {
                             ),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          if (personalSaved &&
+                              employmentSaved &&
+                              employmentSaved) {
+                            FormHelper.showSimpleAlertDialog(
+                              context,
+                              '',
+                              'Completed',
+                              'Ok',
+                              () {
+                                Navigator.of(context).pop();
+                              },
+                            );
+                          } else {
+                            FormHelper.showSimpleAlertDialog(
+                              context,
+                              '',
+                              'Please provide your information',
+                              'Ok',
+                              () {
+                                Navigator.of(context).pop();
+                              },
+                            );
+                          }
+                        },
                       ),
                     ),
                   ],

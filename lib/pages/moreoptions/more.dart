@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:o3_cards/pages/moreoptions/edit_profile.dart';
 import 'package:o3_cards/ui/export.dart';
 
+import '../../models/profile_image.dart';
+import '../../services/api_service.dart';
 import '../../services/shared_service.dart';
 import '../../widgets/slider.dart';
 import '../dashboard/dashboard.dart';
@@ -16,9 +18,19 @@ class More extends StatefulWidget {
 }
 
 class _MoreState extends State<More> {
+  late Future<ProfileImage?> imageRoute;
+
+  Future<ProfileImage?> _getImageRoute() async {
+    Future<ProfileImage?> model = await SharedService.isProfilePictureSaved()
+        ? SharedService.profileImage()
+        : APIService.getProfileImage();
+    return model;
+  }
+
   @override
   void initState() {
     super.initState();
+    imageRoute = _getImageRoute();
   }
 
   String _fullname = '';
@@ -60,7 +72,9 @@ class _MoreState extends State<More> {
                     Navigator.pushReplacement(
                       context,
                       SlideRightRoute(
-                        page: Dashboard(pageIndex: 2,),
+                        page: Dashboard(
+                          pageIndex: 2,
+                        ),
                       ),
                     );
                   },
@@ -79,15 +93,181 @@ class _MoreState extends State<More> {
           SizedBox(
             height: heightOfScreen * 0.05,
           ),
-          GestureDetector(
-            child: CircleAvatar(
-              radius: heightOfScreen * 0.05,
-              backgroundColor: Colors.grey,
-              backgroundImage: AssetImage('assets/person.png'),
-            ),
+          FutureBuilder<ProfileImage?>(
+            future: imageRoute,
+            builder: (context, model) {
+              var response = model.data?.payload;
+              if (model.hasData) {
+                if (model.data!.success) {
+                  return Stack(
+                    alignment: AlignmentDirectional.bottomEnd,
+                    children: [
+                      Card(
+                        elevation: 15,
+                        shape: CircleBorder(),
+                        child: Container(
+                          width: heightOfScreen * 0.1,
+                          height: heightOfScreen * 0.1,
+                          decoration: BoxDecoration(
+                            // border: Border.all(
+                            //   color: FvColors.textview79FontColor,
+                            // ),
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: NetworkImage(response!.data!.data),
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: heightOfScreen * 0.03,
+                        width: heightOfScreen * 0.03,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: FvColors.maintheme,
+                        ),
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.add_a_photo_outlined,
+                            color: FvColors.edittext51Background,
+                            size: heightOfScreen * 0.02,
+                          ),
+                        ),
+                      )
+                    ],
+                  );
+                } else {
+                  return Stack(
+                    alignment: AlignmentDirectional.bottomEnd,
+                    children: [
+                      Card(
+                        elevation: 15,
+                        shape: CircleBorder(),
+                        child: Container(
+                          width: heightOfScreen * 0.1,
+                          height: heightOfScreen * 0.1,
+                          decoration: BoxDecoration(
+                            // border: Border.all(
+                            //   color: FvColors.textview79FontColor,
+                            // ),
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: AssetImage('assets/person.png'),
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: heightOfScreen * 0.03,
+                        width: heightOfScreen * 0.03,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: FvColors.maintheme,
+                        ),
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.add_a_photo_outlined,
+                            color: FvColors.edittext51Background,
+                            size: heightOfScreen * 0.02,
+                          ),
+                        ),
+                      )
+                    ],
+                  );
+                }
+              } else if (model.hasError) {
+                return Stack(
+                  alignment: AlignmentDirectional.bottomEnd,
+                  children: [
+                    Card(
+                      elevation: 15,
+                      shape: CircleBorder(),
+                      child: Container(
+                        width: heightOfScreen * 0.1,
+                        height: heightOfScreen * 0.1,
+                        decoration: BoxDecoration(
+                          // border: Border.all(
+                          //   color: FvColors.textview79FontColor,
+                          // ),
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage('assets/person.png'),
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: heightOfScreen * 0.03,
+                      width: heightOfScreen * 0.03,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: FvColors.maintheme,
+                      ),
+                      child: IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.add_a_photo_outlined,
+                          color: FvColors.edittext51Background,
+                          size: heightOfScreen * 0.02,
+                        ),
+                      ),
+                    )
+                  ],
+                );
+              } else {
+                return Stack(
+                  alignment: AlignmentDirectional.bottomEnd,
+                  children: [
+                    Card(
+                      elevation: 15,
+                      shape: CircleBorder(),
+                      child: Container(
+                        width: heightOfScreen * 0.1,
+                        height: heightOfScreen * 0.1,
+                        decoration: BoxDecoration(
+                          // border: Border.all(
+                          //   color: FvColors.textview79FontColor,
+                          // ),
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage('assets/person.png'),
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: heightOfScreen * 0.03,
+                      width: heightOfScreen * 0.03,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: FvColors.maintheme,
+                      ),
+                      child: IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.add_a_photo_outlined,
+                          color: FvColors.edittext51Background,
+                          size: heightOfScreen * 0.02,
+                        ),
+                      ),
+                    )
+                  ],
+                );
+              }
+            },
           ),
           SizedBox(
-            height: heightOfScreen * 0.05,
+            height: heightOfScreen * 0.03,
           ),
           Card(
             elevation: 5,
@@ -278,6 +458,10 @@ class _MoreState extends State<More> {
                     ),
                   ),
                 ),
+              ),
+              SizedBox(
+                height: heightOfScreen * 0.08,
+                width: widthOfScreen * 0.86,
               ),
               SizedBox(
                 height: heightOfScreen * 0.08,

@@ -14,6 +14,7 @@ import 'package:o3_cards/pages/signin/loginscreen2.dart';
 import 'package:o3_cards/ui/export.dart';
 
 import '../models/banklist.dart';
+import '../models/profile_image.dart';
 import '../models/user_info.dart';
 
 class SharedService {
@@ -57,6 +58,12 @@ class SharedService {
   static Future<bool> isUserSaved() async {
     var isKeyExist = await APICacheManager().isAPICacheKeyExist(
       'user_details',
+    );
+    return isKeyExist;
+  }
+  static Future<bool> isProfilePictureSaved() async {
+    var isKeyExist = await APICacheManager().isAPICacheKeyExist(
+      'profile_image',
     );
     return isKeyExist;
   }
@@ -128,6 +135,16 @@ class SharedService {
       var cacheData = await APICacheManager().getCacheData('user_details');
 
       return userInfoJson(cacheData.syncData);
+    }
+  }
+
+  static Future<ProfileImage?> profileImage() async {
+    var isKeyExist = await APICacheManager().isAPICacheKeyExist('profile_image');
+
+    if (isKeyExist) {
+      var cacheData = await APICacheManager().getCacheData('profile_image');
+
+      return profileImageJson(cacheData.syncData);
     }
   }
 
@@ -222,6 +239,19 @@ class SharedService {
     await APICacheManager().addCacheData(cacheDBModel);
   }
 
+  static Future<void> setProfileImage(
+    ProfileImage model,
+  ) async {
+    APICacheDBModel cacheDBModel = APICacheDBModel(
+      key: 'profile_image',
+      syncData: jsonEncode(
+        model.toJson(),
+      ),
+    );
+
+    await APICacheManager().addCacheData(cacheDBModel);
+  }
+
   static Future<void> softlogout(BuildContext context) async {
     await APICacheManager().deleteCache(
       'card_list',
@@ -249,6 +279,9 @@ class SharedService {
   static Future<void> hardlogout(BuildContext context) async {
     await APICacheManager().deleteCache(
       'login_details',
+    );
+    await APICacheManager().deleteCache(
+      'profile_image',
     );
     await APICacheManager().deleteCache(
       'user_details',
