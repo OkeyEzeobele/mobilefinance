@@ -20,6 +20,7 @@ class _CardsModalState extends State<CardsModal> {
   late Future<CardListResponse?> userCards;
   late int cardUsed;
   String cardNum = '';
+  int? cardBalance;
   Future<CardListResponse?> _getCardsModel() async {
     Future<CardListResponse?> model = await SharedService.isCardsSaved()
         ? SharedService.cardDetails()
@@ -149,6 +150,15 @@ class _CardsModalState extends State<CardsModal> {
                             ),
                           ),
                           onTap: () {
+                            if (cards[i].balance == '0.0') {
+                              setState(() {
+                                cardBalance = 0;
+                              });
+                            } else {
+                              setState(() {
+                                cardBalance = cards[i].balance;
+                              });
+                            }
                             setState(() {
                               cardUsed = cards[i].id;
                               cardNum =
@@ -157,7 +167,7 @@ class _CardsModalState extends State<CardsModal> {
                                           (match) => "${match.group(0)} ")
                                       .trimRight();
                             });
-                            var cardFinal = [cardUsed, cardNum];
+                            var cardFinal = [cardUsed, cardNum, cardBalance];
                             Navigator.pop(context, cardFinal);
                           },
                         ),

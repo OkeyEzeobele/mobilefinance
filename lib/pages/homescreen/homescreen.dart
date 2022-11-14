@@ -14,26 +14,27 @@ class Homescreen extends StatefulWidget {
 class _HomescreenState extends State<Homescreen> {
   @override
   Widget build(BuildContext context) {
-    var widthOfScreen = MediaQuery.of(context).size.width;
+    // var widthOfScreen = MediaQuery.of(context).size.width;
+    var heightOfScreen = MediaQuery.of(context).size.height;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: FvColors.edittext51Background,
       body: Column(
         children: [
           SizedBox.square(
-            dimension: 20,
+            dimension: heightOfScreen*0.02,
           ),
           Greeting(),
           SizedBox.square(
-            dimension: 20,
+            dimension: heightOfScreen*0.008,
           ),
           CreditCards(),
           SizedBox.square(
-            dimension: 20,
+            dimension: heightOfScreen*0.008,
           ),
           QuickLinks(),
           SizedBox.square(
-            dimension: widthOfScreen * 0.07,
+            dimension: heightOfScreen*0.008,
           ),
           Activities()
         ],

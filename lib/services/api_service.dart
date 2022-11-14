@@ -33,6 +33,7 @@ import '../models/user_info.dart';
 
 class APIService {
   static var client = http.Client();
+  static const urlHeader = Uri.http;
 
   static Future<SignupResponse> signup(
     SignupRequest model,
@@ -41,7 +42,7 @@ class APIService {
       'Content-Type': 'application/json',
     };
 
-    var url = Uri.http(Config.baseUrl, Config.authRegister);
+    var url = urlHeader(Config.baseUrl, Config.authRegister);
 
     var response = await client.post(
       url,
@@ -60,7 +61,7 @@ class APIService {
       'Content-Type': 'application/json',
     };
 
-    var url = Uri.http(Config.baseUrl, Config.authLogin);
+    var url = urlHeader(Config.baseUrl, Config.authLogin);
 
     var response = await client.post(
       url,
@@ -86,7 +87,7 @@ class APIService {
       'token': '${loginDetails!.payload!.token}'
     };
 
-    var url = Uri.http(
+    var url = urlHeader(
       Config.baseUrl,
       Config.fetchCards,
     ); //https for live, http for debug
@@ -112,7 +113,7 @@ class APIService {
       'token': '${loginDetails!.payload!.token}'
     };
 
-    var url = Uri.http(
+    var url = urlHeader(
       Config.baseUrl,
       Config.externalTransactions,
     );
@@ -138,7 +139,7 @@ class APIService {
       'token': '${loginDetails!.payload!.token}'
     };
 
-    var url = Uri.http(
+    var url = urlHeader(
       Config.baseUrl,
       Config.transactions,
     );
@@ -169,7 +170,7 @@ class APIService {
       'token': '${loginDetails!.payload!.token}'
     };
 
-    var url = Uri.http(
+    var url = urlHeader(
       Config.baseUrl,
       Config.banklist,
     );
@@ -197,7 +198,7 @@ class APIService {
       'token': '${loginDetails!.payload!.token}'
     };
 
-    var url = Uri.http(
+    var url = urlHeader(
       Config.baseUrl,
       Config.transferAccountResolve,
     );
@@ -221,7 +222,7 @@ class APIService {
       'token': '${loginDetails!.payload!.token}'
     };
 
-    var url = Uri.http(Config.baseUrl, Config.transfer);
+    var url = urlHeader(Config.baseUrl, Config.transfer);
 
     var response = await client.post(
       url,
@@ -242,7 +243,7 @@ class APIService {
       'token': '${loginDetails!.payload!.token}'
     };
 
-    var url = Uri.http(Config.baseUrl, Config.requestTopupBudpay);
+    var url = urlHeader(Config.baseUrl, Config.requestTopupBudpay);
 
     var response = await client.post(
       url,
@@ -261,7 +262,7 @@ class APIService {
       'token': '${loginDetails!.payload!.token}'
     };
 
-    var url = Uri.http(Config.baseUrl, Config.getRates);
+    var url = urlHeader(Config.baseUrl, Config.getRates);
 
     var response = await client.post(
       url,
@@ -282,7 +283,7 @@ class APIService {
       'token': '${loginDetails!.payload!.token}'
     };
 
-    var url = Uri.http(Config.baseUrl, Config.profileCreateEmployer);
+    var url = urlHeader(Config.baseUrl, Config.profileCreateEmployer);
 
     var response = await client.post(
       url,
@@ -305,7 +306,7 @@ class APIService {
       'token': '${loginDetails!.payload!.token}'
     };
 
-    var url = Uri.http(
+    var url = urlHeader(
       Config.baseUrl,
       Config.profileGetEmployer,
     );
@@ -332,7 +333,7 @@ class APIService {
       'token': '${loginDetails!.payload!.token}'
     };
 
-    var url = Uri.http(Config.baseUrl, Config.profileCreatePersonal);
+    var url = urlHeader(Config.baseUrl, Config.profileCreatePersonal);
 
     var response = await client.post(
       url,
@@ -355,7 +356,7 @@ class APIService {
       'token': '${loginDetails!.payload!.token}'
     };
 
-    var url = Uri.http(
+    var url = urlHeader(
       Config.baseUrl,
       Config.profilePersonalDetails,
     );
@@ -381,7 +382,7 @@ class APIService {
       'token': '${loginDetails!.payload!.token}'
     };
 
-    var url = Uri.http(
+    var url = urlHeader(
       Config.baseUrl,
       Config.profileUserInfo,
     );
@@ -407,7 +408,7 @@ class APIService {
       'token': '${loginDetails!.payload!.token}'
     };
 
-    var url = Uri.http(
+    var url = urlHeader(
       Config.baseUrl,
       Config.profilePicture,
     );
@@ -432,7 +433,7 @@ class APIService {
       'token': '${loginDetails!.payload!.token}'
     };
 
-    var url = Uri.http(Config.baseUrl, Config.monoAuth);
+    var url = urlHeader(Config.baseUrl, Config.monoAuth);
 
     var response = await client.post(
       url,

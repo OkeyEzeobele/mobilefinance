@@ -33,44 +33,15 @@ class Payload {
   Payload({
     required this.details,
   });
-  late final Details? details;
+  late final String? details;
 
   Payload.fromJson(Map<String, dynamic> json) {
-    details = json['details']!=null? Details.fromJson(json['details']):null;
+    details = json['details'];
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
-    _data['details'] = details!.toJson();
-    return _data;
-  }
-}
-
-class Details {
-  Details({
-    required this.accountNumber,
-    required this.accountName,
-    required this.bankCode,
-    required this.bankName,
-  });
-  late final String? accountNumber;
-  late final String accountName;
-  late final String? bankCode;
-  late final String? bankName;
-
-  Details.fromJson(Map<String, dynamic> json) {
-    accountNumber = json['account_number'];
-    accountName = json['account_name'];
-    bankCode = json['bank_code'];
-    bankName = json['bank_name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['account_number'] = accountNumber;
-    _data['account_name'] = accountName;
-    _data['bank_code'] = bankCode;
-    _data['bank_name'] = bankName;
+    _data['details'] = details;
     return _data;
   }
 }

@@ -5,7 +5,6 @@ import 'package:o3_cards/pages/homescreen/widgets/recent_transactions.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:o3_cards/ui/export.dart';
 
-//TODO implement list tile instead of row
 
 class Activities extends StatefulWidget {
   const Activities({Key? key}) : super(key: key);
@@ -143,7 +142,7 @@ class _ActivitiesState extends State<Activities> {
     );
 
     return SizedBox(
-      height: heightOfScreen * 0.35,
+      // height: heightOfScreen * 0.4,
       child: body, //_isShowingDialog ? bodyWithDialog : bodyWithCharts
     );
   }

@@ -159,7 +159,7 @@ class _TransferTypeState extends State<TransferType> {
                     children: [
                       SizedBox(
                           child: Image.asset(
-                        "03CapitalLogoSoloIcon1.png",
+                        "assets/03CapitalLogoSoloIcon1.png",
                       )),
                       SizedBox(
                         width: widthOfScreen * 0.4,

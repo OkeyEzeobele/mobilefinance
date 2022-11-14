@@ -1,13 +1,16 @@
 // ignore_for_file: prefer_const_constructors,prefer_const_literals_to_create_immutables
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:o3_cards/pages/dashboard/dashboard.dart';
 import 'package:o3_cards/models/login_request.dart';
 import 'package:o3_cards/services/api_service.dart';
 import 'package:o3_cards/ui/export.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
 
+import '../../constant/constant.dart';
+import '../../models/local_auth.dart';
 import '../../services/shared_service.dart';
 
 class Loginscreen2 extends StatefulWidget {
@@ -23,14 +26,194 @@ class _Loginscreen2State extends State<Loginscreen2> {
   GlobalKey<FormState> globalFormKey = GlobalKey<FormState>();
   String? email;
   String? password;
+  String? savedpassword;
 
   @override
   void initState() {
     super.initState();
+    _autoLoginWithBio();
+    _getSavedPassword();
   }
 
   String _firstname = '';
   String _savedemail = '';
+
+  void _login(value) {
+    setState(() {
+      isAPIcallProcess = true;
+    });
+    LoginRequest model = LoginRequest(
+      email: _savedemail,
+      password: value,
+    );
+
+    APIService.login(model).then(
+      (response) {
+        setState(() {
+          isAPIcallProcess = false;
+        });
+        if (response.success) {
+          APIService.getEmploymentDetails().then(
+            (val) {
+              if (val.success) {
+                APIService.getPersonalDetails().then(
+                  (value) {
+                    if (value.success) {
+                      APIService.getUserInfo().then(
+                        (info) {
+                          if (info.success) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Dashboard(
+                                  pageIndex: 2,
+                                ),
+                              ),
+                            );
+                          } else {
+                            FormHelper.showSimpleAlertDialog(
+                              context,
+                              '',
+                              'There was an error. Please try again',
+                              'OK',
+                              () {
+                                Navigator.of(context).pop();
+                              },
+                            );
+                          }
+                        },
+                      );
+                    } else if (value.message == "Personal Info not added yet") {
+                      APIService.getUserInfo().then(
+                        (info) {
+                          if (info.success) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Dashboard(
+                                  pageIndex: 2,
+                                ),
+                              ),
+                            );
+                          } else {
+                            FormHelper.showSimpleAlertDialog(
+                              context,
+                              '',
+                              'There was an error. Please try again',
+                              'OK',
+                              () {
+                                Navigator.of(context).pop();
+                              },
+                            );
+                          }
+                        },
+                      );
+                    } else {
+                      FormHelper.showSimpleAlertDialog(
+                        context,
+                        '',
+                        'There was an error. Please try again',
+                        'OK',
+                        () {
+                          Navigator.of(context).pop();
+                        },
+                      );
+                    }
+                  },
+                );
+              } else if (val.message == "Employer Info not added yet") {
+                APIService.getPersonalDetails().then(
+                  (value) {
+                    if (value.success) {
+                      APIService.getUserInfo().then(
+                        (info) {
+                          if (info.success) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Dashboard(
+                                  pageIndex: 2,
+                                ),
+                              ),
+                            );
+                          } else {
+                            FormHelper.showSimpleAlertDialog(
+                              context,
+                              '',
+                              'There was an error. Please try again',
+                              'OK',
+                              () {
+                                Navigator.of(context).pop();
+                              },
+                            );
+                          }
+                        },
+                      );
+                    } else if (value.message == "Personal Info not added yet") {
+                      APIService.getUserInfo().then(
+                        (info) {
+                          if (info.success) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Dashboard(
+                                  pageIndex: 2,
+                                ),
+                              ),
+                            );
+                          } else {
+                            FormHelper.showSimpleAlertDialog(
+                              context,
+                              '',
+                              'There was an error. Please try again',
+                              'OK',
+                              () {
+                                Navigator.of(context).pop();
+                              },
+                            );
+                          }
+                        },
+                      );
+                    } else {
+                      FormHelper.showSimpleAlertDialog(
+                        context,
+                        '',
+                        'There was an error. Please try again',
+                        'OK',
+                        () {
+                          Navigator.of(context).pop();
+                        },
+                      );
+                    }
+                  },
+                );
+              } else {
+                FormHelper.showSimpleAlertDialog(
+                  context,
+                  '',
+                  'There was an error. Please try again',
+                  'OK',
+                  () {
+                    Navigator.of(context).pop();
+                  },
+                );
+              }
+            },
+          );
+        } else {
+          FormHelper.showSimpleAlertDialog(
+            context,
+            '',
+            response.message,
+            'OK',
+            () {
+              Navigator.of(context).pop();
+            },
+          );
+        }
+      },
+    );
+  }
 
   _Loginscreen2State() {
     getTextFromFile().then(
@@ -47,6 +230,51 @@ class _Loginscreen2State extends State<Loginscreen2> {
         },
       ),
     );
+  }
+  void cleardata() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('password');
+    prefs.remove('biometric');
+  }
+
+  void _getSavedPassword() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      savedpassword = prefs.getString('password') ?? '';
+    });
+  }
+
+  void _loginWithBio() async {
+    if (isbiometric) {
+      final isAuthenticated = await LocalAuthApi.authenticate();
+      if (isAuthenticated) {
+        _login(savedpassword);
+      }
+    } else {
+      FormHelper.showSimpleAlertDialog(
+        context,
+        '',
+        'You have not enabled biometric login. Login and go to "more" to enable.',
+        'OK',
+        () {
+          Navigator.of(context).pop();
+        },
+      );
+    }
+  }
+
+  void _autoLoginWithBio() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isbiometric = prefs.getBool('biometric') ?? false;
+    });
+    if (isbiometric) {
+      final isAuthenticated = await LocalAuthApi.authenticate();
+
+      if (isAuthenticated) {
+        _login(savedpassword);
+      }
+    }
   }
 
   @override
@@ -159,189 +387,13 @@ class _Loginscreen2State extends State<Loginscreen2> {
           ),
         ),
         SizedBox(
-          height: heightOfScreen * 0.05,
+          height: heightOfScreen * 0.01,
         ),
         FormHelper.submitButton(
           'Sign In',
           () {
             if (validateAndSave()) {
-              setState(() {
-                isAPIcallProcess = true;
-              });
-              LoginRequest model = LoginRequest(
-                email: _savedemail,
-                password: password!,
-              );
-
-              APIService.login(model).then(
-                (response) {
-                  setState(() {
-                    isAPIcallProcess = false;
-                  });
-                  if (response.success) {
-                    APIService.getEmploymentDetails().then(
-                      (val) {
-                        if (val.success) {
-                          APIService.getPersonalDetails().then(
-                            (value) {
-                              if (value.success) {
-                                APIService.getUserInfo().then(
-                                  (info) {
-                                    if (info.success) {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => const Dashboard(
-                                            pageIndex: 2,
-                                          ),
-                                        ),
-                                      );
-                                    } else {
-                                      FormHelper.showSimpleAlertDialog(
-                                        context,
-                                        '',
-                                        'There was an error. Please try again',
-                                        'OK',
-                                        () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      );
-                                    }
-                                  },
-                                );
-                              } else if (value.message ==
-                                  "Personal Info not added yet") {
-                                APIService.getUserInfo().then(
-                                  (info) {
-                                    if (info.success) {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => const Dashboard(
-                                            pageIndex: 2,
-                                          ),
-                                        ),
-                                      );
-                                    } else {
-                                      FormHelper.showSimpleAlertDialog(
-                                        context,
-                                        '',
-                                        'There was an error. Please try again',
-                                        'OK',
-                                        () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      );
-                                    }
-                                  },
-                                );
-                              } else {
-                                FormHelper.showSimpleAlertDialog(
-                                  context,
-                                  '',
-                                  'There was an error. Please try again',
-                                  'OK',
-                                  () {
-                                    Navigator.of(context).pop();
-                                  },
-                                );
-                              }
-                            },
-                          );
-                        } else if (val.message ==
-                            "Employer Info not added yet") {
-                          APIService.getPersonalDetails().then(
-                            (value) {
-                              if (value.success) {
-                                APIService.getUserInfo().then(
-                                  (info) {
-                                    if (info.success) {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => const Dashboard(
-                                            pageIndex: 2,
-                                          ),
-                                        ),
-                                      );
-                                    } else {
-                                      FormHelper.showSimpleAlertDialog(
-                                        context,
-                                        '',
-                                        'There was an error. Please try again',
-                                        'OK',
-                                        () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      );
-                                    }
-                                  },
-                                );
-                              } else if (value.message ==
-                                  "Personal Info not added yet") {
-                                APIService.getUserInfo().then(
-                                  (info) {
-                                    if (info.success) {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => const Dashboard(
-                                            pageIndex: 2,
-                                          ),
-                                        ),
-                                      );
-                                    } else {
-                                      FormHelper.showSimpleAlertDialog(
-                                        context,
-                                        '',
-                                        'There was an error. Please try again',
-                                        'OK',
-                                        () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      );
-                                    }
-                                  },
-                                );
-                              } else {
-                                FormHelper.showSimpleAlertDialog(
-                                  context,
-                                  '',
-                                  'There was an error. Please try again',
-                                  'OK',
-                                  () {
-                                    Navigator.of(context).pop();
-                                  },
-                                );
-                              }
-                            },
-                          );
-                        } else {
-                          FormHelper.showSimpleAlertDialog(
-                            context,
-                            '',
-                            'There was an error. Please try again',
-                            'OK',
-                            () {
-                              Navigator.of(context).pop();
-                            },
-                          );
-                        }
-                      },
-                    );
-                  } else {
-                    FormHelper.showSimpleAlertDialog(
-                      context,
-                      '',
-                      response.message,
-                      'OK',
-                      () {
-                        Navigator.of(context).pop();
-                      },
-                    );
-                  }
-                },
-              );
+              _login(password);
             }
           },
           btnColor: FvColors.maintheme,
@@ -349,7 +401,7 @@ class _Loginscreen2State extends State<Loginscreen2> {
           txtColor: Colors.white,
         ),
         SizedBox(
-          height: 20,
+          height: 40,
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -372,6 +424,7 @@ class _Loginscreen2State extends State<Loginscreen2> {
               ),
               onTap: () {
                 SharedService.hardlogout(context);
+                cleardata();
               },
             ),
           ],
@@ -392,22 +445,24 @@ class _Loginscreen2State extends State<Loginscreen2> {
           child: Padding(
             padding: EdgeInsets.only(
                 left: widthOfScreen * 0.01, top: heightOfScreen * 0.02),
-            child: SizedBox(
-              height: heightOfScreen * 0.1,
-              width: widthOfScreen * 0.3,
-              child: FittedBox(
-                child: IconButton(
-                  icon: const FaIcon(FontAwesomeIcons.fingerprint),
-                  color: FvColors.maintheme,
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Useronboardingscreen2(),
+            child: Center(
+              child: GestureDetector(
+                onTap: _loginWithBio,
+                child: defaultTargetPlatform == TargetPlatform.android
+                    ? Icon(
+                        Icons.fingerprint,
+                        color: FvColors.maintheme,
+                        size: 48,
+                      )
+                    : SizedBox(
+                        height: 48,
+                        width: 48,
+                        child: Image.asset(
+                          "assets/face-id.png",
+                          height: 23,
+                          width: 23,
+                        ),
                       ),
-                    );
-                  },
-                ),
               ),
             ),
           ),

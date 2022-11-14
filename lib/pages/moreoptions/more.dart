@@ -1,9 +1,13 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:o3_cards/pages/moreoptions/change_pin.dart';
 import 'package:o3_cards/pages/moreoptions/edit_profile.dart';
 import 'package:o3_cards/ui/export.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../constant/constant.dart';
 import '../../models/profile_image.dart';
 import '../../services/api_service.dart';
 import '../../services/shared_service.dart';
@@ -31,6 +35,44 @@ class _MoreState extends State<More> {
   void initState() {
     super.initState();
     imageRoute = _getImageRoute();
+    initiate();
+  }
+
+  bool isSwitched = isbiometric;
+  void initiate() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    final bool isActive = prefs.getBool('biometric') ?? false;
+    setState(() {
+      isbiometric = isActive;
+    });
+  }
+
+  void savebiometricstatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('biometric', true);
+  }
+
+  void _toggleSwitch(bool value) {
+    if (isSwitched == false) {
+      isbiometric = true;
+      savebiometricstatus();
+      setState(() {
+        isSwitched = true;
+      });
+      if (kDebugMode) {
+        print('Switch Button is ON and biometric is $isbiometric');
+      }
+    } else {
+      isbiometric = false;
+      savebiometricstatus();
+      setState(() {
+        isSwitched = false;
+      });
+      if (kDebugMode) {
+        print('Switch Button is OFF and biometric is $isbiometric');
+      }
+    }
   }
 
   String _fullname = '';
@@ -409,7 +451,14 @@ class _MoreState extends State<More> {
                           ),
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ChangePin(),
+                              ),
+                            );
+                          },
                           icon: Icon(
                             Icons.chevron_right_rounded,
                             color: FvColors.maintheme,
@@ -462,6 +511,39 @@ class _MoreState extends State<More> {
               SizedBox(
                 height: heightOfScreen * 0.08,
                 width: widthOfScreen * 0.86,
+                child: Card(
+                  elevation: 5,
+                  shadowColor: Colors.grey.shade50,
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: SizedBox(
+                    height: heightOfScreen * 0.12,
+                    width: widthOfScreen * 0.89,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: widthOfScreen * 0.6,
+                          // height: heightOfScreen * 0.05,
+                          child: Text(
+                            'Enable Biometric?',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        Switch(
+                          value: isSwitched,
+                          activeColor: FvColors.maintheme,
+                          onChanged: _toggleSwitch,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
               SizedBox(
                 height: heightOfScreen * 0.08,

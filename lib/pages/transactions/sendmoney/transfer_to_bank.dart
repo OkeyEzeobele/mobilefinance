@@ -39,6 +39,7 @@ class _TransfertoBankState extends State<TransfertoBank> {
   String accountNamePlaceholder = '';
   String? narration = 'Cash Transfer from O3 Cards';
   String? pin = '';
+  int? cardBalance;
   late int cardId;
 
   @override
@@ -93,12 +94,20 @@ class _TransfertoBankState extends State<TransfertoBank> {
                   APIService.accountDetails(model).then(
                     (response) {
                       if (response!.success) {
-                        setState(
-                          () {
-                            accountNamePlaceholder =
-                                response.payload!.details!.accountName;
-                          },
-                        );
+                        if (response.payload!.details!.isNotEmpty) {
+                          setState(
+                            () {
+                              accountNamePlaceholder =
+                                  response.payload!.details!;
+                            },
+                          );
+                        } else {
+                          setState(
+                            () {
+                              accountNamePlaceholder = 'Account not found';
+                            },
+                          );
+                        }
                       } else {
                         setState(
                           () {
@@ -236,6 +245,13 @@ class _TransfertoBankState extends State<TransfertoBank> {
                               () {
                                 cardSelected != null
                                     ? cardId = cardSelected[0]
+                                    : null;
+                              },
+                            );
+                            setState(
+                              () {
+                                cardSelected != null
+                                    ? cardBalance = cardSelected[2]
                                     : null;
                               },
                             );
@@ -586,7 +602,13 @@ class _TransfertoBankState extends State<TransfertoBank> {
                             ),
                           ),
                           style: TextButton.styleFrom(
-                            backgroundColor: FvColors.maintheme,
+                            backgroundColor: (accountNamePlaceholder !=
+                                        'Account not found' &&
+                                    accountNamePlaceholder !=
+                                        'Please wait...' &&
+                                    accountNamePlaceholder != '')
+                                ? FvColors.maintheme
+                                : FvColors.maintheme.withOpacity(0.1),
                             shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.circular(16.31081199645996),
@@ -659,16 +681,6 @@ class _TransfertoBankState extends State<TransfertoBank> {
                                         }
                                       },
                                     );
-                                  },
-                                );
-                              } else {
-                                FormHelper.showSimpleAlertDialog(
-                                  context,
-                                  '',
-                                  'Details Incomplete',
-                                  'Ok',
-                                  () {
-                                    Navigator.of(context).pop();
                                   },
                                 );
                               }

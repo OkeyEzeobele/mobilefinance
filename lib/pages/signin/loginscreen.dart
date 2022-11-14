@@ -7,6 +7,7 @@ import 'package:o3_cards/models/login_request.dart';
 import 'package:o3_cards/services/api_service.dart';
 import 'package:o3_cards/ui/export.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
 
@@ -29,6 +30,11 @@ class _LoginscreenState extends State<Loginscreen> {
   @override
   void initState() {
     super.initState();
+  }
+
+  savecredentials() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('password', password!);
   }
 
   @override
@@ -232,6 +238,7 @@ class _LoginscreenState extends State<Loginscreen> {
                                 APIService.getUserInfo().then(
                                   (info) {
                                     if (info.success) {
+                                      savecredentials();
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
@@ -258,6 +265,7 @@ class _LoginscreenState extends State<Loginscreen> {
                                 APIService.getUserInfo().then(
                                   (info) {
                                     if (info.success) {
+                                      savecredentials();
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
@@ -300,6 +308,7 @@ class _LoginscreenState extends State<Loginscreen> {
                                 APIService.getUserInfo().then(
                                   (info) {
                                     if (info.success) {
+                                      savecredentials();
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
@@ -326,6 +335,7 @@ class _LoginscreenState extends State<Loginscreen> {
                                 APIService.getUserInfo().then(
                                   (info) {
                                     if (info.success) {
+                                      savecredentials();
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
@@ -403,31 +413,6 @@ class _LoginscreenState extends State<Loginscreen> {
             fontWeight: FontWeight.w400,
           ),
         ),
-        Align(
-          alignment: Alignment.topCenter,
-          child: Padding(
-            padding: EdgeInsets.only(
-                left: widthOfScreen * 0.01, top: heightOfScreen * 0.02),
-            child: SizedBox(
-              height: heightOfScreen * 0.1,
-              width: widthOfScreen * 0.3,
-              child: FittedBox(
-                child: IconButton(
-                  icon: const FaIcon(FontAwesomeIcons.fingerprint),
-                  color: FvColors.maintheme,
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Useronboardingscreen2(),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-          ),
-        )
       ],
     );
   }

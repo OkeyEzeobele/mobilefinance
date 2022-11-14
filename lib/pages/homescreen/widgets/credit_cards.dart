@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:o3_cards/ui/pallete.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
 import 'package:progress_indicators/progress_indicators.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../models/cardlist.dart';
 import '../../../services/api_service.dart';
 import '../../../services/shared_service.dart';
@@ -35,67 +36,52 @@ class _CreditCardsState extends State<CreditCards> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        FutureBuilder<CardListResponse?>(
-          future: userCards,
-          builder: (context, cardModel) {
-            var cards = cardModel.data?.payload;
-            if (cardModel.hasData) {
-              final _currentPageNotifier = ValueNotifier<int>(0);
-              final _pageController = PageController(
-                viewportFraction: 0.8,
-              );
-              if (cardModel.data!.payload.isEmpty) {
-                return SizedBox(
-                  height: 216,
-                  width: 450,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.contain,
-                        image: AssetImage('assets/cardplaceholder.png'),
+     double marginFromSafeArea = 24;
+    var heightOfScreen =
+        MediaQuery.of(context).size.height - marginFromSafeArea;
+    // var widthOfScreen = MediaQuery.of(context).size.width;
+    return FutureBuilder<CardListResponse?>(
+      future: userCards,
+      builder: (context, cardModel) {
+        var cards = cardModel.data?.payload;
+        if (cardModel.hasData) {
+          final _currentPageNotifier = ValueNotifier<int>(0);
+          final _pageController = PageController(
+            viewportFraction: 0.8,
+          );
+          if (cardModel.data!.payload.isEmpty) {
+            return SizedBox(
+              height: 216,
+              width: 450,
+              child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.contain,
+                    image: AssetImage('assets/cardplaceholder.png'),
+                  ),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Click to request for a card',
+                      style: GoogleFonts.inconsolata(
+                        fontSize: 15.0,
+                        color: Colors.white,
                       ),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    padding: EdgeInsets.all(20),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Click to request for a card',
-                          style: GoogleFonts.inconsolata(
-                            fontSize: 15.0,
-                            color: Colors.white,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                );
-              }
-              _buildCircleIndicator() {
-                return Positioned(
-                  top: 215,
-                  left: 0.0,
-                  right: 0.0,
-                  bottom: 0.0,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CirclePageIndicator(
-                      itemCount: cards!.length,
-                      currentPageNotifier: _currentPageNotifier,
-                      dotColor: Colors.grey,
-                      selectedDotColor: FvColors.maintheme,
-                    ),
-                  ),
-                );
-              }
-
-              return SizedBox(
+                    )
+                  ],
+                ),
+              ),
+            );
+          }
+          return Column(
+            children: [
+              SizedBox(
                 height: 216,
                 width: 450,
                 child: Stack(
@@ -119,6 +105,7 @@ class _CreditCardsState extends State<CreditCards> {
                           }
                           return 'assets/cardimgbusinesscredit.png';
                         }
+
                         return Column(
                           children: [
                             SizedBox(
@@ -241,87 +228,100 @@ class _CreditCardsState extends State<CreditCards> {
                                 ),
                               ),
                             ),
+                            // SizedBox(
+                            //   height: 5,
+                            // ),
                           ],
                         );
                       },
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    _buildCircleIndicator(),
-                  ],
-                ),
-              );
-            } else if (cardModel.hasError) {
-              return SizedBox(
-                height: 216,
-                width: 450,
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.contain,
-                      image: AssetImage('assets/cardplaceholder.png'),
-                    ),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                  padding: EdgeInsets.all(20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Failed to load cards',
-                        style: GoogleFonts.inconsolata(
-                          fontSize: 20.0,
-                          color: Colors.white,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              );
-            }
-            return SizedBox(
-              height: 216,
-              width: 450,
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.contain,
-                    image: AssetImage('assets/cardplaceholder.png'),
-                  ),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Loading Cards',
-                          style: GoogleFonts.inconsolata(
-                            fontSize: 20.0,
-                            color: Colors.white,
-                          ),
-                        ),
-                        JumpingDotsProgressIndicator(
-                          color: Colors.white,
-                          fontSize: 20.0,
-                        )
-                      ],
-                    ),
                   ],
                 ),
               ),
-            );
-          },
-        )
-      ],
+              SizedBox(
+                height: heightOfScreen * 0.008,
+              ),
+              SmoothPageIndicator(
+                controller: _pageController,
+                count: cards.length,
+                effect: ExpandingDotsEffect(
+                  activeDotColor: FvColors.maintheme,
+                  dotHeight: 5,
+                  dotWidth: 10,
+                  // type: WormType.thin,
+                  // strokeWidth: 5,
+                ),
+              ),
+            ],
+          );
+        } else if (cardModel.hasError) {
+          return SizedBox(
+            height: 216,
+            width: 450,
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.contain,
+                  image: AssetImage('assets/cardplaceholder.png'),
+                ),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+              padding: EdgeInsets.all(20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Failed to load cards',
+                    style: GoogleFonts.inconsolata(
+                      fontSize: 20.0,
+                      color: Colors.white,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        }
+        return SizedBox(
+          height: 216,
+          width: 450,
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.contain,
+                image: AssetImage('assets/cardplaceholder.png'),
+              ),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+            padding: EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Loading Cards',
+                      style: GoogleFonts.inconsolata(
+                        fontSize: 20.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                    JumpingDotsProgressIndicator(
+                      color: Colors.white,
+                      fontSize: 20.0,
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

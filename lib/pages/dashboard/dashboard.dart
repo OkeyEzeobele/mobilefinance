@@ -51,6 +51,7 @@ class _DashboardState extends State<Dashboard> {
       ),
       bottomNavigationBar: ConvexAppBar.badge(
         const {4: ''},
+        disableDefaultTabController: true,
         items: [
           const TabItem(
             icon: Iconsax.send_21,
