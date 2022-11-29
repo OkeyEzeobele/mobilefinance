@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_null_comparison
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -10,6 +11,7 @@ import 'package:o3_cards/pages/transactions/topup/fund_card.dart';
 import 'package:o3_cards/services/api_service.dart';
 import 'package:o3_cards/services/shared_service.dart';
 import 'package:o3_cards/ui/export.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../dashboard/dashboard.dart';
 
@@ -24,9 +26,11 @@ class _CardListState extends State<CardList> {
   late Future<CardListResponse?> userCards;
 
   Future<CardListResponse?> _getCardsModel() async {
-    Future<CardListResponse?> model = await SharedService.isCardsSaved()
-        ? SharedService.cardDetails()
-        : APIService.userCards();
+    Future<CardListResponse?> model = APIService.userCards();
+
+    // Future<CardListResponse?> model = await SharedService.isCardsSaved()
+    //     ? SharedService.cardDetails()
+    //     : APIService.userCards();
     return model;
   }
 
@@ -78,47 +82,85 @@ class _CardListState extends State<CardList> {
                   ),
                 ),
               ),
-              Container(
-                width: widthOfScreen * 0.3,
-                height: heightOfScreen * 0.04,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(181),
-                  color: FvColors.offwhitepink,
+              // Container(
+              //   width: widthOfScreen * 0.3,
+              //   height: heightOfScreen * 0.04,
+              //   decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.circular(181),
+              //     color: FvColors.offwhitepink,
+              //   ),
+              //   child: FittedBox(
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.center,
+              //       children: [
+              //         Text(
+              //           "Request Card",
+              //           textAlign: TextAlign.left,
+              //           style: TextStyle(
+              //             fontSize: 16,
+              //             color: FvColors.maintheme,
+              //             fontWeight: FontWeight.w600,
+              //           ),
+              //         ),
+              //         FittedBox(
+              //           child: IconButton(
+              //             onPressed: () {
+              //               Navigator.pushReplacement(
+              //                 context,
+              //                 MaterialPageRoute(
+              //                   builder: (context) => CardType(),
+              //                 ),
+              //               );
+              //             },
+              //             icon: const FaIcon(
+              //               FontAwesomeIcons.circlePlus,
+              //               color: FvColors.maintheme,
+              //             ),
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+            ],
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CardType(),
                 ),
-                child: FittedBox(
-                  child: Row(
+              );
+            },
+            child: DottedBorder(
+              borderType: BorderType.RRect,
+              strokeCap: StrokeCap.round,
+              color: Colors.grey,
+              radius: Radius.circular(15),
+              dashPattern: [10, 5],
+              strokeWidth: 2,
+              child: SizedBox(
+                height: 200,
+                width: 350,
+                child: Center(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        "Request Card",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: FvColors.maintheme,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      Icon(
+                        Icons.add_circle_outline,
+                        size: 48,
+                        color: Colors.grey,
                       ),
-                      FittedBox(
-                        child: IconButton(
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => CardType(),
-                              ),
-                            );
-                          },
-                          icon: const FaIcon(
-                            FontAwesomeIcons.circlePlus,
-                            color: FvColors.maintheme,
-                          ),
-                        ),
-                      ),
+                      Text('Get a Credit Card')
                     ],
                   ),
                 ),
               ),
-            ],
+            ),
           ),
           SizedBox(
             height: 15,
@@ -131,7 +173,7 @@ class _CardListState extends State<CardList> {
                 if (snapshot.data!.payload.isEmpty) {
                   return Center(
                     child: Padding(
-                      padding: EdgeInsets.only(top: heightOfScreen * 0.4),
+                      padding: EdgeInsets.only(top: heightOfScreen * 0.2),
                       child: Text(
                         'You have no cards yet',
                         style: GoogleFonts.lato(
@@ -158,6 +200,8 @@ class _CardListState extends State<CardList> {
                         }
                         return 'assets/cardimgbusinesscredit.png';
                       }
+
+                      // debugPrint('$widthOfScreen, $heightOfScreen');
 
                       return GestureDetector(
                         child: SizedBox(
@@ -208,7 +252,9 @@ class _CardListState extends State<CardList> {
                                   height: 30,
                                 ),
                                 Text(
-                                  (cards[i].first6 + 'XXXXXX' + cards[i].last4)
+                                  (cards[i].first6 +
+                                          'XXXXXX' +
+                                          cards[i].last4)
                                       .replaceAllMapped(RegExp(r".{4}"),
                                           (match) => "${match.group(0)} ")
                                       .trimRight(),
@@ -387,7 +433,7 @@ class _CardListState extends State<CardList> {
               } else if (snapshot.hasError) {
                 return Center(
                   child: Padding(
-                    padding: EdgeInsets.only(top: heightOfScreen * 0.4),
+                    padding: EdgeInsets.only(top: heightOfScreen * 0.2),
                     child: Text(
                       'Failed to load cards',
                       style: GoogleFonts.lato(
@@ -401,24 +447,50 @@ class _CardListState extends State<CardList> {
                   ),
                 );
               }
-              return SizedBox(
-                height: heightOfScreen * 0.8,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: widthOfScreen * 0.4,
-                      height: heightOfScreen * 0.2,
-                      child: FittedBox(
-                        child: Image.asset('assets/loadinganimation4.gif'),
+              return Expanded(
+                child: Shimmer.fromColors(
+                  baseColor: Colors.grey.shade300,
+                  highlightColor: Colors.grey.shade100,
+                  child: ListView.separated(
+                    itemBuilder: (_, __) => Padding(
+                      padding: EdgeInsets.fromLTRB(
+                          widthOfScreen * 0.1, 0, widthOfScreen * 0.1, 0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        height: 200,
+                        width: 420,
+                        // color: Colors.white,
                       ),
-                    )
-                    // const CircularProgressIndicator(
-                    //   color: FvColors.maintheme,
-                    // ),
-                  ],
+                    ),
+                    itemCount: 100,
+                    separatorBuilder: (BuildContext context, int index) =>
+                        SizedBox(
+                      height: 10,
+                    ),
+                  ),
                 ),
               );
+              // return SizedBox(
+              //   height: heightOfScreen * 0.8,
+              //   child: Column(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: [
+              //       SizedBox(
+              //         width: widthOfScreen * 0.4,
+              //         height: heightOfScreen * 0.2,
+              //         child: FittedBox(
+              //           child: Image.asset('assets/loadinganimation4.gif'),
+              //         ),
+              //       )
+              //       // const CircularProgressIndicator(
+              //       //   color: FvColors.maintheme,
+              //       // ),
+              //     ],
+              //   ),
+              // );
             },
           ),
         ],

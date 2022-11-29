@@ -406,12 +406,25 @@ class _MoreState extends State<More> {
                         ),
                         IconButton(
                           onPressed: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const Editprofile(),
+                            const snackBar = SnackBar(
+                              content: Text(
+                                'Not available in beta testing',
+                                style: TextStyle(fontWeight: FontWeight.w600),
                               ),
+                              backgroundColor: Colors.red,
+                              // shape: StadiumBorder(),
+                              dismissDirection: DismissDirection.up,
+                              behavior: SnackBarBehavior.floating,
+                              elevation: 30,
                             );
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                            // Navigator.pushReplacement(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => const Editprofile(),
+                            //   ),
+                            // );
                           },
                           icon: Icon(
                             Icons.chevron_right_rounded,
@@ -452,12 +465,25 @@ class _MoreState extends State<More> {
                         ),
                         IconButton(
                           onPressed: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const ChangePin(),
+                            const snackBar = SnackBar(
+                              content: Text(
+                                'Not available in beta testing',
+                                style: TextStyle(fontWeight: FontWeight.w600),
                               ),
+                              backgroundColor: Colors.red,
+                              // shape: StadiumBorder(),
+                              dismissDirection: DismissDirection.up,
+                              behavior: SnackBarBehavior.floating,
+                              elevation: 30,
                             );
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                            // Navigator.pushReplacement(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => const ChangePin(),
+                            //   ),
+                            // );
                           },
                           icon: Icon(
                             Icons.chevron_right_rounded,
@@ -497,7 +523,21 @@ class _MoreState extends State<More> {
                           ),
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            const snackBar = SnackBar(
+                              content: Text(
+                                'Not available in beta testing',
+                                style: TextStyle(fontWeight: FontWeight.w600),
+                              ),
+                              backgroundColor: Colors.red,
+                              // shape: StadiumBorder(),
+                              dismissDirection: DismissDirection.up,
+                              behavior: SnackBarBehavior.floating,
+                              elevation: 30,
+                            );
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          },
                           icon: Icon(
                             Icons.chevron_right_rounded,
                             color: FvColors.maintheme,

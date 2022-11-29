@@ -68,7 +68,7 @@ class _GreetingState extends State<Greeting> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            height: 30,
+            height: heightOfScreen*0.02,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -177,41 +177,53 @@ class _GreetingState extends State<Greeting> {
                       );
                     } else {
                       return GestureDetector(
-                        child: CircleAvatar(
-                          radius: heightOfScreen * 0.02,
-                          backgroundColor: FvColors.textview79FontColor,
-                          child: FaIcon(
-                            FontAwesomeIcons.solidUser,
-                            color: FvColors.textview50FontColor,
+                        child: Container(
+                          width: heightOfScreen * 0.045,
+                          height: heightOfScreen * 0.045,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: FvColors.textview79FontColor,
+                            ),
+                            shape: BoxShape.circle,
+                          ),
+                          child: FittedBox(
+                            fit: BoxFit.contain,
+                            child: Icon(Icons.person),
                           ),
                         ),
-                        onTap: () {
-                          // SharedService.logout(context);
-                        },
                       );
                     }
                   } else if (model.hasError) {
                     return GestureDetector(
-                      child: CircleAvatar(
-                        radius: heightOfScreen * 0.02,
-                        backgroundColor: FvColors.textview79FontColor,
-                        child: FaIcon(
-                          FontAwesomeIcons.solidUser,
-                          color: FvColors.textview50FontColor,
+                      child: Container(
+                        width: heightOfScreen * 0.045,
+                        height: heightOfScreen * 0.045,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: FvColors.textview79FontColor,
+                          ),
+                          shape: BoxShape.circle,
+                        ),
+                        child: FittedBox(
+                          fit: BoxFit.contain,
+                          child: Icon(Icons.person),
                         ),
                       ),
-                      onTap: () {
-                        // SharedService.logout(context);
-                      },
                     );
                   }
                   return GestureDetector(
-                    child: CircleAvatar(
-                      radius: heightOfScreen * 0.02,
-                      backgroundColor: FvColors.textview79FontColor,
-                      child: FaIcon(
-                        FontAwesomeIcons.solidUser,
-                        color: FvColors.textview50FontColor,
+                    child: Container(
+                      width: heightOfScreen * 0.045,
+                      height: heightOfScreen * 0.045,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: FvColors.textview79FontColor,
+                        ),
+                        shape: BoxShape.circle,
+                      ),
+                      child: FittedBox(
+                        fit: BoxFit.contain,
+                        child: Icon(Icons.person),
                       ),
                     ),
                     onTap: () {
@@ -221,9 +233,13 @@ class _GreetingState extends State<Greeting> {
                 },
               ),
               GestureDetector(
-                child: FaIcon(
-                  FontAwesomeIcons.solidBell,
-                  color: FvColors.maintheme,
+                child: FittedBox(
+                  fit: BoxFit.contain,
+                  child: Icon(
+                    Icons.notifications,
+                    color: FvColors.maintheme,
+                    size: 24,
+                  ),
                 ),
                 onTap: () {
                   // SharedService.logout(context);

@@ -9,6 +9,7 @@ import 'package:o3_cards/models/config.dart';
 import 'package:o3_cards/models/create_employer_response.dart';
 import 'package:o3_cards/models/employment_details.dart';
 import 'package:o3_cards/models/exchange_rates.dart';
+import 'package:o3_cards/models/fund_card_request.dart';
 import 'package:o3_cards/models/login_request.dart';
 import 'package:o3_cards/models/login_response.dart';
 import 'package:o3_cards/models/mono_auth_request.dart';
@@ -19,6 +20,7 @@ import 'package:o3_cards/services/shared_service.dart';
 import '../models/create_employer_request.dart';
 import '../models/create_personal_info_request.dart';
 import '../models/create_personal_info_response.dart';
+import '../models/fund_card_response.dart';
 import '../models/mono_auth_response.dart';
 import '../models/personal_details.dart';
 import '../models/profile_image.dart';
@@ -33,7 +35,7 @@ import '../models/user_info.dart';
 
 class APIService {
   static var client = http.Client();
-  static const urlHeader = Uri.http;
+  static const urlHeader = Uri.https;
 
   static Future<SignupResponse> signup(
     SignupRequest model,
@@ -443,5 +445,27 @@ class APIService {
       ),
     );
     return monoAuthJson(response.body);
+  }
+
+  static Future<FundResponse> fundCard(
+    FundRequest model,
+  ) async {
+    var loginDetails = await SharedService.loginDetails();
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'token': '${loginDetails!.payload!.token}'
+    };
+
+    var url = urlHeader(Config.baseUrl, Config.fundCard);
+
+    var response = await client.post(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode(
+        model.toJson(),
+      ),
+    );
+
+    return fundResponseJson(response.body);
   }
 }

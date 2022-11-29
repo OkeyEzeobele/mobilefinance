@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_null_comparison
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:o3_cards/services/shared_service.dart';
 import 'package:o3_cards/ui/export.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -391,17 +392,28 @@ class _CardTypeState extends State<CardType> {
                             Navigator.of(context).pop();
                           },
                         );
-                      } else if (cardType == 'debit') {
-                        FormHelper.showSimpleAlertDialog(
-                          context,
-                          '',
-                          'Prepaid card selected',
-                          'Ok',
-                          () {
-                            Navigator.of(context).pop();
-                          },
+                      }
+                      // else if (cardType == 'debit') {
+                      //   FormHelper.showSimpleAlertDialog(
+                      //     context,
+                      //     '',
+                      //     'Prepaid card selected',
+                      //     'Ok',
+                      //     () {
+                      //       Navigator.of(context).pop();
+                      //     },
+                      //   );
+                      // }
+                      else {
+                        const snackBar = SnackBar(
+                          content: Text('Coming Soon', style: TextStyle(fontWeight: FontWeight.w600),),
+                          backgroundColor: Colors.red,
+                          // shape: StadiumBorder(),
+                          dismissDirection: DismissDirection.up,
+                          behavior: SnackBarBehavior.floating,
+                          elevation: 30,
                         );
-                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         Future<void> _showMyDialog() async {
                           return showDialog<void>(
                             context: context,
@@ -452,7 +464,7 @@ class _CardTypeState extends State<CardType> {
                           );
                         }
 
-                        _showMyDialog();
+                        // _showMyDialog();
                       }
                     },
                   ),

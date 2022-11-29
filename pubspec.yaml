@@ -12,6 +12,7 @@ dependencies:
   circular_profile_avatar: ^2.0.5
   convex_bottom_bar: ^3.0.0
   dots_indicator: ^2.1.0
+  dotted_border: ^2.0.0+3
   email_validator: ^2.0.1
   firebase_core:
   flutter:
@@ -42,6 +43,7 @@ dependencies:
   progress_indicators: ^1.0.0
   pull_to_refresh: ^2.0.0
   shared_preferences:
+  shimmer: ^2.0.0
   smooth_page_indicator: ^1.0.0+2
   snippet_coder_utils: ^1.0.12
   toggle_switch: ^2.0.1

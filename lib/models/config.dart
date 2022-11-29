@@ -1,9 +1,9 @@
 class Config {
   // ROUTES
-  // static const baseUrl = 'api.o3virtual.com'; // live
+  static const baseUrl = 'api.o3virtual.com'; // live
   // static const baseUrl = '10.0.2.2:5000'; // android emulator
-  static const baseUrl =
-      '127.0.0.1:5000'; // ios emulator localhost maps to pc localhost
+  // static const baseUrl =
+  //     '127.0.0.1:5000'; // ios emulator localhost maps to pc localhost
   // static const baseUrl = 'https://0026ca16de46.ngrok.io/api/v1';
   // static const baseUrl = '10.2.0.66:7526';
   // static const baseUrl = '10.1.3.16:8443';
@@ -50,4 +50,5 @@ class Config {
   static const forgotPassword = '/api/v1/initiate-password-reset';
   static const setupPin = '/api/v1/spin';
   static const monoAuth = '/api/v1/mono-auth';
+  static const fundCard = '/api/v1/fund-card';
 }

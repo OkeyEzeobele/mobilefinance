@@ -58,14 +58,14 @@ class Payload {
   });
   late final int id;
   late final int userId;
-  late final num amount;
+  late final dynamic amount;
   late final String status;
-  late final int fee;
+  late final dynamic fee;
   late final dynamic extfee;
   late final String destination;
-  late final int destId;
+  late final dynamic destId;
   late final String source;
-  late final int sourceId;
+  late final dynamic sourceId;
   late final String txref;
   late final dynamic response;
   late final String? comment;

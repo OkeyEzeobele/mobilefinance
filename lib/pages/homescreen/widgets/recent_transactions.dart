@@ -20,9 +20,10 @@ class _RecenttransactionsState extends State<Recenttransactions> {
   late Future<TransactionlistResponse?> transactionList;
 
   Future<TransactionlistResponse?> _getTxnsModel() async {
-    Future<TransactionlistResponse?> model = await SharedService.isTxnsSaved()
-        ? SharedService.txnList()
-        : APIService.userTransactions();
+   Future<TransactionlistResponse?> model = APIService.userTransactions();
+    // Future<TransactionlistResponse?> model = await SharedService.isTxnsSaved()
+    //     ? SharedService.txnList()
+    //     : APIService.userTransactions();
     return model;
   }
 

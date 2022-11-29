@@ -22,9 +22,11 @@ class _CardsModalState extends State<CardsModal> {
   String cardNum = '';
   int? cardBalance;
   Future<CardListResponse?> _getCardsModel() async {
-    Future<CardListResponse?> model = await SharedService.isCardsSaved()
-        ? SharedService.cardDetails()
-        : APIService.userCards();
+    Future<CardListResponse?> model = APIService.userCards();
+    //  Future<CardListResponse?> model = await SharedService.isCardsSaved()
+    //     ? SharedService.cardDetails()
+    //     : APIService.userCards();
+  
     return model;
   }
 

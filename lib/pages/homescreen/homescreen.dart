@@ -19,6 +19,7 @@ class _HomescreenState extends State<Homescreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: FvColors.edittext51Background,
+      // backgroundColor: Color.fromARGB(255, 72, 11, 7),
       body: Column(
         children: [
           SizedBox.square(

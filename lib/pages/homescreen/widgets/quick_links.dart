@@ -53,14 +53,9 @@ class _QuickLinksState extends State<QuickLinks> {
                     SizedBox.square(
                       dimension: widthOfScreen * 0.13,
                       child: OutlinedButton(
-                        child: FittedBox(
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Image.asset(
-                              "assets/send_icon.png",
-                              scale: 0.05,
-                            ),
-                          ),
+                        child: Image.asset(
+                          "assets/send_icon.png",
+                          scale: 0.05,
                         ),
                         style: TextButton.styleFrom(
                           backgroundColor:
@@ -108,10 +103,12 @@ class _QuickLinksState extends State<QuickLinks> {
                     SizedBox.square(
                       dimension: widthOfScreen * 0.13,
                       child: OutlinedButton(
-                        child: const Icon(
-                          FontAwesomeIcons.wallet,
-                          color: FvColors.maintheme,
-                          // size: 24,
+                        child: FittedBox(
+                          child: Icon(
+                            Icons.wallet,
+                            color: FvColors.maintheme,
+                            // size: 24,
+                          ),
                         ),
                         style: TextButton.styleFrom(
                           backgroundColor:

@@ -5,22 +5,23 @@ import 'package:intl/intl.dart';
 import 'package:o3_cards/pages/dashboard/dashboard.dart';
 import 'package:o3_cards/ui/export.dart';
 
-class TransferCompleted extends StatefulWidget {
-  final String message;
+class TopupCompleted extends StatefulWidget {
   final String amount;
-  final String recepient;
-  const TransferCompleted(
-      {Key? key,
-      required this.message,
-      required this.amount,
-      required this.recepient})
-      : super(key: key);
+  final String message;
+  final bool success;
+
+  const TopupCompleted({
+    Key? key,
+    required this.amount,
+    required this.success,
+    required this.message,
+  }) : super(key: key);
 
   @override
-  _TransferCompletedState createState() => _TransferCompletedState();
+  _TopupCompletedState createState() => _TopupCompletedState();
 }
 
-class _TransferCompletedState extends State<TransferCompleted> {
+class _TopupCompletedState extends State<TopupCompleted> {
   @override
   Widget build(BuildContext context) {
     double marginFromSafeArea = 24;
@@ -38,37 +39,48 @@ class _TransferCompletedState extends State<TransferCompleted> {
               width: widthOfScreen * 0.2,
               height: heightOfScreen * 0.1,
               child: FittedBox(
-                child: Column(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.green,
-                      child: Icon(
-                        FontAwesomeIcons.check,
-                        color: Colors.white,
+                child: widget.success
+                    ? Column(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.green,
+                            child: Icon(
+                              FontAwesomeIcons.check,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      )
+                    : Column(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.red,
+                            child: Icon(
+                              FontAwesomeIcons.x,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
               ),
             ),
             SizedBox(
               height: heightOfScreen * 0.05,
             ),
-            Text('You sent ${NumberFormat.currency(
-              name: '₦ ',
-              decimalDigits: 0,
-            ).format(
-              int.parse(widget.amount),
-            )} to '),
-            Text(
-              widget.recepient,
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                color: FvColors.textview50FontColor,
-              ),
+            Container(
+              child: widget.success
+                  ? Text(
+                      'Your card has been topped up with ${NumberFormat.currency(
+                        name: '₦ ',
+                        decimalDigits: 0,
+                      ).format(
+                        int.parse(widget.amount),
+                      )}',
+                    )
+                  : Text(widget.message),
             ),
             SizedBox(
-              height: heightOfScreen*0.06,
+              height: heightOfScreen * 0.06,
             ),
             SizedBox(
               height: heightOfScreen * 0.05,
@@ -98,7 +110,9 @@ class _TransferCompletedState extends State<TransferCompleted> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const Dashboard(pageIndex: 2,),
+                      builder: (context) => const Dashboard(
+                        pageIndex: 2,
+                      ),
                     ),
                   );
                 },

@@ -1,15 +1,25 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutterbudpay/flutterbudpay.dart';
-import 'package:o3_cards/models/topup_request.dart';
+// import 'package:get/get.dart';
+// import 'package:http/http.dart';
+import 'package:o3_cards/models/fund_card_request.dart';
+// import 'package:o3_cards/models/topup_request.dart';
+// import 'package:o3_cards/pages/transactions/topup/checkout.dart';
 import 'package:o3_cards/pages/transactions/topup/fund_card.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
+import 'package:o3_cards/pages/transactions/topup/funding_complete.dart';
 import 'package:o3_cards/services/api_service.dart';
 import 'package:o3_cards/services/shared_service.dart';
-import 'package:snippet_coder_utils/FormHelper.dart';
-import 'package:url_launcher/url_launcher.dart';
+// import 'package:snippet_coder_utils/FormHelper.dart';
+// import 'package:url_launcher/url_launcher.dart';
 import '../../../widgets/slider.dart';
+// import '../../cardList/cardlist.dart';
 import '/ui/export.dart';
 // import 'package:intl/intl.dart';
 
@@ -26,21 +36,24 @@ class AmountNaira extends StatefulWidget {
 
 class _AmountNairaState extends State<AmountNaira> {
   final plugin = Budpay();
-  @override
-  void initState() {
-    super.initState();
-
-    // plugin.initialize(publicKey: publicKey,secretKey:secretKey);
-  }
+  String publicKey = dotenv.env['BUDPAY_PUBLIC_KEY']!;
+  String secretKey = dotenv.env['BUDPAY_SECRET_KEY']!;
 
   bool isAPIcallProcess = false;
   final _formKey = GlobalKey<FormState>();
   final FocusNode _nodeText1 = FocusNode();
-  String? amount = '';
+  String _amount = '0';
   String _email = '';
-  String publicKey = dotenv.env['BUDPAY_PUBLIC_KEY']!;
-  String secretKey = dotenv.env['BUDPAY_SECRET_KEY']!;
-  
+  String _reference = '';
+  String o3Ref = '';
+  // String _accessCode = '';
+
+  @override
+  void initState() {
+    super.initState();
+    plugin.initialize(publicKey: publicKey, secretKey: secretKey);
+  }
+
   _AmountNairaState() {
     getTextFromFile().then(
       (val) => setState(
@@ -50,6 +63,29 @@ class _AmountNairaState extends State<AmountNaira> {
       ),
     );
   }
+  void _getReference() {
+    String platform;
+    if (!kIsWeb) {
+      if (Platform.isIOS) {
+        platform = 'iOS';
+      } else {
+        platform = 'Android';
+      }
+    } else {
+      platform = "WEB";
+    }
+    debugPrint(
+        'ChargedFrom${platform}_${DateTime.now().millisecondsSinceEpoch}');
+    // return 'ChargedFrom${platform}_${DateTime.now().millisecondsSinceEpoch}';
+    setState(() {
+      _reference =
+          'ChargedFrom${platform}_${DateTime.now().millisecondsSinceEpoch}';
+      var val = _reference.split('_');
+      var val2 = val[1];
+      o3Ref = val2.substring(val2.length-12);
+    });
+  }
+
   KeyboardActionsConfig _buildConfig(BuildContext context) {
     return KeyboardActionsConfig(
       keyboardActionsPlatform: KeyboardActionsPlatform.ALL,
@@ -179,7 +215,11 @@ class _AmountNairaState extends State<AmountNaira> {
                             child: TextFormField(
                               focusNode: _nodeText1,
                               onChanged: (text) {
-                                amount = text;
+                                setState(() {
+                                  _amount = text;
+                                });
+
+                                // debugPrint('amount:$_amount');
                               },
                               validator: (value) {
                                 if (value == null ||
@@ -245,58 +285,123 @@ class _AmountNairaState extends State<AmountNaira> {
                                 ),
                               ),
                             ),
-                            onPressed: () {
+                            onPressed: () async {
+                              debugPrint(
+                                'amount:${int.parse(_amount)}, reference:$_reference and $o3Ref ',
+                              );
                               if (_formKey.currentState!.validate()) {
-                                setState(
-                                  () {
+                                _getReference();
+                                debugPrint(
+                                  'reference:$_reference and $o3Ref ',
+                                );
+                                Charge charge = Charge()
+                                  ..amount = int.parse(_amount) * 100
+                                  ..reference = _reference
+                                  ..email = _email;
+
+                                var response = await plugin.checkout(
+                                  context,
+                                  fullscreen: true,
+                                  charge: charge,
+                                  logo: Text(
+                                    'data',
+                                    style: TextStyle(color: Colors.blue),
+                                  ),
+                                  // logo: Image.asset(
+                                  //   "assets/CapitalLogoIcon_ImageView_46-190x110.png",
+                                  // ),
+                                );
+                                if (response.status == true) {
+                                  setState(() {
                                     isAPIcallProcess = true;
-                                  },
-                                );
-                                TopupRequest model = TopupRequest(
-                                  email: _email,
-                                  amount: amount!,
-                                  cardId: widget.id,
-                                  currency: 'NGN',
-                                );
-                                APIService.topup(model).then(
-                                  (response) {
+                                  });
+                                  FundRequest model = FundRequest(
+                                    amount: int.parse(_amount),
+                                    cardId: widget.id,
+                                    txref: o3Ref,
+                                  );
+                                  APIService.fundCard(model).then((value) {
                                     setState(() {
                                       isAPIcallProcess = false;
                                     });
-                                    if (response.success) {
-                                      final Uri _url = Uri.parse(
-                                        response.payload.authorizationUrl,
-                                      );
-                                      void _launchUrl() async {
-                                        if (!await launchUrl(_url)) {
-                                          FormHelper.showSimpleAlertDialog(
-                                            context,
-                                            '',
-                                            'Network Timeout',
-                                            'Close',
-                                            () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          );
-                                        }
-                                      }
-
-                                      _launchUrl();
-                                    } else {
-                                      FormHelper.showSimpleAlertDialog(
+                                    debugPrint(jsonEncode(value));
+                                    if (value.success) {
+                                      Navigator.pushReplacement(
                                         context,
-                                        '',
-                                        response.message,
-                                        'Ok',
-                                        () {
-                                          Navigator.of(context).pop();
-                                        },
+                                        MaterialPageRoute(
+                                          builder: (context) => TopupCompleted(
+                                            amount: _amount,
+                                            success: true,
+                                            message: '',
+                                          ),
+                                        ),
+                                      );
+                                    } else {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => TopupCompleted(
+                                            amount: _amount,
+                                            success: false,
+                                            message: value.message,
+                                          ),
+                                        ),
                                       );
                                     }
+                                  });
+                                }
 
-                                    debugPrint(response.message);
-                                  },
-                                );
+                                // Get.to(() => Checkout());
+                                //   setState(
+                                //     () {
+                                //       isAPIcallProcess = true;
+                                //     },
+                                //   );
+                                //   TopupRequest model = TopupRequest(
+                                //     email: _email,
+                                //     amount: amount!,
+                                //     cardId: widget.id,
+                                //     currency: 'NGN',
+                                //   );
+                                //   APIService.topup(model).then(
+                                //     (response) {
+                                //       setState(() {
+                                //         isAPIcallProcess = false;
+                                //       });
+                                //       if (response.success) {
+                                //         final Uri _url = Uri.parse(
+                                //           response.payload.authorizationUrl,
+                                //         );
+                                //         void _launchUrl() async {
+                                //           if (!await launchUrl(_url)) {
+                                //             FormHelper.showSimpleAlertDialog(
+                                //               context,
+                                //               '',
+                                //               'Network Timeout',
+                                //               'Close',
+                                //               () {
+                                //                 Navigator.of(context).pop();
+                                //               },
+                                //             );
+                                //           }
+                                //         }
+
+                                //         _launchUrl();
+                                //       } else {
+                                //         FormHelper.showSimpleAlertDialog(
+                                //           context,
+                                //           '',
+                                //           response.message,
+                                //           'Ok',
+                                //           () {
+                                //             Navigator.of(context).pop();
+                                //           },
+                                //         );
+                                //       }
+
+                                //       debugPrint(response.message);
+                                //     },
+                                //   );
                               }
                             },
                           ),
