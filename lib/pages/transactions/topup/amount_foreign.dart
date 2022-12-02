@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutterbudpay/flutterbudpay.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:o3_cards/models/exchange_rates.dart';
 // import 'package:o3_cards/models/topup_request.dart';
 import 'package:o3_cards/pages/transactions/topup/fund_card.dart';
@@ -22,9 +24,10 @@ import 'funding_complete.dart';
 // import 'package:intl/intl.dart';
 
 class AmountForeign extends StatefulWidget {
+    final StreamController<SessionState> sessionStateStream;
   final int id;
 
-  const AmountForeign({Key? key, required this.id}) : super(key: key);
+  const AmountForeign({Key? key, required this.id, required this.sessionStateStream}) : super(key: key);
 
   @override
   _AmountForeignState createState() => _AmountForeignState();
@@ -171,7 +174,7 @@ class _AmountForeignState extends State<AmountForeign> {
                                 context,
                                 SlideRightRoute(
                                   page: FundCard(
-                                    id: widget.id,
+                                    id: widget.id, sessionStateStream: widget.sessionStateStream
                                   ),
                                 ),
                               );
@@ -491,7 +494,7 @@ class _AmountForeignState extends State<AmountForeign> {
                                                   TopupCompleted(
                                                 amount: convertedAmount,
                                                 success: true,
-                                                message: '',
+                                                message: '', sessionStateStream: widget.sessionStateStream,
                                               ),
                                             ),
                                           );
@@ -503,7 +506,7 @@ class _AmountForeignState extends State<AmountForeign> {
                                                   TopupCompleted(
                                                 amount: convertedAmount,
                                                 success: false,
-                                                message: value.message,
+                                                message: value.message, sessionStateStream: widget.sessionStateStream,
                                               ),
                                             ),
                                           );

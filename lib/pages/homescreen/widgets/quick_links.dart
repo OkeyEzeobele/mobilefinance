@@ -1,16 +1,19 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:math';
+import 'dart:async';
+// import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_alert/flutter_platform_alert.dart';
+// import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:o3_cards/pages/creditCardApplication/select_card_type.dart';
 import 'package:o3_cards/pages/dashboard/dashboard.dart';
 import 'package:o3_cards/ui/pallete.dart';
 
 class QuickLinks extends StatefulWidget {
-  const QuickLinks({Key? key}) : super(key: key);
+  final StreamController<SessionState> sessionStateStream;
+  const QuickLinks({Key? key, required this.sessionStateStream}) : super(key: key);
 
   @override
   _QuickLinksState createState() => _QuickLinksState();
@@ -72,7 +75,7 @@ class _QuickLinksState extends State<QuickLinks> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Dashboard(pageIndex: 0),
+                              builder: (context) => Dashboard(pageIndex: 0, sessionStateStream: widget.sessionStateStream,),
                             ),
                           );
                         },
@@ -170,7 +173,7 @@ class _QuickLinksState extends State<QuickLinks> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => CardType(),
+                              builder: (context) => CardType( sessionStateStream: widget.sessionStateStream,),
                             ),
                           );
                         },

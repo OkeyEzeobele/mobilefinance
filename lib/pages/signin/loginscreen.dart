@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:async';
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:o3_cards/pages/dashboard/dashboard.dart';
 import 'package:o3_cards/models/login_request.dart';
 import 'package:o3_cards/services/api_service.dart';
@@ -14,7 +17,8 @@ import 'package:snippet_coder_utils/ProgressHUD.dart';
 import '../signup/signup.dart';
 
 class Loginscreen extends StatefulWidget {
-  const Loginscreen({Key? key}) : super(key: key);
+  final StreamController<SessionState> sessionStateStream;
+  const Loginscreen({Key? key, required this.sessionStateStream}) : super(key: key);
 
   @override
   _LoginscreenState createState() => _LoginscreenState();
@@ -29,6 +33,7 @@ class _LoginscreenState extends State<Loginscreen> {
 
   @override
   void initState() {
+     widget.sessionStateStream.add(SessionState.stopListening);
     super.initState();
   }
 
@@ -127,7 +132,7 @@ class _LoginscreenState extends State<Loginscreen> {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const Signupscreen(),
+                    builder: (context) => Signupscreen(sessionStateStream: widget.sessionStateStream),
                   ),
                 );
               },
@@ -278,8 +283,8 @@ class _LoginscreenState extends State<Loginscreen> {
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => const Dashboard(
-                                            pageIndex: 2,
+                                          builder: (context) => Dashboard(
+                                            pageIndex: 2, sessionStateStream: widget.sessionStateStream,
                                           ),
                                         ),
                                       );
@@ -305,7 +310,8 @@ class _LoginscreenState extends State<Loginscreen> {
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => const Dashboard(
+                                          builder: (context) => Dashboard(
+                                            sessionStateStream:widget.sessionStateStream,
                                             pageIndex: 2,
                                           ),
                                         ),
@@ -348,7 +354,8 @@ class _LoginscreenState extends State<Loginscreen> {
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => const Dashboard(
+                                          builder: (context) => Dashboard(
+                                            sessionStateStream: widget.sessionStateStream,
                                             pageIndex: 2,
                                           ),
                                         ),
@@ -375,7 +382,8 @@ class _LoginscreenState extends State<Loginscreen> {
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => const Dashboard(
+                                          builder: (context) =>  Dashboard(
+                                            sessionStateStream:widget.sessionStateStream,
                                             pageIndex: 2,
                                           ),
                                         ),

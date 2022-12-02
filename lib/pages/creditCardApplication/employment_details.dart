@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:nigerian_states_and_lga/nigerian_states_and_lga.dart';
 import 'package:o3_cards/models/create_employer_request.dart';
 
@@ -15,6 +18,7 @@ import '/ui/export.dart';
 // import 'package:intl/intl.dart';
 
 class EmploymentDetails extends StatefulWidget {
+  final StreamController<SessionState> sessionStateStream;
   final bool isDialog;
   final String name;
   final String type;
@@ -30,7 +34,7 @@ class EmploymentDetails extends StatefulWidget {
     required this.id,
     required this.employmentDetailsAdded,
     required this.statementAdded,
-    required this.personalDetailsAdded,
+    required this.personalDetailsAdded, required this.sessionStateStream,
   }) : super(key: key);
 
   @override
@@ -185,7 +189,7 @@ class _EmploymentDetails extends State<EmploymentDetails> {
                                             statementAdded:
                                                 widget.statementAdded,
                                             personalDetailsAdded:
-                                                widget.personalDetailsAdded,
+                                                widget.personalDetailsAdded, sessionStateStream: widget.sessionStateStream,
                                           ),
                                         ),
                                       );
@@ -1091,7 +1095,7 @@ class _EmploymentDetails extends State<EmploymentDetails> {
                                                                         statementAdded:
                                                                             widget.statementAdded,
                                                                         personalDetailsAdded:
-                                                                            widget.personalDetailsAdded,
+                                                                            widget.personalDetailsAdded, sessionStateStream: widget.sessionStateStream,
                                                                       ),
                                                                     ),
                                                                   );
@@ -1157,7 +1161,7 @@ class _EmploymentDetails extends State<EmploymentDetails> {
                                                                         statementAdded:
                                                                             widget.statementAdded,
                                                                         personalDetailsAdded:
-                                                                            widget.personalDetailsAdded,
+                                                                            widget.personalDetailsAdded, sessionStateStream: widget.sessionStateStream,
                                                                       ),
                                                                     ),
                                                                   );
@@ -1263,7 +1267,7 @@ class _EmploymentDetails extends State<EmploymentDetails> {
                                   employmentDetailsAdded: employmentSaved,
                                   statementAdded: widget.statementAdded,
                                   personalDetailsAdded:
-                                      widget.personalDetailsAdded,
+                                      widget.personalDetailsAdded, sessionStateStream: widget.sessionStateStream,
                                 ),
                               ),
                             );
@@ -1938,7 +1942,7 @@ class _EmploymentDetails extends State<EmploymentDetails> {
                                         employmentDetailsAdded: employmentSaved,
                                         statementAdded: widget.statementAdded,
                                         personalDetailsAdded:
-                                            widget.personalDetailsAdded,
+                                            widget.personalDetailsAdded, sessionStateStream: widget.sessionStateStream,
                                       ),
                                     ),
                                   );
@@ -1966,7 +1970,7 @@ class _EmploymentDetails extends State<EmploymentDetails> {
                   type: widget.type,
                   employmentDetailsAdded: employmentSaved,
                   statementAdded: widget.statementAdded,
-                  personalDetailsAdded: widget.personalDetailsAdded,
+                  personalDetailsAdded: widget.personalDetailsAdded, sessionStateStream: widget.sessionStateStream,
                 ),
               ),
             );
@@ -2006,7 +2010,7 @@ class _EmploymentDetails extends State<EmploymentDetails> {
                       type: widget.type,
                       employmentDetailsAdded: employmentSaved,
                       statementAdded: widget.statementAdded,
-                      personalDetailsAdded: widget.personalDetailsAdded,
+                      personalDetailsAdded: widget.personalDetailsAdded, sessionStateStream: widget.sessionStateStream,
                     ),
                   ),
                 );

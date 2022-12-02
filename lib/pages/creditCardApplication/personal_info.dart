@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:o3_cards/models/create_personal_info_request.dart';
 import 'package:o3_cards/models/personal_details.dart';
 
@@ -15,6 +18,7 @@ import '/ui/export.dart';
 // import 'package:intl/intl.dart';
 
 class PersonalInfo extends StatefulWidget {
+  final StreamController<SessionState> sessionStateStream;
   final bool isDialog;
   final String name;
   final String type;
@@ -30,7 +34,7 @@ class PersonalInfo extends StatefulWidget {
     required this.id,
     required this.employmentDetailsAdded,
     required this.statementAdded,
-    required this.personalDetailsAdded,
+    required this.personalDetailsAdded, required this.sessionStateStream,
   }) : super(key: key);
 
   @override
@@ -206,7 +210,7 @@ class _PersonalInfo extends State<PersonalInfo> {
                                                 widget.employmentDetailsAdded,
                                             statementAdded:
                                                 widget.statementAdded,
-                                            personalDetailsAdded: personalSaved,
+                                            personalDetailsAdded: personalSaved, sessionStateStream: widget.sessionStateStream,
                                           ),
                                         ),
                                       );
@@ -947,7 +951,7 @@ class _PersonalInfo extends State<PersonalInfo> {
                                                                         statementAdded:
                                                                             widget.statementAdded,
                                                                         personalDetailsAdded:
-                                                                            personalSaved,
+                                                                            personalSaved, sessionStateStream: widget.sessionStateStream,
                                                                       ),
                                                                     ),
                                                                   );
@@ -1013,7 +1017,7 @@ class _PersonalInfo extends State<PersonalInfo> {
                                                                         statementAdded:
                                                                             widget.statementAdded,
                                                                         personalDetailsAdded:
-                                                                            personalSaved,
+                                                                            personalSaved, sessionStateStream: widget.sessionStateStream,
                                                                       ),
                                                                     ),
                                                                   );
@@ -1118,7 +1122,7 @@ class _PersonalInfo extends State<PersonalInfo> {
                                   employmentDetailsAdded:
                                       widget.employmentDetailsAdded,
                                   statementAdded: widget.statementAdded,
-                                  personalDetailsAdded: personalSaved,
+                                  personalDetailsAdded: personalSaved, sessionStateStream: widget.sessionStateStream,
                                 ),
                               ),
                             );
@@ -1720,7 +1724,7 @@ class _PersonalInfo extends State<PersonalInfo> {
                                         employmentDetailsAdded:
                                             widget.employmentDetailsAdded,
                                         statementAdded: widget.statementAdded,
-                                        personalDetailsAdded: personalSaved,
+                                        personalDetailsAdded: personalSaved, sessionStateStream: widget.sessionStateStream,
                                       ),
                                     ),
                                   );
@@ -1748,7 +1752,7 @@ class _PersonalInfo extends State<PersonalInfo> {
                   type: widget.type,
                   employmentDetailsAdded: widget.employmentDetailsAdded,
                   statementAdded: widget.statementAdded,
-                  personalDetailsAdded: personalSaved,
+                  personalDetailsAdded: personalSaved, sessionStateStream: widget.sessionStateStream,
                 ),
               ),
             );
@@ -1788,7 +1792,7 @@ class _PersonalInfo extends State<PersonalInfo> {
                       type: widget.type,
                       employmentDetailsAdded: widget.employmentDetailsAdded,
                       statementAdded: widget.statementAdded,
-                      personalDetailsAdded: personalSaved,
+                      personalDetailsAdded: personalSaved, sessionStateStream: widget.sessionStateStream,
                     ),
                   ),
                 );

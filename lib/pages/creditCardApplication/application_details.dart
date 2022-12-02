@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_null_comparison
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:mono_flutter/mono_flutter.dart';
 import 'package:o3_cards/pages/creditCardApplication/personal_info.dart';
 import 'package:o3_cards/pages/creditCardApplication/select_card_type.dart';
@@ -15,6 +18,7 @@ import '../../services/api_service.dart';
 import 'employment_details.dart';
 
 class ApplicationDetails extends StatefulWidget {
+  final StreamController<SessionState> sessionStateStream;
   final String name;
   final String type;
   final int? id;
@@ -28,7 +32,7 @@ class ApplicationDetails extends StatefulWidget {
     required this.id,
     required this.employmentDetailsAdded,
     required this.statementAdded,
-    required this.personalDetailsAdded,
+    required this.personalDetailsAdded, required this.sessionStateStream,
   }) : super(key: key);
 
   @override
@@ -206,7 +210,7 @@ class _ApplicationDetailsState extends State<ApplicationDetails> {
                           Navigator.pushReplacement(
                             context,
                             SlideRightRoute(
-                              page: CardType(),
+                              page: CardType(sessionStateStream: widget.sessionStateStream,),
                             ),
                           );
                         },
@@ -239,7 +243,7 @@ class _ApplicationDetailsState extends State<ApplicationDetails> {
                                 id: widget.id,
                                 employmentDetailsAdded: employmentSaved,
                                 statementAdded: statementConnected,
-                                personalDetailsAdded: personalSaved,
+                                personalDetailsAdded: personalSaved, sessionStateStream: widget.sessionStateStream,
                               ),
                             ),
                           );
@@ -315,7 +319,7 @@ class _ApplicationDetailsState extends State<ApplicationDetails> {
                                 id: widget.id,
                                 employmentDetailsAdded: employmentSaved,
                                 statementAdded: statementConnected,
-                                personalDetailsAdded: personalSaved,
+                                personalDetailsAdded: personalSaved, sessionStateStream: widget.sessionStateStream,
                               ),
                             ),
                           );
@@ -436,7 +440,7 @@ class _ApplicationDetailsState extends State<ApplicationDetails> {
                                               statementAdded:
                                                   statementConnected,
                                               personalDetailsAdded:
-                                                  personalSaved,
+                                                  personalSaved, sessionStateStream: widget.sessionStateStream,
                                             ),
                                             transitionDuration: Duration.zero,
                                             reverseTransitionDuration:
@@ -464,7 +468,7 @@ class _ApplicationDetailsState extends State<ApplicationDetails> {
                                               statementAdded:
                                                   statementConnected,
                                               personalDetailsAdded:
-                                                  personalSaved,
+                                                  personalSaved, sessionStateStream: widget.sessionStateStream,
                                             ),
                                             transitionDuration: Duration.zero,
                                             reverseTransitionDuration:

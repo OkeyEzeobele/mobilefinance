@@ -1,11 +1,15 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:o3_cards/pages/dashboard/dashboard.dart';
 import 'package:o3_cards/ui/export.dart';
 
 class TransferCompleted extends StatefulWidget {
+  final StreamController<SessionState> sessionStateStream;
   final String message;
   final String amount;
   final String recepient;
@@ -15,7 +19,7 @@ class TransferCompleted extends StatefulWidget {
       required this.message,
       required this.amount,
       required this.recepient,
-      required this.success})
+      required this.success, required this.sessionStateStream})
       : super(key: key);
 
   @override
@@ -23,6 +27,11 @@ class TransferCompleted extends StatefulWidget {
 }
 
 class _TransferCompletedState extends State<TransferCompleted> {
+  @override
+  void initState() {
+    widget.sessionStateStream.add(SessionState.startListening);
+    super.initState();
+  }
   Widget text() {
     if (widget.success) {
       return Column(
@@ -161,8 +170,8 @@ class _TransferCompletedState extends State<TransferCompleted> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Dashboard(
-                            pageIndex: 2,
+                          builder: (context) => Dashboard(
+                            pageIndex: 2, sessionStateStream: widget.sessionStateStream,
                           ),
                         ),
                       );

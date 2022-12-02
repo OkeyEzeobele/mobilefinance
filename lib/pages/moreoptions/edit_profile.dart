@@ -1,13 +1,17 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:o3_cards/pages/moreoptions/more.dart';
 import 'package:o3_cards/ui/export.dart';
 
 import '../../widgets/slider.dart';
 
 class Editprofile extends StatefulWidget {
-  const Editprofile({Key? key}) : super(key: key);
+  final StreamController<SessionState> sessionStateStream;
+  const Editprofile({Key? key, required this.sessionStateStream}) : super(key: key);
 
   @override
   _EditprofileState createState() => _EditprofileState();
@@ -50,7 +54,7 @@ class _EditprofileState extends State<Editprofile> {
                     Navigator.pushReplacement(
                       context,
                       SlideRightRoute(
-                        page: More(),
+                        page: More(sessionStateStream: widget.sessionStateStream,),
                       ),
                     );
                   },

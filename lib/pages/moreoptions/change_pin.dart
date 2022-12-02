@@ -1,14 +1,18 @@
+import 'dart:async';
+
 import 'package:custom_pin_screen/custom_pin_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:o3_cards/pages/moreoptions/more.dart';
 import 'package:o3_cards/ui/pallete.dart';
 
 import '../../widgets/slider.dart';
-import '/../widgets/dialpad.dart';
+// import '/../widgets/dialpad.dart';
 
 class ChangePin extends StatefulWidget {
-  const ChangePin({Key? key}) : super(key: key);
+  final StreamController<SessionState> sessionStateStream;
+  const ChangePin({Key? key, required this.sessionStateStream}) : super(key: key);
 
   @override
   _ChangePinState createState() => _ChangePinState();
@@ -57,7 +61,7 @@ class _ChangePinState extends State<ChangePin> {
             Navigator.pushReplacement(
               context,
               SlideRightRoute(
-                page: const More(),
+                page: More(sessionStateStream: widget.sessionStateStream),
               ),
             );
           },

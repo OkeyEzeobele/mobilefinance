@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_null_comparison
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:o3_cards/pages/dashboard/dashboard.dart';
 import 'package:o3_cards/pages/transactions/sendmoney/transfer_to_bank.dart';
 
@@ -9,8 +12,9 @@ import 'package:o3_cards/ui/export.dart';
 import '../../../widgets/slider.dart';
 
 class TransferType extends StatefulWidget {
+  final StreamController<SessionState> sessionStateStream;
   final String amount;
-  const TransferType({Key? key, required this.amount}) : super(key: key);
+  const TransferType({Key? key, required this.amount, required this.sessionStateStream}) : super(key: key);
 
   @override
   _TransferTypeState createState() => _TransferTypeState();
@@ -46,7 +50,7 @@ class _TransferTypeState extends State<TransferType> {
                     Navigator.pushReplacement(
                       context,
                       SlideRightRoute(
-                        page: Dashboard(pageIndex: 0,),
+                        page: Dashboard(pageIndex: 0, sessionStateStream: widget.sessionStateStream,),
                       ),
                     );
                   },
@@ -120,7 +124,7 @@ class _TransferTypeState extends State<TransferType> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => TransfertoBank(
-                                amount: widget.amount,
+                                amount: widget.amount, sessionStateStream: widget.sessionStateStream,
                               ),
                             ),
                           );

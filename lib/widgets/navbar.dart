@@ -1,14 +1,18 @@
+import 'dart:async';
+
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:o3_cards/pages/cardList/cardlist.dart';
 import 'package:o3_cards/pages/homescreen/homescreen.dart';
 import 'package:o3_cards/pages/signin/loginscreen.dart';
 import 'package:o3_cards/ui/pallete.dart';
 
 class NavBar extends StatefulWidget {
-  const NavBar({Key? key}) : super(key: key);
+  final StreamController<SessionState> sessionStateStream;
+  const NavBar({Key? key, required this.sessionStateStream}) : super(key: key);
 
   @override
   State<NavBar> createState() => _NavBarState();
@@ -42,19 +46,19 @@ class _NavBarState extends State<NavBar> {
       onTap: (int i) {
         if (i == 0) {
           Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const Loginscreen()));
+              MaterialPageRoute(builder: (context) => Loginscreen(sessionStateStream: widget.sessionStateStream)));
         } else if(i == 1){
           Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const CardList()));
+              MaterialPageRoute(builder: (context) => CardList(sessionStateStream: widget.sessionStateStream,)));
         } else if ( i == 2){
           Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const Homescreen()));
+              MaterialPageRoute(builder: (context) => Homescreen(sessionStateStream: widget.sessionStateStream,)));
         } else if ( i == 3){
           Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const Loginscreen()));
+              MaterialPageRoute(builder: (context) =>  Loginscreen(sessionStateStream: widget.sessionStateStream)));
         } else if ( i == 4){
           Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const Loginscreen()));
+              MaterialPageRoute(builder: (context) =>  Loginscreen(sessionStateStream: widget.sessionStateStream)));
         }
       },
       elevation: 5,

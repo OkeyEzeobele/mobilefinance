@@ -1,10 +1,12 @@
 // ignore_for_file: body_might_complete_normally_nullable
 
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:api_cache_manager/models/cache_db_model.dart';
 import 'package:api_cache_manager/utils/cache_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:o3_cards/models/cardlist.dart';
 import 'package:o3_cards/models/employment_details.dart';
 import 'package:o3_cards/models/login_response.dart';
@@ -265,6 +267,7 @@ class SharedService {
   }
 
   static Future<void> softlogout(BuildContext context) async {
+    final sessionStateStream = StreamController<SessionState>();
     await APICacheManager().deleteCache(
       'card_list',
     );
@@ -283,12 +286,13 @@ class SharedService {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => const Loginscreen2(),
+        builder: (context) =>  Loginscreen2(sessionStateStream: sessionStateStream),
       ),
     );
   }
 
   static Future<void> hardlogout(BuildContext context) async {
+     final sessionStateStream = StreamController<SessionState>();
     await APICacheManager().deleteCache(
       'login_details',
     );
@@ -301,7 +305,7 @@ class SharedService {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => const Loginscreen(),
+        builder: (context) => Loginscreen(sessionStateStream: sessionStateStream),
       ),
     );
   }

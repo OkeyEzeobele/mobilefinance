@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_null_comparison
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
+// import 'package:get/get.dart';
 import 'package:o3_cards/services/shared_service.dart';
 import 'package:o3_cards/ui/export.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -13,7 +16,8 @@ import '../dashboard/dashboard.dart';
 import 'application_details.dart';
 
 class CardType extends StatefulWidget {
-  const CardType({Key? key}) : super(key: key);
+  final StreamController<SessionState> sessionStateStream;
+  const CardType({Key? key, required this.sessionStateStream}) : super(key: key);
 
   @override
   _CardTypeState createState() => _CardTypeState();
@@ -137,7 +141,8 @@ class _CardTypeState extends State<CardType> {
                             context,
                             SlideRightRoute(
                               page: Dashboard(
-                                pageIndex: 2,
+                                
+                                pageIndex: 2, sessionStateStream: widget.sessionStateStream,
                               ),
                             ),
                           );
@@ -452,7 +457,7 @@ class _CardTypeState extends State<CardType> {
                                                 isEmploymentAdded,
                                             statementAdded: isStatementSaved,
                                             personalDetailsAdded:
-                                                isPersonalSaved,
+                                                isPersonalSaved, sessionStateStream: widget.sessionStateStream,
                                           ),
                                         ),
                                       );

@@ -1,11 +1,15 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:o3_cards/pages/homescreen/widgets/greeting.dart';
 import 'package:o3_cards/pages/homescreen/widgets/quick_links.dart';
 import 'package:o3_cards/ui/export.dart';
 
 class Homescreen extends StatefulWidget {
-  const Homescreen({Key? key}) : super(key: key);
+  final StreamController<SessionState> sessionStateStream;
+  const Homescreen({Key? key, required this.sessionStateStream}) : super(key: key);
 
   @override
   _HomescreenState createState() => _HomescreenState();
@@ -54,7 +58,7 @@ class _HomescreenState extends State<Homescreen> {
               SizedBox.square(
                 dimension: heightOfScreen * 0.008,
               ),
-              QuickLinks(),
+              QuickLinks(sessionStateStream: widget.sessionStateStream,),
               SizedBox.square(
                 dimension: heightOfScreen * 0.008,
               ),

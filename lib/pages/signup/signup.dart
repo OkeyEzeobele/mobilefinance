@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:async';
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../models/signup_request.dart';
 import '/pages/dashboard/dashboard.dart';
@@ -18,7 +21,8 @@ final Uri _url =
     Uri.parse('https://www.o3cards.com/terms_and_conditions_o3cards.pdf');
 
 class Signupscreen extends StatefulWidget {
-  const Signupscreen({Key? key}) : super(key: key);
+  final StreamController<SessionState> sessionStateStream;
+  const Signupscreen({Key? key, required this.sessionStateStream}) : super(key: key);
 
   @override
   _SignupscreenState createState() => _SignupscreenState();
@@ -28,6 +32,7 @@ class _SignupscreenState extends State<Signupscreen> {
   @override
   void initState() {
     super.initState();
+    widget.sessionStateStream.add(SessionState.stopListening);
   }
 
   bool isAPIcallProcess = false;
@@ -142,7 +147,7 @@ class _SignupscreenState extends State<Signupscreen> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const Loginscreen(),
+                              builder: (context) =>  Loginscreen(sessionStateStream: widget.sessionStateStream),
                             ),
                           );
                         },
@@ -916,8 +921,9 @@ class _SignupscreenState extends State<Signupscreen> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const Dashboard(
-                                pageIndex: 2,
+                              builder: (context) => Dashboard(
+                                
+                                pageIndex: 2, sessionStateStream: widget.sessionStateStream,
                               ),
                             ),
                           );

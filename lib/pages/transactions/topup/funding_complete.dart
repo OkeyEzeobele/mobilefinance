@@ -1,11 +1,15 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:o3_cards/pages/dashboard/dashboard.dart';
 import 'package:o3_cards/ui/export.dart';
 
 class TopupCompleted extends StatefulWidget {
+    final StreamController<SessionState> sessionStateStream;
   final String amount;
   final String message;
   final bool success;
@@ -14,7 +18,7 @@ class TopupCompleted extends StatefulWidget {
     Key? key,
     required this.amount,
     required this.success,
-    required this.message,
+    required this.message, required this.sessionStateStream,
   }) : super(key: key);
 
   @override
@@ -110,8 +114,8 @@ class _TopupCompletedState extends State<TopupCompleted> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const Dashboard(
-                        pageIndex: 2,
+                      builder: (context) => Dashboard(
+                        pageIndex: 2, sessionStateStream: widget.sessionStateStream,
                       ),
                     ),
                   );

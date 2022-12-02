@@ -38,6 +38,7 @@ dependencies:
   intl_phone_number_input: ^0.7.0+2
   keyboard_actions: ^4.0.1
   local_auth: ^2.1.0
+  local_session_timeout: ^2.1.2
   mono_flutter: ^1.1.3
   nigerian_states_and_lga: ^1.0.0
   page_view_indicators: ^2.0.0

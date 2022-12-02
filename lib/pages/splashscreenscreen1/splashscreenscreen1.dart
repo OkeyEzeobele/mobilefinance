@@ -1,20 +1,27 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import '../../services/shared_service.dart';
 import '../../ui/export.dart';
 import '../signin/loginscreen2.dart';
 
 class Splashscreenscreen1 extends StatefulWidget {
-  const Splashscreenscreen1({Key? key}) : super(key: key);
+  final StreamController<SessionState> sessionStateStream;
+  const Splashscreenscreen1({Key? key, required this.sessionStateStream})
+      : super(key: key);
 
   @override
   _Splashscreenscreen1State createState() => _Splashscreenscreen1State();
 }
 
 class _Splashscreenscreen1State extends State<Splashscreenscreen1> {
-   @override
+  @override
   void initState() {
     super.initState();
+    widget.sessionStateStream.add(SessionState.stopListening);
   }
+
   bool isLoggedIn = false;
   _Splashscreenscreen1State() {
     _isLoggedIn().then((val) {
@@ -73,20 +80,24 @@ class _Splashscreenscreen1State extends State<Splashscreenscreen1> {
                     ),
                     onPressed: isLoggedIn
                         ? () {
+                          widget.sessionStateStream.add(SessionState.startListening);
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    const Loginscreen2(),
+                                builder: (context) => Loginscreen2(
+                                    sessionStateStream:
+                                        widget.sessionStateStream),
                               ),
                             );
                           }
                         : () {
+                          widget.sessionStateStream.add(SessionState.startListening);
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    const Useronboardingscreen2(),
+                                builder: (context) => Useronboardingscreen2(
+                                    sessionStateStream:
+                                        widget.sessionStateStream),
                               ),
                             );
                           },

@@ -1,14 +1,18 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'dart:async';
+
 import 'package:custom_pin_screen/custom_pin_screen.dart';
 // import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:o3_cards/pages/transactions/sendmoney/choose_transfer_type.dart';
 import '/ui/export.dart';
 // import '/widgets/numpad.dart';
 // import 'package:intl/intl.dart';
 
 class Sendmoney extends StatefulWidget {
-  const Sendmoney({Key? key}) : super(key: key);
+    final StreamController<SessionState> sessionStateStream;
+  const Sendmoney({Key? key, required this.sessionStateStream}) : super(key: key);
 
   @override
   _SendmoneyState createState() => _SendmoneyState();
@@ -95,7 +99,7 @@ class _SendmoneyState extends State<Sendmoney> {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            TransferType(amount: amount),
+                            TransferType(amount: amount, sessionStateStream: widget.sessionStateStream,),
                       ),
                     );
                   }

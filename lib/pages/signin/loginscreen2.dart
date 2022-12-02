@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors,prefer_const_literals_to_create_immutables
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:o3_cards/pages/dashboard/dashboard.dart';
 import 'package:o3_cards/models/login_request.dart';
 import 'package:o3_cards/services/api_service.dart';
@@ -14,7 +17,8 @@ import '../../models/local_auth.dart';
 import '../../services/shared_service.dart';
 
 class Loginscreen2 extends StatefulWidget {
-  const Loginscreen2({Key? key}) : super(key: key);
+  final StreamController<SessionState> sessionStateStream;
+  const Loginscreen2({Key? key, required this.sessionStateStream}) : super(key: key);
 
   @override
   _Loginscreen2State createState() => _Loginscreen2State();
@@ -30,6 +34,7 @@ class _Loginscreen2State extends State<Loginscreen2> {
 
   @override
   void initState() {
+     widget.sessionStateStream.add(SessionState.stopListening);
     super.initState();
     _autoLoginWithBio();
     _getSavedPassword();
@@ -65,8 +70,8 @@ class _Loginscreen2State extends State<Loginscreen2> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Dashboard(
-                                  pageIndex: 2,
+                                builder: (context) => Dashboard(
+                                  pageIndex: 2, sessionStateStream: widget.sessionStateStream,
                                 ),
                               ),
                             );
@@ -90,8 +95,8 @@ class _Loginscreen2State extends State<Loginscreen2> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Dashboard(
-                                  pageIndex: 2,
+                                builder: (context) => Dashboard(
+                                  pageIndex: 2, sessionStateStream: widget.sessionStateStream,
                                 ),
                               ),
                             );
@@ -131,8 +136,8 @@ class _Loginscreen2State extends State<Loginscreen2> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Dashboard(
-                                  pageIndex: 2,
+                                builder: (context) => Dashboard(
+                                  pageIndex: 2, sessionStateStream: widget.sessionStateStream,
                                 ),
                               ),
                             );
@@ -156,8 +161,8 @@ class _Loginscreen2State extends State<Loginscreen2> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Dashboard(
-                                  pageIndex: 2,
+                                builder: (context) =>Dashboard(
+                                  pageIndex: 2, sessionStateStream: widget.sessionStateStream,
                                 ),
                               ),
                             );

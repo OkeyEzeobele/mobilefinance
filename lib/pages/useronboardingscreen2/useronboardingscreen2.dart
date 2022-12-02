@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:o3_cards/pages/signup/signup.dart';
 import 'package:o3_cards/ui/export.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -10,7 +13,8 @@ import '../../services/shared_service.dart';
 
 
 class Useronboardingscreen2 extends StatefulWidget {
-  const Useronboardingscreen2({Key? key}) : super(key: key);
+  final StreamController<SessionState> sessionStateStream;
+  const Useronboardingscreen2({Key? key, required this.sessionStateStream}) : super(key: key);
 
   @override
   _Useronboardingscreen2State createState() => _Useronboardingscreen2State();
@@ -28,6 +32,7 @@ class _Useronboardingscreen2State extends State<Useronboardingscreen2> {
   void initState() {
     super.initState();
     userProfile = _getProfile();
+    widget.sessionStateStream.add(SessionState.stopListening);
   }
 
   @override
@@ -251,7 +256,7 @@ class _Useronboardingscreen2State extends State<Useronboardingscreen2> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      const Signupscreen(),
+                                                      Signupscreen(sessionStateStream: widget.sessionStateStream),
                                                 ),
                                               );
                                             },
@@ -300,7 +305,7 @@ class _Useronboardingscreen2State extends State<Useronboardingscreen2> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      const Loginscreen(),
+                                                      Loginscreen(sessionStateStream: widget.sessionStateStream),
                                                 ),
                                               );
                                             },

@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'dart:async';
+
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:o3_cards/pages/cardList/cardlist.dart';
 import 'package:o3_cards/pages/transactions/sendmoney/sendmoney.dart';
 import 'package:o3_cards/ui/export.dart';
@@ -10,8 +13,11 @@ import 'package:o3_cards/ui/export.dart';
 import '../moreoptions/more.dart';
 
 class Dashboard extends StatefulWidget {
+  final StreamController<SessionState> sessionStateStream;
   final int pageIndex;
-  const Dashboard({Key? key, required this.pageIndex}) : super(key: key);
+  const Dashboard(
+      {Key? key, required this.pageIndex, required this.sessionStateStream})
+      : super(key: key);
 
   @override
   _DashboardState createState() => _DashboardState();
@@ -21,19 +27,10 @@ class _DashboardState extends State<Dashboard> {
   late int _selectedIndex;
   @override
   void initState() {
+    widget.sessionStateStream.add(SessionState.startListening);
     super.initState();
     _selectedIndex = widget.pageIndex;
   }
-
-  static const List<Widget> _widgetOptions = <Widget>[
-    Sendmoney(),
-    CardList(),
-    Homescreen(),
-    Text(
-      'Coming Soon',
-    ),
-    More(),
-  ];
 
   void _onItemTapped(int i) {
     setState(() {
@@ -43,6 +40,17 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> _widgetOptions = <Widget>[
+      Sendmoney(sessionStateStream: widget.sessionStateStream,),
+      CardList(
+        sessionStateStream: widget.sessionStateStream,
+      ),
+      Homescreen(sessionStateStream: widget.sessionStateStream,),
+      Text(
+        'Coming Soon',
+      ),
+      More(sessionStateStream: widget.sessionStateStream,),
+    ];
     var heightOfScreen = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Center(

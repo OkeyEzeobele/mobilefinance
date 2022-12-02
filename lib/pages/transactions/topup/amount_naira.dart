@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -6,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutterbudpay/flutterbudpay.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 // import 'package:get/get.dart';
 // import 'package:http/http.dart';
 import 'package:o3_cards/models/fund_card_request.dart';
@@ -24,10 +26,11 @@ import '/ui/export.dart';
 // import 'package:intl/intl.dart';
 
 class AmountNaira extends StatefulWidget {
+    final StreamController<SessionState> sessionStateStream;
   final bool isDialog;
   final int id;
 
-  const AmountNaira({Key? key, this.isDialog = false, required this.id})
+  const AmountNaira({Key? key, this.isDialog = false, required this.id, required this.sessionStateStream})
       : super(key: key);
 
   @override
@@ -153,7 +156,7 @@ class _AmountNairaState extends State<AmountNaira> {
                               context,
                               SlideRightRoute(
                                 page: FundCard(
-                                  id: widget.id,
+                                  id: widget.id, sessionStateStream: widget.sessionStateStream
                                 ),
                               ),
                             );
@@ -332,7 +335,7 @@ class _AmountNairaState extends State<AmountNaira> {
                                           builder: (context) => TopupCompleted(
                                             amount: _amount,
                                             success: true,
-                                            message: '',
+                                            message: '', sessionStateStream: widget.sessionStateStream,
                                           ),
                                         ),
                                       );
@@ -343,7 +346,7 @@ class _AmountNairaState extends State<AmountNaira> {
                                           builder: (context) => TopupCompleted(
                                             amount: _amount,
                                             success: false,
-                                            message: value.message,
+                                            message: value.message, sessionStateStream: widget.sessionStateStream,
                                           ),
                                         ),
                                       );

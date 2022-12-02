@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_null_comparison
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:o3_cards/pages/dashboard/dashboard.dart';
 import 'package:o3_cards/pages/transactions/topup/amount_foreign.dart';
 import 'package:o3_cards/pages/transactions/topup/amount_naira.dart';
@@ -10,8 +13,9 @@ import 'package:o3_cards/ui/export.dart';
 import '../../../widgets/slider.dart';
 
 class FundCard extends StatefulWidget {
+    final StreamController<SessionState> sessionStateStream;
   final int id;
-  const FundCard({Key? key, required this.id}) : super(key: key);
+  const FundCard({Key? key, required this.id, required this.sessionStateStream}) : super(key: key);
 
   @override
   _FundCardState createState() => _FundCardState();
@@ -48,7 +52,7 @@ class _FundCardState extends State<FundCard> {
                       context,
                       SlideRightRoute(
                         page: Dashboard(
-                          pageIndex: 1,
+                          pageIndex: 1, sessionStateStream: widget.sessionStateStream
                         ),
                       ),
                     );
@@ -122,7 +126,7 @@ class _FundCardState extends State<FundCard> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => AmountNaira(id: widget.id,),
+                              builder: (context) => AmountNaira(id: widget.id, sessionStateStream: widget.sessionStateStream,),
                             ),
                           );
                         },
@@ -194,7 +198,7 @@ class _FundCardState extends State<FundCard> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => AmountForeign(id: widget.id,),
+                              builder: (context) => AmountForeign(id: widget.id, sessionStateStream: widget.sessionStateStream,),
                             ),
                           );
                         },

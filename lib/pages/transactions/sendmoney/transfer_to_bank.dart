@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:o3_cards/pages/transactions/sendmoney/confirm_transfer.dart';
 // import 'package:o3_cards/pages/transactions/sendmoney/transfer_complete.dart';
 // import 'package:snippet_coder_utils/FormHelper.dart';
@@ -21,8 +22,9 @@ import '/../ui/export.dart';
 import '../../../widgets/slider.dart';
 
 class TransfertoBank extends StatefulWidget {
+  final StreamController<SessionState> sessionStateStream;
   final String amount;
-  const TransfertoBank({Key? key, required this.amount}) : super(key: key);
+  const TransfertoBank({Key? key, required this.amount, required this.sessionStateStream}) : super(key: key);
 
   @override
   _TransfertoBankState createState() => _TransfertoBankState();
@@ -141,7 +143,7 @@ class _TransfertoBankState extends State<TransfertoBank> {
                               context,
                               SlideRightRoute(
                                 page: TransferType(
-                                  amount: widget.amount,
+                                  amount: widget.amount, sessionStateStream: widget.sessionStateStream
                                 ),
                               ),
                             );
@@ -610,7 +612,7 @@ class _TransfertoBankState extends State<TransfertoBank> {
                                             bankName: bankPlaceholder,
                                             accountNumber: accountNumber!,
                                             narration: narration,
-                                            accountName: accountNamePlaceholder,
+                                            accountName: accountNamePlaceholder, sessionStateStream: widget.sessionStateStream,
                                           ),
                                         ),
                                       );

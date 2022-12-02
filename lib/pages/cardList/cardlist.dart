@@ -1,22 +1,26 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_null_comparison
+import 'dart:async';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:o3_cards/models/cardlist.dart';
 import 'package:o3_cards/pages/creditCardApplication/select_card_type.dart';
 import 'package:o3_cards/pages/transactions/topup/fund_card.dart';
 import 'package:o3_cards/services/api_service.dart';
-import 'package:o3_cards/services/shared_service.dart';
+// import 'package:o3_cards/services/shared_service.dart';
 import 'package:o3_cards/ui/export.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../dashboard/dashboard.dart';
 
 class CardList extends StatefulWidget {
-  const CardList({Key? key}) : super(key: key);
+  final StreamController<SessionState> sessionStateStream;
+  const CardList({Key? key, required this.sessionStateStream}) : super(key: key);
 
   @override
   _CardListState createState() => _CardListState();
@@ -132,7 +136,7 @@ class _CardListState extends State<CardList> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CardType(),
+                  builder: (context) => CardType(sessionStateStream: widget.sessionStateStream,),
                 ),
               );
             },
@@ -368,7 +372,7 @@ class _CardListState extends State<CardList> {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) => FundCard(
-                                                id: cards[i].id,
+                                                id: cards[i].id, sessionStateStream: widget.sessionStateStream,
                                               ),
                                             ),
                                           );
@@ -410,7 +414,7 @@ class _CardListState extends State<CardList> {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  const Dashboard(pageIndex: 2),
+                                                  Dashboard(pageIndex: 2, sessionStateStream: widget.sessionStateStream,),
                                             ),
                                           );
                                         },

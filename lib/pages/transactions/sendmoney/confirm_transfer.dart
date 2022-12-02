@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:custom_pin_screen/custom_pin_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:o3_cards/pages/transactions/sendmoney/transfer_to_bank.dart';
 import 'package:o3_cards/ui/export.dart';
 
@@ -12,6 +14,7 @@ import '../../../services/api_service.dart';
 import 'transfer_complete.dart';
 
 class ConfirmTransfer extends StatefulWidget {
+  final StreamController<SessionState> sessionStateStream;
   final String amount;
   final String recepient;
   final String bankName;
@@ -32,7 +35,7 @@ class ConfirmTransfer extends StatefulWidget {
       required this.cifNumber,
       required this.accountNumber,
       required this.narration,
-      required this.accountName})
+      required this.accountName, required this.sessionStateStream})
       : super(key: key);
 
   @override
@@ -44,7 +47,7 @@ class _ConfirmTransferState extends State<ConfirmTransfer> {
   Route _createRoute() {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => TransfertoBank(
-        amount: widget.amount,
+        amount: widget.amount, sessionStateStream: widget.sessionStateStream,
       ),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return child;
@@ -248,11 +251,12 @@ class TransferLoading extends StatelessWidget {
       required this.accountNumber,
       required this.narration,
       required this.accountName,
-      required this.pin})
+      required this.pin,})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final sessionStateStream = StreamController<SessionState>();
     return TransferLoadingWrapper(
       onInit: () {
         TransferRequest model = TransferRequest(
@@ -278,19 +282,20 @@ class TransferLoading extends StatelessWidget {
                     message: response.message,
                     amount: amount,
                     recepient: accountName,
-                    success: true,
+                    success: true, sessionStateStream: sessionStateStream
                   ),
                 ),
               );
             } else {
               Navigator.pushReplacement(
+                
                 context,
                 MaterialPageRoute(
                   builder: (context) => TransferCompleted(
                     message: response.message,
                     amount: amount,
                     recepient: accountName,
-                    success: false,
+                    success: false, sessionStateStream: sessionStateStream,
                   ),
                 ),
               );

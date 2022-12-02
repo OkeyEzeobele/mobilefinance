@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:local_session_timeout/local_session_timeout.dart';
 import 'package:o3_cards/pages/moreoptions/change_pin.dart';
 import 'package:o3_cards/pages/moreoptions/edit_profile.dart';
 import 'package:o3_cards/ui/export.dart';
@@ -15,7 +18,8 @@ import '../../widgets/slider.dart';
 import '../dashboard/dashboard.dart';
 
 class More extends StatefulWidget {
-  const More({Key? key}) : super(key: key);
+  final StreamController<SessionState> sessionStateStream;
+  const More({Key? key, required this.sessionStateStream}) : super(key: key);
 
   @override
   _MoreState createState() => _MoreState();
@@ -115,7 +119,7 @@ class _MoreState extends State<More> {
                       context,
                       SlideRightRoute(
                         page: Dashboard(
-                          pageIndex: 2,
+                          pageIndex: 2, sessionStateStream: widget.sessionStateStream,
                         ),
                       ),
                     );
