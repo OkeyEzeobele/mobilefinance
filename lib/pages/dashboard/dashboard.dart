@@ -45,10 +45,10 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     var heightOfScreen = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: FvColors.edittext51Background,
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
+      extendBody: true,
       bottomNavigationBar: ConvexAppBar.badge(
         const {4: ''},
         disableDefaultTabController: true,

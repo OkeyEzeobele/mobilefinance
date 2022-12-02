@@ -6,7 +6,7 @@ import 'package:o3_cards/pages/dashboard/dashboard.dart';
 import 'package:o3_cards/models/login_request.dart';
 import 'package:o3_cards/services/api_service.dart';
 import 'package:o3_cards/ui/export.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
@@ -42,14 +42,45 @@ class _LoginscreenState extends State<Loginscreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: FvColors.offwhite,
-      body: ProgressHUD(
-        child: Form(
-          key: globalFormKey,
-          child: _loginUI(context),
-        ),
-        inAsyncCall: isAPIcallProcess,
-        opacity: 0.3,
-        key: UniqueKey(),
+      extendBody: true,
+      body: Stack(
+        children: [
+          // Positioned(
+          //   top: 0,
+          //   child: Image.asset(
+          //     "assets/topcurve.png",
+          //     height: MediaQuery.of(context).size.height - 620,
+          //     color: FvColors.maintheme
+          //   ),
+          // ),
+          Positioned(
+            bottom: 0,
+            right: 0,
+            left: 0,
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height *0.6,
+              child: FittedBox(
+                fit: BoxFit.fill,
+                child: Image.asset(
+                  "assets/bottomcurve.png",
+                  // height: MediaQuery.of(context).size.height - 170,
+                  // width: MediaQuery.of(context).size.width,
+                  color: FvColors.maintheme,
+                ),
+              ),
+            ),
+          ),
+          ProgressHUD(
+            child: Form(
+              key: globalFormKey,
+              child: _loginUI(context),
+            ),
+            inAsyncCall: isAPIcallProcess,
+            opacity: 0.3,
+            key: UniqueKey(),
+          ),
+        ],
       ),
     );
   }
@@ -61,8 +92,11 @@ class _LoginscreenState extends State<Loginscreen> {
     var widthOfScreen = MediaQuery.of(context).size.width;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
+        SizedBox(
+          height: heightOfScreen *0.1
+        ),
         SizedBox(
           height: heightOfScreen * 0.08,
           width: widthOfScreen * 0.5,
@@ -122,6 +156,7 @@ class _LoginscreenState extends State<Loginscreen> {
               email = onSavedVal;
             },
             initialValue: '',
+            validationColor: Colors.white,
             borderFocusColor: FvColors.maintheme,
             borderColor: Colors.white,
             backgroundColor: FvColors.edittext51Background,
@@ -159,6 +194,7 @@ class _LoginscreenState extends State<Loginscreen> {
                   password = onSavedVal;
                 },
                 initialValue: '',
+                validationColor: Colors.white,
                 borderFocusColor: FvColors.maintheme,
                 backgroundColor: FvColors.edittext51Background,
                 prefixIcon: const Icon(Icons.lock),
@@ -409,7 +445,7 @@ class _LoginscreenState extends State<Loginscreen> {
           "Forgot Password?",
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: FvColors.maintheme,
+            color: Colors.white,
             fontWeight: FontWeight.w400,
           ),
         ),

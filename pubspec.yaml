@@ -11,6 +11,7 @@ dependencies:
   carousel_slider: ^4.1.1
   circular_profile_avatar: ^2.0.5
   convex_bottom_bar: ^3.0.0
+  custom_pin_screen: ^0.3.0
   dots_indicator: ^2.1.0
   dotted_border: ^2.0.0+3
   email_validator: ^2.0.1
@@ -91,5 +92,7 @@ flutter:
       - assets/send_icon.png
       - assets/send_icon_white.png
       - assets/face-id.png
+      - assets/topcurve.png
+      - assets/bottomcurve.png
       - assets/ca/lets-encrypt-r3.pem
 

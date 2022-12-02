@@ -14,7 +14,7 @@ import 'package:o3_cards/pages/signin/loginscreen2.dart';
 import 'package:o3_cards/ui/export.dart';
 
 import '../models/banklist.dart';
-import '../models/profile_image.dart';
+import '../models/profile_image.dart' ;
 import '../models/user_info.dart';
 
 class SharedService {
@@ -31,36 +31,42 @@ class SharedService {
     );
     return isKeyExist;
   }
+
   static Future<bool> isTxnsSaved() async {
     var isKeyExist = await APICacheManager().isAPICacheKeyExist(
       'txn_list',
     );
     return isKeyExist;
   }
+
   static Future<bool> isBanksSaved() async {
     var isKeyExist = await APICacheManager().isAPICacheKeyExist(
       'bank_list',
     );
     return isKeyExist;
   }
+
   static Future<bool> isEmploymentSaved() async {
     var isKeyExist = await APICacheManager().isAPICacheKeyExist(
       'employment_details',
     );
     return isKeyExist;
   }
+
   static Future<bool> isPersonalSaved() async {
     var isKeyExist = await APICacheManager().isAPICacheKeyExist(
       'personal_details',
     );
     return isKeyExist;
   }
+
   static Future<bool> isUserSaved() async {
     var isKeyExist = await APICacheManager().isAPICacheKeyExist(
       'user_details',
     );
     return isKeyExist;
   }
+
   static Future<bool> isProfilePictureSaved() async {
     var isKeyExist = await APICacheManager().isAPICacheKeyExist(
       'profile_image',
@@ -89,6 +95,7 @@ class SharedService {
       return cardListResponseJson(cacheData.syncData);
     }
   }
+
   static Future<TransactionlistResponse?> txnList() async {
     var isKeyExist = await APICacheManager().isAPICacheKeyExist('txn_list');
 
@@ -98,6 +105,7 @@ class SharedService {
       return transactionlistResponseJson(cacheData.syncData);
     }
   }
+
   static Future<Banklist?> bankList() async {
     var isKeyExist = await APICacheManager().isAPICacheKeyExist('bank_list');
 
@@ -109,17 +117,20 @@ class SharedService {
   }
 
   static Future<EmployerDetails?> employerDetails() async {
-    var isKeyExist = await APICacheManager().isAPICacheKeyExist('employment_details');
+    var isKeyExist =
+        await APICacheManager().isAPICacheKeyExist('employment_details');
 
     if (isKeyExist) {
-      var cacheData = await APICacheManager().getCacheData('employment_details');
+      var cacheData =
+          await APICacheManager().getCacheData('employment_details');
 
       return employmentDetailsJson(cacheData.syncData);
     }
   }
 
   static Future<PersonalDetails?> personalDetails() async {
-    var isKeyExist = await APICacheManager().isAPICacheKeyExist('personal_details');
+    var isKeyExist =
+        await APICacheManager().isAPICacheKeyExist('personal_details');
 
     if (isKeyExist) {
       var cacheData = await APICacheManager().getCacheData('personal_details');
@@ -139,7 +150,8 @@ class SharedService {
   }
 
   static Future<ProfileImage?> profileImage() async {
-    var isKeyExist = await APICacheManager().isAPICacheKeyExist('profile_image');
+    var isKeyExist =
+        await APICacheManager().isAPICacheKeyExist('profile_image');
 
     if (isKeyExist) {
       var cacheData = await APICacheManager().getCacheData('profile_image');

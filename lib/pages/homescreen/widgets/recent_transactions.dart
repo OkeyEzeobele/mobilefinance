@@ -40,7 +40,7 @@ class _RecenttransactionsState extends State<Recenttransactions> {
     var heightOfScreen =
         MediaQuery.of(context).size.height - marginFromSafeArea;
     return SizedBox(
-      height: heightOfScreen * 0.35,
+      height: heightOfScreen * 0.4,
       child: FutureBuilder<TransactionlistResponse?>(
         future: transactionList,
         builder: (context, txnModel) {

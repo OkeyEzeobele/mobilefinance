@@ -10,7 +10,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../models/cardlist.dart';
 import '../../../services/api_service.dart';
-// import '../../../services/shared_service.dart';
+import '../../../services/shared_service.dart';
 
 class CreditCards extends StatefulWidget {
   const CreditCards({Key? key}) : super(key: key);
@@ -29,6 +29,12 @@ class _CreditCardsState extends State<CreditCards> {
     //     : APIService.userCards();
     return model;
   }
+  Future<CardListResponse?> _getSavedCards()async{
+    Future<CardListResponse?> model = await SharedService.isCardsSaved()
+        ? SharedService.cardDetails()
+        : APIService.userCards();
+    return model;
+  }
 
   @override
   void initState() {
@@ -41,7 +47,7 @@ class _CreditCardsState extends State<CreditCards> {
     double marginFromSafeArea = 24;
     var heightOfScreen =
         MediaQuery.of(context).size.height - marginFromSafeArea;
-    var widthOfScreen = MediaQuery.of(context).size.width;
+    // var widthOfScreen = MediaQuery.of(context).size.width;
     return FutureBuilder<CardListResponse?>(
       future: userCards,
       builder: (context, cardModel) {

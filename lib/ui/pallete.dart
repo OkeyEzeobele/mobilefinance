@@ -14,9 +14,11 @@ class FvColors {
   static const Color textview37FontColor = Color.fromARGB(255, 233, 247, 255);
   static const Color textview50FontColor = Color.fromARGB(255, 29, 31, 31);
   static const Color edittext51Background = Color.fromARGB(255, 242, 244, 248);
-  static const Color dashboardBackground = Color.fromARGB(255, 231, 103, 103);
+  static const Color dashboardBackground = Color.fromARGB(255, 251, 231, 231);
+  static const Color dashboardBackground2 = Color.fromARGB(255, 251, 231, 231);
   static const Color screen5Background = Color.fromARGB(255, 247, 249, 252);
   static const Color offwhitepink = Color.fromARGB(255, 251, 236, 236);
+  static const Color offwhitepink2 = Color.fromARGB(255, 251, 176, 176);
   static const Color textview65FontColor = Color.fromARGB(255, 119, 126, 144);
   static const Color textview66FontColor = Color.fromARGB(255, 31, 35, 61);
   static const Color textview70FontColor = Color.fromARGB(255, 87, 91, 92);

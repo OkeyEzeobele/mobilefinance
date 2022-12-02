@@ -282,14 +282,36 @@ class _Loginscreen2State extends State<Loginscreen2> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: FvColors.offwhite,
-      body: ProgressHUD(
-        child: Form(
-          key: globalFormKey,
-          child: _loginUI(context),
-        ),
-        inAsyncCall: isAPIcallProcess,
-        opacity: 0.3,
-        key: UniqueKey(),
+      body: Stack(
+        children: [
+           Positioned(
+            bottom: 0,
+            right: 0,
+            left: 0,
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height *0.6,
+              child: FittedBox(
+                fit: BoxFit.fill,
+                child: Image.asset(
+                  "assets/bottomcurve.png",
+                  // height: MediaQuery.of(context).size.height - 170,
+                  // width: MediaQuery.of(context).size.width,
+                  color: FvColors.maintheme,
+                ),
+              ),
+            ),
+          ),
+          ProgressHUD(
+            child: Form(
+              key: globalFormKey,
+              child: _loginUI(context),
+            ),
+            inAsyncCall: isAPIcallProcess,
+            opacity: 0.3,
+            key: UniqueKey(),
+          ),
+        ],
       ),
     );
   }
@@ -362,6 +384,7 @@ class _Loginscreen2State extends State<Loginscreen2> {
               password = onSavedVal;
             },
             initialValue: '',
+            validationColor: Colors.white,
             borderFocusColor: FvColors.maintheme,
             backgroundColor: FvColors.edittext51Background,
             prefixIcon: const Icon(Icons.lock),
@@ -419,7 +442,7 @@ class _Loginscreen2State extends State<Loginscreen2> {
                 'I am not ' + _firstname,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: FvColors.maintheme,
+                  color: Colors.white,
                 ),
               ),
               onTap: () {
@@ -436,7 +459,7 @@ class _Loginscreen2State extends State<Loginscreen2> {
           "Forgot Password?",
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: FvColors.maintheme,
+            color: Colors.white,
             fontWeight: FontWeight.w400,
           ),
         ),

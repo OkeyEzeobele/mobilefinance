@@ -20,24 +20,47 @@ class _HomescreenState extends State<Homescreen> {
       resizeToAvoidBottomInset: false,
       backgroundColor: FvColors.edittext51Background,
       // backgroundColor: Color.fromARGB(255, 72, 11, 7),
-      body: Column(
+      body: Stack(
         children: [
-          SizedBox.square(
-            dimension: heightOfScreen*0.02,
+          Positioned(
+            top: 0,
+            child: Image.asset(
+              "assets/topcurve.png",
+              height: MediaQuery.of(context).size.height - 620,
+              color: FvColors.maintheme
+            ),
           ),
-          Greeting(),
-          SizedBox.square(
-            dimension: heightOfScreen*0.008,
+          // Positioned(
+          //   bottom: 0,
+          //   right: 0,
+          //   left: 0,
+          //   child: Image.asset(
+          //     "assets/bottomcurve.png",
+          //     height: MediaQuery.of(context).size.height - 170,
+          //     width: MediaQuery.of(context).size.width,
+          //     color: FvColors.maintheme,
+          //   ),
+          // ),
+          Column(
+            children: [
+              SizedBox.square(
+                dimension: heightOfScreen * 0.02,
+              ),
+              Greeting(),
+              SizedBox.square(
+                dimension: heightOfScreen * 0.008,
+              ),
+              CreditCards(),
+              SizedBox.square(
+                dimension: heightOfScreen * 0.008,
+              ),
+              QuickLinks(),
+              SizedBox.square(
+                dimension: heightOfScreen * 0.008,
+              ),
+              Activities()
+            ],
           ),
-          CreditCards(),
-          SizedBox.square(
-            dimension: heightOfScreen*0.008,
-          ),
-          QuickLinks(),
-          SizedBox.square(
-            dimension: heightOfScreen*0.008,
-          ),
-          Activities()
         ],
       ),
     );

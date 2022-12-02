@@ -1,3 +1,5 @@
+import 'package:custom_pin_screen/custom_pin_screen.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:o3_cards/pages/moreoptions/more.dart';
 import 'package:o3_cards/ui/pallete.dart';
@@ -48,79 +50,64 @@ class _ChangePinState extends State<ChangePin> {
     var heightOfScreen =
         MediaQuery.of(context).size.height - marginFromSafeArea;
     return Scaffold(
-        backgroundColor: FvColors.offwhitepink,
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                SlideRightRoute(
-                  page: const More(),
-                ),
-              );
-            },
-            icon: const Icon(
-              Icons.arrow_back,
-              color: FvColors.maintheme,
-            ),
-          ),
-          backgroundColor: FvColors.screen5Background,
-          title: const Text(
-            'Enter Old Pin',
-            style: TextStyle(color: Colors.black),
+      backgroundColor: FvColors.screen5Background,
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              SlideRightRoute(
+                page: const More(),
+              ),
+            );
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            color: FvColors.maintheme,
           ),
         ),
-        body: Center(
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 30),
-            child: Row(
-              // mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                for (int i = 0; i < pinLength; i++)
-                  Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                      border: Border.all(color: FvColors.maintheme),
-                    ),
-                    child: Center(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(40),
-                          ),
-                          color: controller.text.length - 1 >= i
-                              ? Colors.black
-                              : Colors.transparent,
-                        ),
-                        height: 10,
-                        width: 10,
-                      ),
-                    ),
-                  ),
-              ],
-            ),
+        backgroundColor: FvColors.screen5Background,
+        title: const Text(
+          'Enter Old Pin',
+          style: TextStyle(color: Colors.black),
+        ),
+      ),
+      body: Center(
+        child: PinAuthentication(
+          onChanged: (v) {
+            if (kDebugMode) {
+              print(v);
+            }
+          },
+          action:'',
+          actionDescription: '',
+          pinTheme: PinTheme(
+            inactiveFillColor: FvColors.maintheme,
+            activeFillColor: FvColors.maintheme,
+            selectedColor: FvColors.maintheme,
+            activeColor: FvColors.maintheme,
+            keysColor: FvColors.maintheme,
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            selectedFillColor: FvColors.maintheme,
           ),
         ),
-        bottomNavigationBar: Container(
-          height: heightOfScreen * 0.45,
-          width: MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.symmetric(vertical: 25),
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(50)),
-            color: Colors.white,
-          ),
-          child: Dialpad(
-            addValue: addValue,
-            remove: remove,
-            press: () async {
-              debugPrint(controller.text);
-            },
-          ),
-        ));
+      ),
+      // bottomNavigationBar: Container(
+      //   height: heightOfScreen * 0.45,
+      //   width: MediaQuery.of(context).size.width,
+      //   padding: const EdgeInsets.symmetric(vertical: 25),
+      //   decoration: const BoxDecoration(
+      //     borderRadius: BorderRadius.vertical(top: Radius.circular(50)),
+      //     color: Colors.white,
+      //   ),
+      //   child: Dialpad(
+      //     addValue: addValue,
+      //     remove: remove,
+      //     press: () async {
+      //       debugPrint(controller.text);
+      //     },
+      //   ),
+      // ),
+    );
   }
 }
